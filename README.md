@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Contents of this repository
 
 This repository complements the [online notebooks](https://hwrberlin.github.io/fswd/) to the Full-Stack Web Development course at HWR Berlin.
@@ -53,3 +54,6 @@ Press CTRL+C to quit
 **Step 5:** visit [http://127.0.0.1:5000/insert/sample](http://127.0.0.1:5000/insert/sample) to populate the app's database with some sample data.
 
 **Step 6:** visit [http://127.0.0.1:5000/](http://127.0.0.1:5000/) to view the landing page
+=======
+# WheelsEats1
+>>>>>>> 583d5e76ef6bf9838568a2cd10b9868bf841129d
