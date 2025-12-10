@@ -21,14 +21,24 @@ nav_order: 4
 ### Meta
 
 Status
-: **Work in progress** - Done - Obsolete
+: **Work in progress** 
 
 Updated
-: DD-MMM-YYYY
+: 10.12.2025
 
 ### Goal
 
-[Describe the goal of this evaluation, for example as a research question like: "How long does it take to register a new account and what is the drop-out rate?"]
+•⁠  ⁠Eine App entwickeln, die echte Bedürfnisse von Menschen mit Mobilitätseinschränkungen adressiert.  
+•⁠  ⁠Durch Nutzerinterviews und Feedback-Runden sicherstellen, dass Design und Funktionen wirklich hilfreich sind.  
+•⁠  ⁠Eine einfache, barrierearme Bedienoberfläche gestalten, die für alle leicht verständlich ist.  
+•⁠  ⁠Eine aktive Community aufbauen, in der Nutzer*innen selbst Orte hinzufügen und bewerten können.  
+•⁠  ⁠Vertrauen schaffen, indem alle Daten zu Barrierefreiheit transparent und nachvollziehbar sind.
+
+## Persönliche Ziele
+•⁠  ⁠*Batool:* Kartenintegration mit OpenStreetMap
+•⁠  ⁠*Esma:* Backend-API & Datenbank 
+•⁠  ⁠*Batool:* UI/UX in Figma + Frontend 
+•⁠  ⁠*Esma:* Testing, Deployment & Dokumentation
 
 ### Method
 

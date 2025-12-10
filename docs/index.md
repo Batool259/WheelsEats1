@@ -8,27 +8,27 @@ nav_order: 0
 >
 > You may delete this `attention` box.
 
-# [Project Name]
+# WheelEats
 
 [Project description]
 
 ## Team members
 
-### [Jane Dane]
+### [Batool Sawalha]
 
 About
 : Some info about Jane
 
 Matr.-Nr.
-: 1234567
+: 77209977011
 
-### [Joe Doe]
+### [Esma Gebesce]
 
 About
 : Some info about Joe
 
 Matr.-Nr.
-: 1234567
+: 77208979939
 
 ## Eidesstattliche Erklärung
 

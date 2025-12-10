@@ -21,13 +21,20 @@ The [Just the Docs documentation](https://just-the-docs.github.io/just-the-docs/
 
 For a quick reference of the markdown syntax, visit [this page](https://github.com/just-the-docs/just-the-docs/blob/main/docs/index-test.md?plain=1).
 
-## Images
+## Images/UI_screens
 
-```markdown
-![get_list_todos_sample](assets/images/fswd-intro_02.png)
-```
+## Home_bildschirm 
+![index](assets/images/index.png)
 
-![get_list_todos_sample](assets/images/fswd-intro_02.png)
+## Resaurant_detail
+![detail](assets/images/detail.jpeg)
+
+## Map
+![map](assets/images/map.png)
+
+## Restaurant_hinzufügen 
+![new](assets/images/new.jpeg)
+
 
 ## Callouts
 
