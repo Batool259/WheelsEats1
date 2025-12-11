@@ -1,4 +1,6 @@
 ---
 title: Data Model
-nav_order: 2
+
+![datamodel](../docs/assets/images/data-model.png)
+
 ---
