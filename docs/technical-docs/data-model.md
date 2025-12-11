@@ -10,6 +10,8 @@ nav_order: 2
 {: .no_toc }
 # Data model
 
+![datamodel](../assets/images/data-model.png)
+
 <details open markdown="block">
 {: .text-delta }
 <summary>Table of contents</summary>
