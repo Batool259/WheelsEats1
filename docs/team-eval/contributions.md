@@ -17,14 +17,14 @@ nav_order: 4
 {: toc }
 </details>
 
-## [Jane Dane]
+## [Batool Sawalha]
 
 Contributions
 : Lorem ipsum dolor
 : Consetetur sadipscing elitr
 : ...
 
-## [Joe Doe]
+## [Esma Gebesce]
 
 Contributions
 : Diam nonumy eirmod
