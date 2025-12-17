@@ -3,7 +3,7 @@ title: Home
 nav_order: 0
 ---
 
-# WheelEats
+## WheelEats
 
 WheelEats ist eine webbasierte Anwendung, die Menschen dabei unterstützt, barrierefreie Restaurants einfach zu finden, zu entdecken und zu bewerten. Ziel des Projekts ist es, die Restaurant­suche für Menschen mit Mobilitätseinschränkungen – insbesondere Rollstuhlnutzer:innen – transparenter und zugänglicher zu machen.
 
