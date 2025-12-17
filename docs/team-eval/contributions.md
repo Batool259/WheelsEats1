@@ -5,7 +5,7 @@ nav_order: 4
 ---
 
 {: .label }
-[Jane Dane]
+[Batool, Esma]
 
 {: .no_toc }
 # Summary of individual contributions
@@ -17,14 +17,14 @@ nav_order: 4
 {: toc }
 </details>
 
-## [Jane Dane]
+## [Batool Sawalha]
 
 Contributions
 : Lorem ipsum dolor
 : Consetetur sadipscing elitr
 : ...
 
-## [Joe Doe]
+## [Esma Gebesce]
 
 Contributions
 : Diam nonumy eirmod
