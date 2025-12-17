@@ -23,6 +23,7 @@ nav_order: 2
 
 Das Datenmodell der WheelEats-App bildet alle zentralen Informationen ab, die für das Auffinden, Bewerten und Ergänzen barrierefreier Restaurants notwendig sind. Es besteht aus mehreren miteinander verknüpften Entitäten, die klar definierte Aufgaben haben.
 
+
 # Restaurant
 
 Die zentrale Entität des Modells ist Restaurant. Sie speichert grundlegende Informationen zu einem Restaurant, darunter Name, Adresse (Straße, Hausnummer, Postleitzahl, Stadt), geografische Koordinaten (Breiten- und Längengrad), Beschreibung, Öffnungszeiten sowie Metadaten wie Erstellungs-, Aktualisierungs- und Prüfdatum.
