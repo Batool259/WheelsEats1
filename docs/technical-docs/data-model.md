@@ -8,7 +8,7 @@ nav_order: 2
 [Batool, Esma]
 
 {: .no_toc }
-# Data model
+## Data model
 
 ![datamodel](../assets/images/data-model.png)
 

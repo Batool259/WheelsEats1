@@ -8,7 +8,7 @@ nav_order: 1
 [Batool, Esma]
 
 {: .no_toc }
-# Architecture
+## Architecture
 
 {: .attention }
 > This page describes how the application is structured and how important parts of the app work. It should give a new-joiner sufficient technical knowledge for contributing to the codebase.

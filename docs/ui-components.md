@@ -15,7 +15,7 @@ nav_order: 99
 > ---
 > ```
 
-# UI components
+## UI components
 
 The [Just the Docs documentation](https://just-the-docs.github.io/just-the-docs/docs/ui-components) details more UI components.
 

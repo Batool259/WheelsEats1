@@ -7,7 +7,7 @@ nav_order: 3
 [Batool, Esma]
 
 {: .no_toc }
-# Design decisions
+## Design decisions
 
 <details open markdown="block">
 {: .text-delta }
