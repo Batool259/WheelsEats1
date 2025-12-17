@@ -15,7 +15,7 @@ Ein weiteres zentrales Feature ist die Kartenansicht, die es ermöglicht, Restau
 
 Das Projekt verfolgt das übergeordnete Ziel, Menschen mit Einschränkungen mehr Selbstständigkeit bei der Freizeit- und Restaurantplanung zu ermöglichen.
 
-## Team members
+## Gruppenmitglieder
 
 ### [Batool Sawalha]
 

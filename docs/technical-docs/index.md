@@ -7,4 +7,4 @@ nav_order: 2
 {: .label }
 [Batool, Esma]
 
-# Technical documentation
+# Teschnische Dokumentation
