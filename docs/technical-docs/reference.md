@@ -39,172 +39,164 @@ nav_order: 3
 [Show an image, string output, or similar illustration -- or write NONE if function generates no output]
 
 ---
+## Authentifizierung
 
-# =========================================================
-# Routes Documentation – WheelEats
-# =========================================================
-#
-# ## Authentication
-#
-# ### home()
-#
-# **Route:** /
-# **Methods:** GET
-#
-# **Purpose:**
-# Entry point of the application.
-# Redirects the user automatically to the start page (/index).
-#
-# **Sample output:**
-# NONE
-#
-# ---------------------------------------------------------
-#
-# ### login()
-#
-# **Route:** /login
-# **Methods:** GET, POST
-#
-# **Purpose:**
-# Displays the login screen and authenticates users in demo mode.
-# Logged-in users gain access to protected features such as
-# adding restaurants and submitting reviews.
-#
-# **Sample output:**
-# Login form (email and password)
-#
-# ---------------------------------------------------------
-#
-# ### register()
-#
-# **Route:** /register
-# **Methods:** GET, POST
-#
-# **Purpose:**
-# Allows new users to register.
-# Registration is currently implemented as a demo
-# without persistent data storage.
-#
-# **Sample output:**
-# Registration form
-#
-# ---------------------------------------------------------
-#
-# ### logout()
-#
-# **Route:** /logout
-# **Methods:** GET
-#
-# **Purpose:**
-# Logs out the currently authenticated user
-# and ends the session.
-#
-# **Sample output:**
-# Redirect to login page with info message
-#
-# =========================================================
-# ## Restaurants
-# =========================================================
-#
-# ### index()
-#
-# **Route:** /index
-# **Methods:** GET
-#
-# **Purpose:**
-# Displays the main page of the application
-# with a list of accessible restaurants.
-#
-# **Sample output:**
-# Restaurant list overview
-#
-# ---------------------------------------------------------
-#
-# ### restaurant_detail(restaurant_id)
-#
-# **Route:** /restaurants/<int:restaurant_id>
-# **Methods:** GET
-#
-# **Purpose:**
-# Displays detailed information about a specific restaurant
-# identified by its ID.
-#
-# **Sample output:**
-# Restaurant detail view
-#
-# ---------------------------------------------------------
-#
-# ### restaurant_new()
-#
-# **Route:** /restaurants/new
-# **Methods:** GET, POST
-#
-# **Purpose:**
-# Allows authenticated users to submit a new restaurant.
-# Unauthenticated users are redirected to the login page.
-#
-# **Sample output:**
-# New restaurant submission form
-#
-# =========================================================
-# ## Reviews
-# =========================================================
-#
-# ### restaurant_review_create(restaurant_id)
-#
-# **Route:** /restaurants/<int:restaurant_id>/reviews
-# **Methods:** POST
-#
-# **Purpose:**
-# Allows authenticated users to submit a review
-# for a restaurant. Reviews are currently handled
-# in demo mode without database persistence.
-#
-# **Sample output:**
-# Success message after submitting a review
-#
-# =========================================================
-# ## Map
-# =========================================================
-#
-# ### restaurant_map()
-#
-# **Route:** /map
-# **Methods:** GET
-#
-# **Purpose:**
-# Displays a map view of restaurants.
-# Currently implemented as a placeholder.
-#
-# **Sample output:**
-# Map view placeholder
-#
-# =========================================================
-# ## Error Handling
-# =========================================================
-#
-# ### http_not_found(e)
-#
-# **Route:** *
-# **Methods:** GET
-#
-# **Purpose:**
-# Handles requests to non-existing routes.
-#
-# **Sample output:**
-# 404 error page
-#
-# ---------------------------------------------------------
-#
-# ### http_internal_server_error(e)
-#
-# **Route:** *
-# **Methods:** GET
-#
-# **Purpose:**
-# Handles internal server errors.
-#
-# **Sample output:**
-# 500 error page
-#
-# =========================================================
+### `home()`
+
+**Route:** `/`
+
+**Methods:** `GET`
+
+**Purpose:**  
+Einstiegspunkt der Anwendung. Leitet Nutzer automatisch auf die Startseite (`/index`) weiter.
+
+**Sample output:**  
+NONE
+
+---
+
+### `login()`
+
+**Route:** `/login`
+
+**Methods:** `GET` `POST`
+
+**Purpose:**  
+Zeigt den Login-Screen an und authentifiziert Nutzer im Demo-Modus. Nach erfolgreichem Login erhalten Nutzer Zugriff auf geschützte Funktionen.
+
+**Sample output:**  
+Login-Formular (E-Mail, Passwort)
+
+---
+
+### `register()`
+
+**Route:** `/register`
+
+**Methods:** `GET` `POST`
+
+**Purpose:**  
+Ermöglicht neuen Nutzern die Registrierung. Die Registrierung ist aktuell als Demo umgesetzt und speichert noch keine Daten dauerhaft.
+
+**Sample output:**  
+Registrierungsformular
+
+---
+
+### `logout()`
+
+**Route:** `/logout`
+
+**Methods:** `GET`
+
+**Purpose:**  
+Loggt den aktuell eingeloggten Nutzer aus und beendet die Sitzung.
+
+**Sample output:**  
+Weiterleitung zur Login-Seite mit Hinweisnachricht
+
+---
+
+## Restaurants
+
+### `index()`
+
+**Route:** `/index`
+
+**Methods:** `GET`
+
+**Purpose:**  
+Startseite der Anwendung. Zeigt eine Übersicht barrierefreier Restaurants mit grundlegenden Informationen.
+
+**Sample output:**  
+Restaurant-Übersichtsliste
+
+---
+
+### `restaurant_detail(restaurant_id)`
+
+**Route:** `/restaurants/<int:restaurant_id>`
+
+**Methods:** `GET`
+
+**Purpose:**  
+Zeigt die Detailseite eines Restaurants anhand der übergebenen Restaurant-ID.
+
+**Sample output:**  
+Restaurant-Detailansicht
+
+---
+
+### `restaurant_new()`
+
+**Route:** `/restaurants/new`
+
+**Methods:** `GET` `POST`
+
+**Purpose:**  
+Ermöglicht eingeloggten Nutzern, ein neues Restaurant einzureichen. Nicht eingeloggte Nutzer werden zur Login-Seite weitergeleitet.
+
+**Sample output:**  
+Formular zum Hinzufügen eines Restaurants
+
+---
+
+## Bewertungen
+
+### `restaurant_review_create(restaurant_id)`
+
+**Route:** `/restaurants/<int:restaurant_id>/reviews`
+
+**Methods:** `POST`
+
+**Purpose:**  
+Ermöglicht eingeloggten Nutzern, eine Bewertung für ein Restaurant abzugeben. Bewertungen werden aktuell nur im Demo-Modus verarbeitet.
+
+**Sample output:**  
+Erfolgsmeldung nach dem Absenden der Bewertung
+
+---
+
+## Karte
+
+### `restaurant_map()`
+
+**Route:** `/map`
+
+**Methods:** `GET`
+
+**Purpose:**  
+Zeigt eine Kartenansicht der Restaurants. Die Funktion ist derzeit als Platzhalter umgesetzt.
+
+**Sample output:**  
+Kartenansicht (Platzhalter)
+
+---
+
+## Fehlerbehandlung
+
+### `http_not_found(e)`
+
+**Route:** `*`
+
+**Methods:** `GET`
+
+**Purpose:**  
+Wird ausgelöst, wenn eine angeforderte Route nicht existiert.
+
+**Sample output:**  
+404-Fehlerseite
+
+---
+
+### `http_internal_server_error(e)`
+
+**Route:** `*`
+
+**Methods:** `GET`
+
+**Purpose:**  
+Wird ausgelöst, wenn ein interner Serverfehler auftritt.
+
+**Sample output:**  
+500-Fehlerseite
