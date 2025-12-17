@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block TITLE %}Details{% endblock %}
+
+{% block CONTENT %}
+<h2>Restaurant Details </h2>
+
+<p><strong>Restaurant-ID:</strong> {{ restaurant_id }}</p>
+
+<!-- Platzhalter: Diese Felder stammen aus dem Datenmodell,
+     werden aber noch nicht dynamisch befüllt -->
+
+<h4>Grunddaten</h4>
+<p><strong>Name:</strong> Platzhalter für Restaurantname</p>
+<p><strong>Adresse:</strong> Platzhalter für Straße, Hausnummer, PLZ, Stadt</p>
+<p><strong>Bezirk:</strong> Platzhalter für Bezirk</p>
+
+<h4>Barrierefreiheitsmerkmale</h4>
+<ul>
+  <li>Stufenloser Eingang </li>
+  <li>Rampe vorhanden </li>
+  <li>Barrierefreies WC </li>
+  <li>Breite Türen </li>
+  <li>Unterfahrbare Tische </li>
+  <li>Behindertenparkplatz </li>
+</ul>
+
+<h4>Beschreibung</h4>
+<p>Platzhalter für Beschreibung des Restaurants.</p>
+
+<h4>Öffnungszeiten</h4>
+<p>Platzhalter für Öffnungszeiten.</p>
+
+<h4>Titelbild</h4>
+<p>(Platzhalter für Bild)</p>
+
+<h4>Community-Bewertungen</h4>
+<p>Platzhalter für Bewertungen.</p>
+
+<hr class="my-4">
+
+<h4>Bewertung abgeben</h4>
+
+{% if session.get("logged_in") %}
+  <form method="POST" action="{{ url_for('restaurant_review_create', restaurant_id=restaurant_id) }}">
+
+    <div class="mb-3">
+      <label class="form-label">Sterne (1–5)</label>
+      <select name="sterne" class="form-select" required>
+        <option value="">Bitte wählen</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★</option>
+        <option value="3">★★★</option>
+        <option value="2">★★</option>
+        <option value="1">★</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Kommentar</label>
+      <textarea name="text" class="form-control" rows="3" placeholder="Wie war’s?" required></textarea>
+    </div>
+
+    <button class="btn btn-primary" type="submit">Bewertung senden</button>
+  </form>
+{% else %}
+  <p class="text-muted">Du musst eingeloggt sein, um eine Bewertung abzugeben.</p>
+  <a class="btn btn-primary" href="{{ url_for('login') }}">Einloggen</a>
+  <a class="btn btn-outline-secondary" href="{{ url_for('register') }}">Registrieren</a>
+{% endif %}
+
+<p class="text-muted mt-4">Diese Inhalte werden in einer späteren Version dynamisch aus dem Datenmodell geladen.</p>
+
+{% endblock %}

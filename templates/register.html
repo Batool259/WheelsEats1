@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block TITLE %}Registrieren{% endblock %}
+
+{% block CONTENT %}
+<h2>Registrieren</h2>
+<p class="text-muted">Demo: Es wird noch nichts gespeichert.</p>
+
+<form method="POST" class="mt-3">
+
+  <div class="mb-3">
+    <label class="form-label">E-Mail</label>
+    <input name="email" type="email" class="form-control" placeholder="name@example.com" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Passwort</label>
+    <input name="password" type="password" class="form-control" placeholder="Passwort" required>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Registrieren</button>
+  <a class="btn btn-link" href="{{ url_for('login') }}">Schon ein Konto? Einloggen</a>
+
+</form>
+{% endblock %}
