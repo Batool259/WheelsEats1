@@ -27,13 +27,13 @@ For a quick reference of the markdown syntax, visit [this page](https://github.c
 ![index](assets/images/index.png)
 
 ## Resaurant_detail
-![detail](assets/images/detail.jpeg)
+![detail](assets/images/detail.png)
 
 ## Map
 ![map](assets/images/map.png)
 
 ## Restaurant_hinzufügen 
-![new](assets/images/new.jpeg)
+![new](assets/images/new.png)
 
 
 ## Callouts
