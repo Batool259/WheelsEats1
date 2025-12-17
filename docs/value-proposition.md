@@ -28,7 +28,9 @@ WheelEats ist eine Plattform, die barrierefreie Restaurants anzeigt, bewertet un
 
 
 •⁠  ⁠Rollstuhlfahrer*innen und Menschen mit eingeschränkter Mobilität
+
 •⁠  ⁠Familien und Begleitpersonen
+
 •⁠  ⁠Gastronom*innen, die ihre Barrierefreiheit transparent zeigen möchten
 
 ## Customer journey
