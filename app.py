@@ -10,7 +10,8 @@ app.config.from_mapping(
 
 bootstrap = Bootstrap5(app)
 
-# WheelEats – Startseite
+# --- Platzhalter-Daten für die Startseite ------------------------------
+
 @app.route("/")
 @app.route("/index")
 def index():
@@ -27,38 +28,36 @@ def index():
             "address": "Friedrichstraße 45, 10117 Berlin",
             "features": ["Ebenerdig", "WC", "Rampe", ">90cm Tür"],
         },
-        {
-            "id": 3,
-            "name": "Curry 36",
-            "address": "Mehringdamm 36, 10961 Berlin",
-            "features": ["Ebenerdig"],
-        },
     ]
+    # Platzhalter-Liste
     return render_template("we_index.html", restaurants=restaurants)
 
+# --- Detailseite mit Platzhalter ---------------------------------------
 
-# WheelEats – Detailseite
 @app.route("/restaurants/<int:restaurant_id>")
 def restaurant_detail(restaurant_id):
+    # aktuell nur Platzhalter: wir geben die ID an das Template weiter
     return render_template("we_detail.html", restaurant_id=restaurant_id)
 
+# --- Formular "Restaurant hinzufügen" (Platzhalter) --------------------
 
-# WheelEats – Formular „Restaurant hinzufügen“
 @app.route("/restaurants/new", methods=["GET", "POST"])
 def restaurant_new():
     if request.method == "POST":
+        # später würden wir hier die Formulardaten speichern
         flash("Vielen Dank, dein Restaurant wurde eingereicht (Platzhalter).", "success")
         return redirect(url_for("index"))
     return render_template("we_new.html")
 
+# --- Karte (Platzhalter) -----------------------------------------------
 
-# WheelEats – Map-Seite
 @app.route("/map")
 def restaurant_map():
+    # später: Marker anhand von Koordinaten, aktuell nur Platzhalter
     return render_template("we_map.html")
 
+# --- Fehlerseiten -------------------------------------------
 
-# Fehlerseiten
 @app.errorhandler(404)
 def http_not_found(e):
     return render_template("404.html"), 404
@@ -69,23 +68,5 @@ def http_internal_server_error(e):
     return render_template("500.html"), 500
 
 
-# Beispielseiten
-@app.get("/faq/<css>")
-@app.get("/faq/", defaults={"css": "default"})
-def faq(css):
-    return render_template("faq.html", css=css)
-
-
-@app.get("/ex/<int:id>")
-@app.get("/ex/", defaults={"id": 1})
-def ex(id):
-    if id == 1:
-        return render_template("ex1.html")
-    elif id == 2:
-        return render_template("ex2.html")
-    else:
-        abort(404)
-
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5001) 
