@@ -19,10 +19,14 @@ Das Projekt verfolgt das übergeordnete Ziel, Menschen mit Einschränkungen mehr
 
 ### Batool Sawalha
 
+About Batool: Wirtschaftsinformatikstudentin im 4. Semester 
+
 Matr.-Nr.
 : 77209977011
 
 ### Esma Gebesce
+
+About Esma: Wirtschaftsinformatikstudentin im 4. Semester
 
 Matr.-Nr.
 : 77208979939
