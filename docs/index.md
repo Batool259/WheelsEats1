@@ -17,12 +17,12 @@ Das Projekt verfolgt das übergeordnete Ziel, Menschen mit Einschränkungen mehr
 
 ## Gruppenmitglieder
 
-### [Batool Sawalha]
+### Batool Sawalha
 
 Matr.-Nr.
 : 77209977011
 
-### [Esma Gebesce]
+### Esma Gebesce
 
 Matr.-Nr.
 : 77208979939

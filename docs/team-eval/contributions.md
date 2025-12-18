@@ -17,14 +17,14 @@ nav_order: 4
 {: toc }
 </details>
 
-## [Batool Sawalha]
+## Batool Sawalha
 
 Contributions
 : Lorem ipsum dolor
 : Consetetur sadipscing elitr
 : ...
 
-## [Esma Gebesce]
+## Esma Gebesce
 
 Contributions
 : Diam nonumy eirmod
