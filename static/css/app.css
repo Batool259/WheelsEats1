@@ -1,0 +1,37 @@
+:root{
+  /* Modernes Blau (kannst du anpassen) */
+  --we-primary: #2563eb;      /* blue-600 */
+  --we-primary-700: #1d4ed8;  /* blue-700 */
+  --we-bg: #f7f8fb;
+  --we-card: #ffffff;
+  --we-border: rgba(15, 23, 42, .08);
+  --we-text: #0f172a;
+  --we-muted: #64748b;
+  --radius: 16px;
+}
+
+/* Bootstrap Primary überschreiben */
+.btn-primary{
+  background-color: var(--we-primary) !important;
+  border-color: var(--we-primary) !important;
+}
+.btn-primary:hover{
+  background-color: var(--we-primary-700) !important;
+  border-color: var(--we-primary-700) !important;
+}
+.btn-outline-primary{
+  color: var(--we-primary) !important;
+  border-color: rgba(37,99,235,.35) !important;
+}
+.btn-outline-primary:hover{
+  background-color: rgba(37,99,235,.10) !important;
+  border-color: rgba(37,99,235,.50) !important;
+  color: var(--we-primary) !important;
+}
+
+/* Links */
+a{
+  color: var(--we-primary);
+}
+.we-body{ background: #f7f8fb; }
+.we-main{ max-width: 1100px; }

@@ -18,16 +18,13 @@ app.config.from_mapping(
 
 bootstrap = Bootstrap5(app)
 
-# ---------------------------------------------------------
+
 # Start: "/" -> Login
-# ---------------------------------------------------------
 @app.route("/")
 def home():
     return redirect(url_for("index"))
 
-# ---------------------------------------------------------
 # Login (Demo, ohne DB)
-# ---------------------------------------------------------
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -38,9 +35,7 @@ def login():
 
     return render_template("login.html")
 
-# ---------------------------------------------------------
 # Registrierung (Demo, ohne Speicherung)
-# ---------------------------------------------------------
 @app.route("/register", methods=["GET", "POST"])
 def register():
     if request.method == "POST":
@@ -53,18 +48,14 @@ def register():
 
     return render_template("register.html")
 
-# ---------------------------------------------------------
 # Logout
-# ---------------------------------------------------------
 @app.route("/logout")
 def logout():
     session.pop("logged_in", None)
     flash("Du wurdest ausgeloggt (Demo).", "info")
     return redirect(url_for("login"))
 
-# ---------------------------------------------------------
 # Startseite (Restaurants-Liste)
-# ---------------------------------------------------------
 @app.route("/index")
 def index():
     restaurants = [
@@ -83,9 +74,7 @@ def index():
     ]
     return render_template("index.html", restaurants=restaurants)
 
-# ---------------------------------------------------------
 # Detailseite
-# ---------------------------------------------------------
 @app.route("/restaurants/<int:restaurant_id>")
 def restaurant_detail(restaurant_id):
     return render_template("detail.html", restaurant_id=restaurant_id)
@@ -104,9 +93,7 @@ def restaurant_review_create(restaurant_id):
     return redirect(url_for("restaurant_detail", restaurant_id=restaurant_id))
 
 
-# ---------------------------------------------------------
 # Restaurant hinzufügen (nur wenn "eingeloggt")
-# ---------------------------------------------------------
 @app.route("/restaurants/new", methods=["GET", "POST"])
 def restaurant_new():
     if not session.get("logged_in"):
@@ -122,16 +109,12 @@ def restaurant_new():
 
     return render_template("new.html")
 
-# ---------------------------------------------------------
 # Karte
-# ---------------------------------------------------------
 @app.route("/map")
 def restaurant_map():
     return render_template("map.html")
 
-# ---------------------------------------------------------
 # Fehlerseiten
-# ---------------------------------------------------------
 @app.errorhandler(404)
 def http_not_found(e):
     return render_template("404.html"), 404
