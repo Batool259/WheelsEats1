@@ -158,7 +158,11 @@ def insert_sample():
         barrierefreies_wc=True,
         rampe=True,
     )
-    r1.fotos = [Foto(dateipfad="static/images/restaurant_demo_1.jpg", titelbild=True)]
+
+    r1.fotos = [Foto(
+        dateipfad="static/images/restaurant_demo_1.jpeg",
+        titelbild=True
+    )]
 
     r2 = Restaurant(
         erstellt_von_nutzer_id=u2.id,
@@ -174,6 +178,11 @@ def insert_sample():
         status="approved",
         geprueft_am=datetime.utcnow(),
     )
+
+    r2.fotos = [Foto(
+    dateipfad="static/images/restaurant_demo_1.jpeg",
+    titelbild=True
+)]
     r2.merkmale = BarrierefreieMerkmale(rampe=True, breite_tueren=True)
 
     db.session.add_all([r1, r2])

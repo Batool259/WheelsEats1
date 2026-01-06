@@ -14,6 +14,25 @@
   </div>
 </div>
 
+{# TITELBILD #}
+{% set titelbild = restaurant.fotos | selectattr("titelbild") | first %}
+
+<div class="mb-4">
+  {% if titelbild %}
+    <img
+      src="{{ url_for('static', filename=titelbild.dateipfad.replace('static/', '')) }}"
+      alt="Titelbild von {{ restaurant.name }}"
+      class="img-fluid rounded-4 shadow-sm w-100"
+      style="max-height: 360px; object-fit: cover;">
+  {% else %}
+    <img
+      src="https://picsum.photos/1200/600"
+      alt="Platzhalterbild"
+      class="img-fluid rounded-4 shadow-sm w-100"
+      style="max-height: 360px; object-fit: cover;">
+  {% endif %}
+</div>
+
 <!-- Merkmale -->
 <div class="mb-4">
   <h2 class="h5 fw-semibold mb-2">Barrierefreiheitsmerkmale</h2>
@@ -45,6 +64,7 @@
 </div>
 
 <div class="row g-4">
+
   <!-- Beschreibung + Öffnungszeiten -->
   <div class="col-lg-7">
     <div class="card">
