@@ -1,7 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, session
 from flask_bootstrap import Bootstrap
 
-from db import db, Restaurant, register_commands
+from db import db, Restaurant, Bewertung, register_commands
 
 app = Flask(__name__)
 
@@ -82,7 +82,17 @@ def index():
 @app.route("/restaurants/<int:id>")
 def detail(id):
     restaurant = Restaurant.query.get_or_404(id)
-    return render_template("detail.html", restaurant=restaurant)
+
+    # Bewertungen laden (neueste zuerst)
+    bewertungen = Bewertung.query.filter_by(restaurant_id=id).order_by(Bewertung.erstellt_am.desc()).all()
+
+    # Durchschnitt (für Anzeige)
+    if bewertungen:
+        avg = sum(b.sterne for b in bewertungen) / len(bewertungen)
+    else:
+        avg = None
+
+    return render_template("detail.html", restaurant=restaurant, bewertungen=bewertungen, avg=avg)
 
 
 @app.route("/restaurants/<int:id>/reviews", methods=["POST"])
