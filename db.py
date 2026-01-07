@@ -124,7 +124,6 @@ def register_commands(app):
         insert_sample()
         click.echo("✅ Demo-Daten wurden eingefügt.")
 
-
 def insert_sample():
     # Alles leeren
     db.session.query(Bewertung).delete()
@@ -134,36 +133,42 @@ def insert_sample():
     db.session.query(Nutzer).delete()
     db.session.commit()
 
+    # Nutzer anlegen
     u1 = Nutzer(benutzername="Lisa Müller", email="lisa@example.com", passwort_hash="demo", rolle="user")
     u2 = Nutzer(benutzername="Tim K.", email="tim@example.com", passwort_hash="demo", rolle="user")
     db.session.add_all([u1, u2])
-    db.session.commit()
+    db.session.commit()  # wichtig, damit u1.id und u2.id existieren
 
+    # Restaurant 1
     r1 = Restaurant(
         erstellt_von_nutzer_id=u1.id,
-        name="Café am Neuen See",
-        strasse="Lichtensteinallee",
-        hausnummer="2",
-        postleitzahl="10787",
+        name="Alvis Restaurant",
+        strasse="Albrechtstraße",
+        hausnummer="8",
+        postleitzahl="10117",
         stadt="Berlin",
-        breitengrad=52.5109,
-        laengengrad=13.3477,
-        beschreibung="Beliebtes Café im Tiergarten mit guter Zugänglichkeit.",
-        oeffnungszeiten="Mo–So: 10:00–22:00",
+        breitengrad=52.5235,
+        laengengrad=13.3889,
+        beschreibung="Modernes Restaurant mit regionaler Küche und guter Barrierefreiheit.",
+        oeffnungszeiten="Mo–Sa: 12:00–22:00",
         status="approved",
         geprueft_am=datetime.utcnow(),
     )
+
     r1.merkmale = BarrierefreieMerkmale(
         stufenloser_eingang=True,
         barrierefreies_wc=True,
-        rampe=True,
+        breite_tueren=True,
     )
 
-    r1.fotos = [Foto(
-        dateipfad="static/images/restaurant_demo_1.jpeg",
-        titelbild=True
-    )]
+    r1.fotos = [
+        Foto(
+            dateipfad="static/images/alvis_1.jpeg",
+            titelbild=True
+        )
+    ]
 
+    # Restaurant 2
     r2 = Restaurant(
         erstellt_von_nutzer_id=u2.id,
         name="Pizzeria Napoli",
@@ -179,15 +184,23 @@ def insert_sample():
         geprueft_am=datetime.utcnow(),
     )
 
-    r2.fotos = [Foto(
-    dateipfad="static/images/restaurant_demo_1.jpeg",
-    titelbild=True
-)]
-    r2.merkmale = BarrierefreieMerkmale(rampe=True, breite_tueren=True)
+    r2.merkmale = BarrierefreieMerkmale(
+        rampe=True,
+        breite_tueren=True
+    )
 
+    r2.fotos = [
+        Foto(
+            dateipfad="static/images/restaurant_demo_1.jpeg",
+            titelbild=True
+        )
+    ]
+
+    # Speichern
     db.session.add_all([r1, r2])
     db.session.commit()
 
+    # Bewertungen
     db.session.add_all([
         Bewertung(restaurant_id=r1.id, nutzer_id=u1.id, sterne=5, text="Fantastisch! Rampe sehr gut nutzbar."),
         Bewertung(restaurant_id=r1.id, nutzer_id=u2.id, sterne=4, text="WC ist barrierefrei, Spiegel etwas hoch."),
