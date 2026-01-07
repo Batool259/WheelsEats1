@@ -296,8 +296,76 @@ def insert_sample():
         )
     ]
 
+
+ # Restaurant 6
+    r6 = Restaurant(
+        erstellt_von_nutzer_id=u2.id,
+        name="Käfer – Dachgarten Restaurant",
+        strasse="Platz der Republik",
+        hausnummer="1",
+        postleitzahl="10557",
+        stadt="Berlin",
+        breitengrad=52.5186, 
+        laengengrad=13.3761,
+        beschreibung= "Käfer Dachgarten Restaurant am Reichstag mit Panoramablick über Berlin "
+        "und kreativer moderner Küche – ein Highlight für Besucher und Einheimische.",
+        oeffnungszeiten="Mo – So: 11:30 – 23:00", 
+        status="approved",
+        geprueft_am=datetime.utcnow(), 
+    )
+    
+    r6.merkmale = BarrierefreieMerkmale(
+        unterfahrbare_tische=True,
+        rampe=True,
+        behindertenparkplatz=True,
+    )
+
+    r6.fotos = [
+        Foto(
+            dateipfad="static/images/kaefer_dachgarten_restaurant_1.jpeg",
+            titelbild=True
+        )
+    ]
+
+
+
+ # Restaurant 7
+    r7 = Restaurant(
+        erstellt_von_nutzer_id=u2.id,
+        name="MANI Restaurant",
+        strasse="Torstraße",
+        hausnummer="4",
+        postleitzahl="10119",
+        stadt="Berlin",
+        breitengrad=52.5295, 
+        laengengrad=13.3996,
+        beschreibung= "Mediterranes Restaurant in Berlin-Mitte bei Rosenthaler Platz, bekannt "
+        "für vielfältige mediterrane Küche und beliebt bei Foodies.",
+        oeffnungszeiten="Mo – Sa: 12:00 – 23:00", 
+        status="approved",
+        geprueft_am=datetime.utcnow(), 
+    )
+    
+    r7.merkmale = BarrierefreieMerkmale(
+        unterfahrbare_tische=True,
+        rampe=True,
+        behindertenparkplatz=True,
+        stufenloser_eingang=True,
+        barrierefreies_wc=True,
+    )
+
+    r7.fotos = [
+        Foto(
+            dateipfad="static/images/mani_1.jpeg",
+            titelbild=True
+        )
+    ]
+
+
+
+
     # Speichern
-    db.session.add_all([r1, r2, r3, r4, r5])
+    db.session.add_all([r1, r2, r3, r4, r5, r6, r7])
     db.session.commit()
 
     # Bewertungen
