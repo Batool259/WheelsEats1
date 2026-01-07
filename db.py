@@ -370,7 +370,39 @@ def insert_sample():
 
     # Bewertungen
     db.session.add_all([
-        Bewertung(restaurant_id=r1.id, nutzer_id=u1.id, sterne=5, text="Fantastisch! Rampe sehr gut nutzbar."),
-        Bewertung(restaurant_id=r1.id, nutzer_id=u2.id, sterne=4, text="WC ist barrierefrei, Spiegel etwas hoch."),
+        # r1 — Alvis Restaurant (3 Bewertungen)
+        Bewertung(restaurant_id=r1.id, nutzer_id=u1.id, sterne=5, text="Sehr gut erreichbar. Stufenloser Eingang und breite Türen machen vieles leichter."),
+        Bewertung(restaurant_id=r1.id, nutzer_id=u2.id, sterne=4, text="Barrierefreies WC vorhanden, insgesamt angenehm. Bei viel Betrieb etwas eng."),
+        Bewertung(restaurant_id=r1.id, nutzer_id=u1.id, sterne=3, text="Gutes Essen und freundlicher Service. Zur Stoßzeit aber recht voll im Innenraum."),
+
+        # r2 — Fischer und Lustig (2 Bewertungen)
+        Bewertung(restaurant_id=r2.id, nutzer_id=u2.id, sterne=4, text="Rampe am Eingang funktioniert gut, Türen sind breit genug."),
+        Bewertung(restaurant_id=r2.id, nutzer_id=u1.id, sterne=2, text="Sehr voll und laut. Mit Rollstuhl eher mühsam, auch wenn der Zugang grundsätzlich klappt."),
+
+        # r3 — Il Punto (5 Bewertungen)
+        Bewertung(restaurant_id=r3.id, nutzer_id=u1.id, sterne=5, text="Unterfahrbare Tische sind ein großes Plus. Zugang stufenlos und entspannt."),
+        Bewertung(restaurant_id=r3.id, nutzer_id=u2.id, sterne=4, text="Rampe und Platzangebot gut. Musik war etwas laut, sonst sehr angenehm."),
+        Bewertung(restaurant_id=r3.id, nutzer_id=u1.id, sterne=4, text="Service aufmerksam und hilfsbereit. Man fühlt sich ernst genommen."),
+        Bewertung(restaurant_id=r3.id, nutzer_id=u2.id, sterne=3, text="Gutes Konzept, aber zeitweise hektisch."),
+        Bewertung(restaurant_id=r3.id, nutzer_id=u1.id, sterne=2, text="Heute recht voll und unruhig. Barrierefreiheit vorhanden, aber nicht ideal nutzbar."),
+
+        # r4 — Nante-Eck (1 Bewertung)
+        Bewertung(restaurant_id=r4.id, nutzer_id=u2.id, sterne=3, text="Rampe vorhanden und Türen breit. Innenraum allerdings recht eng bei Betrieb."),
+
+        # r5 — Schnitzelei Mitte (4 Bewertungen)
+        Bewertung(restaurant_id=r5.id, nutzer_id=u1.id, sterne=4, text="Rampe vorhanden, unterfahrbarer Tisch möglich. Essen gut."),
+        Bewertung(restaurant_id=r5.id, nutzer_id=u2.id, sterne=3, text="Zugang klappt, aber zwischen den Tischen oft eng."),
+        Bewertung(restaurant_id=r5.id, nutzer_id=u1.id, sterne=2, text="Sehr voll und wenig Bewegungsfreiheit. Positiv: Personal bemüht."),
+        Bewertung(restaurant_id=r5.id, nutzer_id=u2.id, sterne=3, text="Solide Erfahrung. Barrierefreiheit ok, aber nichts Besonderes."),
+
+        # r6 — Käfer – Dachgarten Restaurant (2 Bewertungen)
+        Bewertung(restaurant_id=r6.id, nutzer_id=u2.id, sterne=5, text="Sehr gute Organisation. Zugang klappt, Tisch war gut nutzbar."),
+        Bewertung(restaurant_id=r6.id, nutzer_id=u1.id, sterne=3, text="Tolle Aussicht, aber sehr touristisch und hektisch bei Andrang."),
+
+        # r7 — MANI Restaurant (4 Bewertungen)
+        Bewertung(restaurant_id=r7.id, nutzer_id=u1.id, sterne=5, text="Stufenloser Zugang und barrierefreies WC vorhanden. Sehr gut umgesetzt."),
+        Bewertung(restaurant_id=r7.id, nutzer_id=u2.id, sterne=4, text="Unterfahrbare Tische und Rampe vorhanden. Abends sehr voll."),
+        Bewertung(restaurant_id=r7.id, nutzer_id=u1.id, sterne=2, text="Heute lange Wartezeit und viel Trubel."),
+        Bewertung(restaurant_id=r7.id, nutzer_id=u2.id, sterne=3, text="Gute Küche, aber nur eingeschränkt entspannt bei hoher Auslastung."),
     ])
     db.session.commit()
