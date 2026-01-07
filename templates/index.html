@@ -21,21 +21,73 @@
 </section>
 
 <section>
-  <h2>Passende Restaurants</h2>
+  <h2 class="mb-3">Passende Restaurants</h2>
 
   {% for r in restaurants %}
-    <div class="card my-2">
-      <div class="card-body d-flex justify-content-between align-items-center">
-        <div>
-          <h5 class="card-title">{{ r.name }}</h5>
-          <p class="card-text">{{ r.adresse_zeile }}</p>
+    {# Titelbild (falls vorhanden) #}
+    {% set titelbild = r.fotos | selectattr("titelbild") | first %}
+
+    <div class="card mb-3">
+      <div class="card-body d-flex gap-3 align-items-start">
+
+        <!-- Bild links -->
+        <div style="width: 180px; flex: 0 0 180px;">
+          {% if titelbild %}
+            <img
+              src="{{ url_for('static', filename=titelbild.dateipfad.replace('static/', '')) }}"
+              class="img-fluid rounded-3"
+              style="height: 110px; width: 180px; object-fit: cover;"
+              alt="Bild von {{ r.name }}">
+          {% else %}
+            <img
+              src="https://picsum.photos/360/220"
+              class="img-fluid rounded-3"
+              style="height: 110px; width: 180px; object-fit: cover;"
+              alt="Platzhalterbild">
+          {% endif %}
         </div>
-        <div>
-          <a href="{{ url_for('detail', id=r.id) }}"
-             class="btn btn-outline-primary btn-sm">Details</a>
+
+        <!-- Infos Mitte -->
+        <div class="flex-grow-1">
+          <h5 class="card-title mb-1">{{ r.name }}</h5>
+          <div class="text-muted mb-2">{{ r.adresse_zeile }}</div>
+
+          <!-- Merkmale -->
+          <div class="d-flex flex-wrap gap-2">
+            {% if r.merkmale %}
+              {% if r.merkmale.stufenloser_eingang %}
+                <span class="badge rounded-pill text-bg-success">Stufenlos</span>
+              {% endif %}
+              {% if r.merkmale.barrierefreies_wc %}
+                <span class="badge rounded-pill text-bg-success">WC</span>
+              {% endif %}
+              {% if r.merkmale.rampe %}
+                <span class="badge rounded-pill text-bg-success">Rampe</span>
+              {% endif %}
+              {% if r.merkmale.breite_tueren %}
+                <span class="badge rounded-pill text-bg-success">&gt; 90 cm Tür</span>
+              {% endif %}
+              {% if r.merkmale.unterfahrbare_tische %}
+                <span class="badge rounded-pill text-bg-success">Unterfahrbar</span>
+              {% endif %}
+              {% if r.merkmale.behindertenparkplatz %}
+                <span class="badge rounded-pill text-bg-success">Parkplatz</span>
+              {% endif %}
+            {% endif %}
+          </div>
         </div>
+
+        <!-- Button rechts -->
+        <div class="ms-auto">
+          <a href="{{ url_for('detail', id=r.id) }}" class="btn btn-outline-primary">
+            Details ansehen
+          </a>
+        </div>
+
       </div>
     </div>
+  {% else %}
+    <div class="text-muted">Keine Restaurants gefunden.</div>
   {% endfor %}
 </section>
 
