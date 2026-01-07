@@ -150,7 +150,8 @@ def insert_sample():
         breitengrad=52.5235,
         laengengrad=13.3889,
         beschreibung="Modernes Restaurant mit regionaler Küche und guter Barrierefreiheit.",
-        oeffnungszeiten="Mo–Sa: 12:00–22:00",
+        oeffnungszeiten="Mo – Sa: 12:00 – 22:00" \
+                        "So: Geschlossen", 
         status="approved",
         geprueft_am=datetime.utcnow(),
     )
@@ -171,15 +172,16 @@ def insert_sample():
     # Restaurant 2
     r2 = Restaurant(
         erstellt_von_nutzer_id=u2.id,
-        name="Pizzeria Napoli",
-        strasse="Hauptstraße",
-        hausnummer="45",
-        postleitzahl="10969",
+        name="Fischer und Lustig",
+        strasse="Poststraße",
+        hausnummer="28",
+        postleitzahl="10178",
         stadt="Berlin",
-        breitengrad=52.5049,
-        laengengrad=13.4030,
-        beschreibung="Italienische Klassiker, freundlich und zentral.",
-        oeffnungszeiten="Di–So: 12:00–23:00",
+        breitengrad=52.5173,
+        laengengrad=13.4059,
+        beschreibung=" Wir bringen Fleisch & Fisch auf den Tisch. Regional und traditionell – " 
+        "aber quergedacht..",
+        oeffnungszeiten="Mo – Sa: 11:30 – 00:00\nSo: Geschlossen", 
         status="approved",
         geprueft_am=datetime.utcnow(),
     )
@@ -191,13 +193,111 @@ def insert_sample():
 
     r2.fotos = [
         Foto(
-            dateipfad="static/images/restaurant_demo_1.jpeg",
+            dateipfad="static/images/fischer&lustig_1.jpeg",
+            titelbild=True
+        )
+    ]
+
+
+    # Restaurant 3
+    r3 = Restaurant(
+        erstellt_von_nutzer_id=u1.id,
+        name=" Il Punto",
+        strasse="Neustaedtische Kirchstraße",
+        hausnummer="6",
+        postleitzahl="10117",
+        stadt="Berlin",
+        breitengrad=52.5189, 
+        laengengrad=13.3855,
+        beschreibung="Saisonale Speisen aus handerlesenen Zutaten. "
+        "Gepaart mit einem Wein oder einem Cocktail werden Sie und Ihre Gäste auf eine " 
+        "kulinarische und vinologische Reise geschickt.",
+        oeffnungszeiten="Mo – Fr: 12:00 – 23:00\nSa: 17:00 - 20:00\nSo: Geschlossen", 
+        status="approved",
+        geprueft_am=datetime.utcnow(), 
+    )
+    
+
+    r3.merkmale = BarrierefreieMerkmale(
+        stufenloser_eingang=True,
+        unterfahrbare_tische=True,
+        rampe=True,
+    )
+
+    r3.fotos = [
+        Foto(
+            dateipfad="static/images/il_punto_1.jpeg",
+            titelbild=True
+        )
+    ]
+
+
+    
+    # Restaurant 4
+    r4 = Restaurant(
+        erstellt_von_nutzer_id=u2.id,
+        name="Nante-Eck",
+        strasse="Unter den Linden",
+        hausnummer="35",
+        postleitzahl="10117",
+        stadt="Berlin",
+        breitengrad=52.5166, 
+        laengengrad=13.3882,
+        beschreibung="Urige Altberliner Restauration mit typischem Flair Berlins um 1900 – "
+        "direkt an der Ecke Unter den Linden / Friedrichstraße. "
+        "Berliner Küche nach alten Rezepten sowie moderne Hausmannskost.",
+        oeffnungszeiten="Mo – So: 11:30 – 23:30\n(Warme Speisen bis 22:00)", 
+        status="approved",
+        geprueft_am=datetime.utcnow(), 
+    )
+    
+    r4.merkmale = BarrierefreieMerkmale(
+        unterfahrbare_tische=True,
+        rampe=True,
+        breite_tueren=True,
+        behindertenparkplatz=True,
+    )
+
+    r4.fotos = [
+        Foto(
+            dateipfad="static/images/nante_eck_1.jpeg",
+            titelbild=True
+        )
+    ]
+
+
+    # Restaurant 5
+    r5 = Restaurant(
+        erstellt_von_nutzer_id=u1.id,
+        name="Schnitzelei Mitte",
+        strasse="Friedrichstraße",
+        hausnummer="185-190",
+        postleitzahl="10117",
+        stadt="Berlin",
+        breitengrad=52.5287, 
+        laengengrad=13.3884,
+        beschreibung= "Traditionelles deutsches Lokal mit klassischem Ambiente und "
+        "beliebten Gerichten wie Schnitzel, regionaler Küche und freundlichem Service.",
+        oeffnungszeiten="Mo – Sa: 11:30 – 23:00\nSo: Geschlossen", 
+        status="approved",
+        geprueft_am=datetime.utcnow(), 
+    )
+    
+    r5.merkmale = BarrierefreieMerkmale(
+        unterfahrbare_tische=True,
+        rampe=True,
+        behindertenparkplatz=True,
+    )
+
+    r5.fotos = [
+        Foto(
+            dateipfad="static/images/schnitzelei_1.jpeg",
             titelbild=True
         )
     ]
 
     # Speichern
-    db.session.add_all([r1, r2])
+    db.session.add_all([r1, r2, r3, r4, r5])
     db.session.commit()
 
     # Bewertungen
