@@ -21,10 +21,9 @@
 </section>
 
 <section>
-  <h2 class="mb-3">Passende Restaurants</h2>
+  <h2 class="mb-3">Barrierefreie Restaurants</h2>
 
   {% for r in restaurants %}
-    {# Titelbild (falls vorhanden) #}
     {% set titelbild = r.fotos | selectattr("titelbild") | first %}
 
     <div class="card mb-3">
@@ -36,13 +35,13 @@
             <img
               src="{{ url_for('static', filename=titelbild.dateipfad.replace('static/', '')) }}"
               class="img-fluid rounded-3"
-              style="height: 110px; width: 180px; object-fit: cover;"
+              style="height: 110px; width: 180px;"
               alt="Bild von {{ r.name }}">
           {% else %}
             <img
               src="https://picsum.photos/360/220"
               class="img-fluid rounded-3"
-              style="height: 110px; width: 180px; object-fit: cover;"
+              style="height: 110px; width: 180px;"
               alt="Platzhalterbild">
           {% endif %}
         </div>
@@ -56,22 +55,22 @@
           <div class="d-flex flex-wrap gap-2">
             {% if r.merkmale %}
               {% if r.merkmale.stufenloser_eingang %}
-                <span class="badge rounded-pill text-bg-success">Stufenlos</span>
+                <span class="badge badge-access badge-stepfree">♿ Stufenlos</span>
               {% endif %}
               {% if r.merkmale.barrierefreies_wc %}
-                <span class="badge rounded-pill text-bg-success">WC</span>
+                <span class="badge badge-access badge-wc">🚻 WC</span>
               {% endif %}
               {% if r.merkmale.rampe %}
-                <span class="badge rounded-pill text-bg-success">Rampe</span>
+                <span class="badge badge-access badge-ramp">↗️ Rampe</span>
               {% endif %}
               {% if r.merkmale.breite_tueren %}
-                <span class="badge rounded-pill text-bg-success">&gt; 90 cm Tür</span>
+                <span class="badge badge-access badge-door">&gt; 90 cm Tür</span>
               {% endif %}
               {% if r.merkmale.unterfahrbare_tische %}
-                <span class="badge rounded-pill text-bg-success">Unterfahrbar</span>
+                <span class="badge badge-access badge-table">🪑 Unterfahrbar</span>
               {% endif %}
               {% if r.merkmale.behindertenparkplatz %}
-                <span class="badge rounded-pill text-bg-success">Parkplatz</span>
+                <span class="badge badge-access badge-parking">🅿 Parkplatz</span>
               {% endif %}
             {% endif %}
           </div>
@@ -86,6 +85,7 @@
 
       </div>
     </div>
+
   {% else %}
     <div class="text-muted">Keine Restaurants gefunden.</div>
   {% endfor %}
