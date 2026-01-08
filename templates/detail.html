@@ -112,6 +112,7 @@
   </div>
 </div>
 
+
 <!-- Bewertungen -->
 <div class="mt-4">
   <div class="d-flex justify-content-between align-items-end mb-2">
@@ -134,7 +135,9 @@
           <div class="card">
             <div class="card-body">
               <div class="d-flex justify-content-between">
-                <div class="fw-semibold">Bewertung</div>
+                <div class="fw-semibold">
+                  {{ b.nutzer.benutzername if b.nutzer else "Anonym" }}
+                </div>
                 <div class="fw-semibold">{{ "★" * b.sterne }}{{ "☆" * (5 - b.sterne) }}</div>
               </div>
               <div class="text-muted small mb-2">{{ b.erstellt_am.strftime("%d.%m.%Y") }}</div>
