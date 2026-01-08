@@ -1,62 +1,48 @@
-body {
-    font-family: sans-serif;
-    width: 350px;
-    margin: 10px auto;
-    border: 2px solid #D50C2F;
-}
-a {
-    color: #35a;
-    text-decoration: none;
-}
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-li {
-    margin-top: 3px;
-}
-li input {
-    display: none;
-}
-label::before {
-    width: 12px;
-    height: 12px;
-    border-radius: 3px;
-    border: 2px solid darkgrey;
-    background-color: #fff;
-    display: block;
-    content: "";
-    float: left;
-    margin-right: 5px;
-    position: relative;
-}
-input:checked + label::before {
-    background-color: darkgrey;
-    box-shadow: inset 0 0 0 2px #FFF;
-}
-form {
-    display: inline;
-}
-nav {
-    background: #eee;
-    border-bottom: 2px solid #D50C2F;
-    display: flex;
-    align-items: center;
-    padding: 0 5px;
-}
-nav h1 {
-    font-size: x-large;
-    flex: auto;
-    margin: 2px 0;
-}
-nav a {
-    text-decoration: none;
-}
-.content {
-    padding: 10px 5px 5px 5px;
-}
-.content h2 {
-    font-size: large;
-    margin: 2px 0px;
-}
+/* barrierefreie Merkmale – sanfte Farben */
+.badge-access {
+    border-radius: 999px;
+    font-weight: 500;
+    padding: 0.4em 0.75em;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  
+  /* Einzelne Merkmale */
+  .badge-stepfree {
+    background-color: #d1e7dd;
+    color: #0f5132;
+  }
+  
+  .badge-wc {
+    background-color: #cff4fc;
+    color: #055160;
+  }
+  
+  .badge-ramp {
+    background-color: #e7d9ff;
+    color: #3d0a91;
+  }
+  
+  .badge-door {
+    background-color: #fff3cd;
+    color: #664d03;
+  }
+  
+  .badge-table {
+    background-color: #fde2e2;
+    color: #842029;
+  }
+  
+  .badge-parking {
+    background-color: #e2e3e5;
+    color: #41464b;
+  }
+  
+  /* Kleine UI-Verbesserungen */
+  .card {
+    border-radius: 12px;
+  }
+  
+  img {
+    object-fit: cover;
+  }
+  

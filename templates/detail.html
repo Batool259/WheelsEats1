@@ -41,72 +41,72 @@
 <div class="mb-4">
   <h2 class="h5 fw-semibold mb-2">Barrierefreiheitsmerkmale</h2>
 
-  <div class="d-flex flex-wrap gap-2">
+  <div class="d-flex flex-wrap gap-2 mb-3">
     {% if restaurant.merkmale %}
       {% if restaurant.merkmale.stufenloser_eingang %}
-        <span class="badge rounded-pill text-bg-success">Stufenloser Eingang</span>
-      {% endif %}
-      {% if restaurant.merkmale.rampe %}
-        <span class="badge rounded-pill text-bg-success">Rampe vorhanden</span>
+        <span class="badge badge-access badge-stepfree">♿ Stufenlos</span>
       {% endif %}
       {% if restaurant.merkmale.barrierefreies_wc %}
-        <span class="badge rounded-pill text-bg-success">Barrierefreies WC</span>
+        <span class="badge badge-access badge-wc">🚻 WC</span>
+      {% endif %}
+      {% if restaurant.merkmale.rampe %}
+        <span class="badge badge-access badge-ramp">↗️ Rampe</span>
       {% endif %}
       {% if restaurant.merkmale.breite_tueren %}
-        <span class="badge rounded-pill text-bg-success">Breite Türen (&gt; 90 cm)</span>
+        <span class="badge badge-access badge-door">&gt; 90 cm Tür</span>
       {% endif %}
       {% if restaurant.merkmale.unterfahrbare_tische %}
-        <span class="badge rounded-pill text-bg-success">Unterfahrbare Tische</span>
+        <span class="badge badge-access badge-table">🪑 Unterfahrbar</span>
       {% endif %}
       {% if restaurant.merkmale.behindertenparkplatz %}
-        <span class="badge rounded-pill text-bg-success">Behindertenparkplatz</span>
+        <span class="badge badge-access badge-parking">🅿 Parkplatz</span>
       {% endif %}
     {% else %}
       <span class="text-muted">Keine Merkmale hinterlegt.</span>
     {% endif %}
   </div>
-</div>
 
-<div class="row g-4">
+  <!-- HIER ist der wichtige Teil: row + 2 cols -->
+  <div class="row g-3">
+    <!-- Beschreibung + Öffnungszeiten -->
+    <div class="col-12 col-lg-7">
+      <div class="card h-100">
+        <div class="card-body">
+          <h2 class="h5 fw-semibold">Beschreibung</h2>
+          <p class="mb-0">
+            {{ restaurant.beschreibung or "Keine Beschreibung vorhanden." }}
+          </p>
 
-  <!-- Beschreibung + Öffnungszeiten -->
-  <div class="col-lg-7">
-    <div class="card">
-      <div class="card-body">
-        <h2 class="h5 fw-semibold">Beschreibung</h2>
-        <p class="mb-0">
-          {{ restaurant.beschreibung or "Keine Beschreibung vorhanden." }}
-        </p>
+          <hr>
 
-        <hr>
-
-        <h2 class="h5 fw-semibold">Öffnungszeiten</h2>
-        <p class="mb-0">
-          {{ restaurant.oeffnungszeiten or "Keine Öffnungszeiten angegeben." }}
-        </p>
+          <h2 class="h5 fw-semibold">Öffnungszeiten</h2>
+          <p class="mb-0">
+            {{ restaurant.oeffnungszeiten or "Keine Öffnungszeiten angegeben." }}
+          </p>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Mini-Karte/Koordinaten -->
-  <div class="col-lg-5">
-    <div class="card">
-      <div class="card-body">
-        <h2 class="h5 fw-semibold">Standort</h2>
+    <!-- Standort -->
+    <div class="col-12 col-lg-5">
+      <div class="card h-100">
+        <div class="card-body">
+          <h2 class="h5 fw-semibold">Standort</h2>
 
-        {% if restaurant.breitengrad and restaurant.laengengrad %}
-          <div class="text-muted mb-2">
-            Lat: {{ restaurant.breitengrad }} • Lng: {{ restaurant.laengengrad }}
-          </div>
+          {% if restaurant.breitengrad and restaurant.laengengrad %}
+            <div class="text-muted mb-2">
+              Lat: {{ restaurant.breitengrad }} • Lng: {{ restaurant.laengengrad }}
+            </div>
 
-          <a class="btn btn-outline-primary w-100"
-             target="_blank"
-             href="https://www.google.com/maps?q={{ restaurant.breitengrad }},{{ restaurant.laengengrad }}">
-            Route planen
-          </a>
-        {% else %}
-          <div class="text-muted">Keine Koordinaten vorhanden.</div>
-        {% endif %}
+            <a class="btn btn-outline-primary w-100"
+               target="_blank"
+               href="https://www.google.com/maps?q={{ restaurant.breitengrad }},{{ restaurant.laengengrad }}">
+              Route planen
+            </a>
+          {% else %}
+            <div class="text-muted">Keine Koordinaten vorhanden.</div>
+          {% endif %}
+        </div>
       </div>
     </div>
   </div>
