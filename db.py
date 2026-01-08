@@ -133,11 +133,21 @@ def insert_sample():
     db.session.query(Nutzer).delete()
     db.session.commit()
 
+
+
     # Nutzer anlegen
     u1 = Nutzer(benutzername="Lisa Müller", email="lisa@example.com", passwort_hash="demo", rolle="user")
     u2 = Nutzer(benutzername="Tim K.", email="tim@example.com", passwort_hash="demo", rolle="user")
-    db.session.add_all([u1, u2])
-    db.session.commit()  # wichtig, damit u1.id und u2.id existieren
+    u3 = Nutzer(benutzername="Gisela Hoffmann", email="gisela@example.com", passwort_hash="demo", rolle="user")
+    u4 = Nutzer(benutzername="Karl-Heinz Schneider", email="karlheinz@example.com", passwort_hash="demo", rolle="user")
+    u5 = Nutzer(benutzername="Renate Berger", email="renate@example.com", passwort_hash="demo", rolle="user")
+    u6 = Nutzer(benutzername="Wolfgang Peters", email="wolfgang@example.com", passwort_hash="demo", rolle="user")
+    u7 = Nutzer(benutzername="Ingrid Lehmann", email="ingrid@example.com", passwort_hash="demo", rolle="user")
+
+    db.session.add_all([u1, u2, u3, u4, u5, u6, u7])
+    db.session.commit()  # wichtig, damit alle IDs existieren
+
+
 
     # Restaurant 1
     r1 = Restaurant(
@@ -201,7 +211,7 @@ def insert_sample():
 
     # Restaurant 3
     r3 = Restaurant(
-        erstellt_von_nutzer_id=u1.id,
+        erstellt_von_nutzer_id=u3.id,
         name=" Il Punto",
         strasse="Neustaedtische Kirchstraße",
         hausnummer="6",
@@ -235,7 +245,7 @@ def insert_sample():
     
     # Restaurant 4
     r4 = Restaurant(
-        erstellt_von_nutzer_id=u2.id,
+        erstellt_von_nutzer_id=u4.id,
         name="Nante-Eck",
         strasse="Unter den Linden",
         hausnummer="35",
@@ -268,7 +278,7 @@ def insert_sample():
 
     # Restaurant 5
     r5 = Restaurant(
-        erstellt_von_nutzer_id=u1.id,
+        erstellt_von_nutzer_id=u5.id,
         name="Schnitzelei Mitte",
         strasse="Friedrichstraße",
         hausnummer="185-190",
@@ -299,7 +309,7 @@ def insert_sample():
 
  # Restaurant 6
     r6 = Restaurant(
-        erstellt_von_nutzer_id=u2.id,
+        erstellt_von_nutzer_id=u6.id,
         name="Käfer – Dachgarten Restaurant",
         strasse="Platz der Republik",
         hausnummer="1",
@@ -331,7 +341,7 @@ def insert_sample():
 
  # Restaurant 7
     r7 = Restaurant(
-        erstellt_von_nutzer_id=u2.id,
+        erstellt_von_nutzer_id=u7.id,
         name="MANI Restaurant",
         strasse="Torstraße",
         hausnummer="4",
@@ -367,6 +377,7 @@ def insert_sample():
     # Speichern
     db.session.add_all([r1, r2, r3, r4, r5, r6, r7])
     db.session.commit()
+
 
     # Bewertungen
     db.session.add_all([

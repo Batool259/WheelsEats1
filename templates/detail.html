@@ -11,6 +11,10 @@
     {% if restaurant.geprueft_am %}
       • <span class="badge text-bg-success">Geprüft</span>
     {% endif %}
+    <div class="small mt-1">
+      Erstellt von:
+      {{ restaurant.erstellt_von.benutzername if restaurant.erstellt_von else "Unbekannt" }}
+    </div>
   </div>
 </div>
 
