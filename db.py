@@ -145,7 +145,7 @@ def insert_sample():
     u7 = Nutzer(benutzername="Ingrid Lehmann", email="ingrid@example.com", passwort_hash="demo", rolle="user")
     u8 = Nutzer(benutzername="Gustav Führer", email="gustav@example.com", passwort_hash="demo", rolle="user")
 
-    db.session.add_all([u1, u2, u3, u4, u5, u6, u7])
+    db.session.add_all([u1, u2, u3, u4, u5, u6, u7, u8])
     db.session.commit()  # wichtig, damit alle IDs existieren
 
 
