@@ -143,6 +143,7 @@ def insert_sample():
     u5 = Nutzer(benutzername="Renate Berger", email="renate@example.com", passwort_hash="demo", rolle="user")
     u6 = Nutzer(benutzername="Wolfgang Peters", email="wolfgang@example.com", passwort_hash="demo", rolle="user")
     u7 = Nutzer(benutzername="Ingrid Lehmann", email="ingrid@example.com", passwort_hash="demo", rolle="user")
+    u8 = Nutzer(benutzername="Gustav Führer", email="gustav@example.com", passwort_hash="demo", rolle="user")
 
     db.session.add_all([u1, u2, u3, u4, u5, u6, u7])
     db.session.commit()  # wichtig, damit alle IDs existieren
@@ -211,7 +212,7 @@ def insert_sample():
 
     # Restaurant 3
     r3 = Restaurant(
-        erstellt_von_nutzer_id=u1.id,
+        erstellt_von_nutzer_id=u8.id,
         name=" Il Punto",
         strasse="Neustaedtische Kirchstraße",
         hausnummer="6",
