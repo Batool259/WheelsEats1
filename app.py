@@ -1,15 +1,17 @@
 from flask import Flask, render_template, redirect, url_for, request, flash, session
 from flask_bootstrap import Bootstrap
 
-from db import db, Restaurant, Bewertung, register_commands
+from db import db, Restaurant, Bewertung, register_commands, BarrierefreieMerkmale, Foto
 
 app = Flask(__name__)
 
 app.config.from_mapping(
     SECRET_KEY="secret_key_just_for_dev_environment",
     BOOTSTRAP_BOOTSWATCH_THEME="pulse",
-    SQLALCHEMY_DATABASE_URI="sqlite:///wheeleats.sqlite",
+    SQLALCHEMY_DATABASE_URI = "sqlite:///instance/wheeleats.sqlite"
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
+    UPLOAD_FOLDER="static/uploads",
+    MAX_CONTENT_LENGTH=6 * 1024 * 1024,
 )
 
 # DB an Flask-App binden
@@ -110,6 +112,10 @@ def restaurant_review_create(id):
 
 
 # Restaurant hinzufügen (nur wenn "eingeloggt")
+def _to_bool(name: str) -> bool:
+    return request.form.get(name) == "on"
+
+
 @app.route("/restaurants/new", methods=["GET", "POST"])
 def restaurant_new():
     if not session.get("logged_in"):
@@ -117,11 +123,63 @@ def restaurant_new():
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        flash("Vielen Dank, dein Restaurant wurde eingereicht (Platzhalter).", "success")
-        return redirect(url_for("index"))
+        name = (request.form.get("name") or "").strip()
+        if not name:
+            flash("Bitte gib einen Namen für das Restaurant an.", "danger")
+            return render_template("new.html")
+
+        r = Restaurant(
+            # solange du nur Demo-Login hast, lass das weg:
+            # erstellt_von_nutzer_id=session.get("user_id"),
+            name=name,
+            strasse=(request.form.get("strasse") or "").strip() or None,
+            hausnummer=(request.form.get("hausnummer") or "").strip() or None,
+            postleitzahl=(request.form.get("postleitzahl") or "").strip() or None,
+            stadt=(request.form.get("stadt") or "").strip() or None,
+            beschreibung=(request.form.get("beschreibung") or "").strip() or None,
+            status="pending",
+        )
+
+        # optional: Koordinaten
+        bg = (request.form.get("breitengrad") or "").strip()
+        lg = (request.form.get("laengengrad") or "").strip()
+        r.breitengrad = float(bg) if bg else None
+        r.laengengrad = float(lg) if lg else None
+
+        r.merkmale = BarrierefreieMerkmale(
+            stufenloser_eingang=_to_bool("stufenloser_eingang"),
+            rampe=_to_bool("rampe"),
+            barrierefreies_wc=_to_bool("barrierefreies_wc"),
+            breite_tueren=_to_bool("breite_tueren"),
+            unterfahrbare_tische=_to_bool("unterfahrbare_tische"),
+            behindertenparkplatz=_to_bool("behindertenparkplatz"),
+        )
+
+        db.session.add(r)
+        db.session.flush()  # damit r.id existiert
+
+        file = request.files.get("titelbild")
+        if file and file.filename:
+            filename = secure_filename(file.filename)
+
+            upload_dir = app.config["UPLOAD_FOLDER"]
+            os.makedirs(upload_dir, exist_ok=True)
+
+            save_path = os.path.join(upload_dir, filename)
+            if os.path.exists(save_path):
+                filename = f"{int(datetime.utcnow().timestamp())}_{filename}"
+                save_path = os.path.join(upload_dir, filename)
+
+            file.save(save_path)
+
+            r.fotos = [Foto(dateipfad=save_path.replace("\\", "/"), titelbild=True)]
+
+        db.session.commit()
+
+        flash("Restaurant wurde gespeichert ✅", "success")
+        return redirect(url_for("detail", id=r.id))
 
     return render_template("new.html")
-
 
 # Karte
 @app.route("/map")

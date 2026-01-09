@@ -1,77 +1,144 @@
 {% extends "base.html" %}
-
 {% block TITLE %}Restaurant hinzufügen{% endblock %}
 
 {% block CONTENT %}
-<h2>Restaurant hinzufügen</h2>
 
-<p class="text-muted">Dieses Formular orientiert sich am Datenmodell. Die Eingaben werden noch nicht gespeichert.</p>
+<div class="container py-4" style="max-width: 980px;">
 
-<form method="POST">
-
-  <div class="mb-3">
-    <label class="form-label">Name des Restaurants</label>
-    <input type="text" class="form-control" placeholder="Platzhalter">
+  <div class="mb-4">
+    <h1 class="display-6 fw-bold mb-1">Restaurant hinzufügen</h1>
+    <p class="text-muted mb-0">Helfen Sie anderen, barrierefreie Orte in Berlin zu finden.</p>
   </div>
 
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <label class="form-label">Straße</label>
-      <input type="text" class="form-control" placeholder="Platzhalter">
+  <form method="POST" enctype="multipart/form-data" class="card shadow-sm border-0 rounded-4">
+    <div class="card-body p-4 p-md-5">
+
+      <!-- Grunddaten -->
+      <div class="d-flex align-items-center gap-2 mb-3">
+        <span class="badge rounded-pill text-bg-light border">🏛️</span>
+        <h2 class="h5 fw-semibold mb-0">Grunddaten</h2>
+      </div>
+      <hr class="mt-2 mb-4">
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Name des Restaurants</label>
+        <input name="name" type="text" class="form-control form-control-lg" placeholder="z.B. Café Sonnenschein" required>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-7">
+          <label class="form-label fw-semibold">Straße</label>
+          <input name="strasse" type="text" class="form-control" placeholder="Musterstraße">
+        </div>
+        <div class="col-md-2">
+          <label class="form-label fw-semibold">Nr.</label>
+          <input name="hausnummer" type="text" class="form-control" placeholder="12">
+        </div>
+        <div class="col-md-3">
+          <label class="form-label fw-semibold">PLZ</label>
+          <input name="postleitzahl" type="text" class="form-control" placeholder="10115">
+        </div>
+        <div class="col-md-6">
+          <label class="form-label fw-semibold">Stadt</label>
+          <input name="stadt" type="text" class="form-control" placeholder="Berlin">
+        </div>
+
+      <!-- Barrierefreiheit -->
+      <div class="d-flex align-items-center gap-2 mt-5 mb-3">
+        <span class="badge rounded-pill text-bg-light border">♿</span>
+        <h2 class="h5 fw-semibold mb-0">Barrierefreiheit</h2>
+      </div>
+      <hr class="mt-2 mb-4">
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label class="feature-tile w-100">
+            <input class="feature-check" type="checkbox" name="stufenloser_eingang">
+            <div class="feature-card">
+              <div class="feature-icon">🛗</div>
+              <div class="feature-label fw-semibold">Stufenloser Eingang</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="col-md-6">
+          <label class="feature-tile w-100">
+            <input class="feature-check" type="checkbox" name="rampe">
+            <div class="feature-card">
+              <div class="feature-icon">↗️</div>
+              <div class="feature-label fw-semibold">Rampe vorhanden</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="col-md-6">
+          <label class="feature-tile w-100">
+            <input class="feature-check" type="checkbox" name="barrierefreies_wc">
+            <div class="feature-card">
+              <div class="feature-icon">🚻</div>
+              <div class="feature-label fw-semibold">Barrierefreies WC</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="col-md-6">
+          <label class="feature-tile w-100">
+            <input class="feature-check" type="checkbox" name="breite_tueren">
+            <div class="feature-card">
+              <div class="feature-icon">🚪</div>
+              <div class="feature-label fw-semibold">Breite Türen (&gt; 90cm)</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="col-md-6">
+          <label class="feature-tile w-100">
+            <input class="feature-check" type="checkbox" name="unterfahrbare_tische">
+            <div class="feature-card">
+              <div class="feature-icon">🪑</div>
+              <div class="feature-label fw-semibold">Unterfahrbare Tische</div>
+            </div>
+          </label>
+        </div>
+
+        <div class="col-md-6">
+          <label class="feature-tile w-100">
+            <input class="feature-check" type="checkbox" name="behindertenparkplatz">
+            <div class="feature-card">
+              <div class="feature-icon">🅿️</div>
+              <div class="feature-label fw-semibold">Behindertenparkplatz</div>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Details & Foto -->
+      <div class="d-flex align-items-center gap-2 mt-5 mb-3">
+        <span class="badge rounded-pill text-bg-light border">🖼️</span>
+        <h2 class="h5 fw-semibold mb-0">Details & Foto</h2>
+      </div>
+      <hr class="mt-2 mb-4">
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Zusätzliche Hinweise (optional)</label>
+        <textarea name="beschreibung" class="form-control" rows="3"
+          placeholder="z.B. Gibt es Besonderheiten beim Eingang? Wie ist die Beleuchtung?"></textarea>
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Titelbild hochladen (optional)</label>
+        <input type="file" name="titelbild" class="form-control" accept="image/png,image/jpeg,image/jpg">
+        <div class="form-text">Die Datei wird gespeichert und als Titelbild hinterlegt.</div>
+      </div>
+
+      <div class="d-flex justify-content-center">
+        <button class="btn btn-primary btn-lg px-5 rounded-pill" type="submit">
+          ▶ Restaurant einreichen
+        </button>
+      </div>
+
     </div>
-    <div class="col-md-2 mb-3">
-      <label class="form-label">Hausnummer</label>
-      <input type="text" class="form-control" placeholder="Platzhalter">
-    </div>
-    <div class="col-md-4 mb-3">
-      <label class="form-label">PLZ / Stadt</label>
-      <input type="text" class="form-control" placeholder="Platzhalter">
-    </div>
-  </div>
-
-  <h4>Barrierefreie Merkmale</h4>
-
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox">
-    <label class="form-check-label">Stufenloser Eingang</label>
-  </div>
-
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox">
-    <label class="form-check-label">Rampe vorhanden</label>
-  </div>
-
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox">
-    <label class="form-check-label">Barrierefreies WC</label>
-  </div>
-
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox">
-    <label class="form-check-label">Breite Türen</label>
-  </div>
-
-  <div class="form-check">
-    <input class="form-check-input" type="checkbox">
-    <label class="form-check-label">Unterfahrbare Tische</label>
-  </div>
-
-  <div class="form-check mb-3">
-    <input class="form-check-input" type="checkbox">
-    <label class="form-check-label">Behindertenparkplatz</label>
-  </div>
-  
-  <div class="mb-3 mt-3">
-    <label class="form-label">Titelbild hochladen (optional)</label>
-    <input type="file" class="form-control">
-    <div class="form-text">Die Datei wird in dieser Version noch nicht gespeichert.</div>
-  </div>
-
-  <button class="btn btn-primary" type="submit">Absenden</button>
-
-  <button class="btn btn-primary" type="submit">Absenden</button>
-
-</form>
-
+  </form>
+</div>
 
 {% endblock %}
