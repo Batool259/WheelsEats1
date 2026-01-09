@@ -1,5 +1,9 @@
+import os
+from datetime import datetime
+
 from flask import Flask, render_template, redirect, url_for, request, flash, session
 from flask_bootstrap import Bootstrap
+from werkzeug.utils import secure_filename
 
 from db import db, Restaurant, Bewertung, register_commands, BarrierefreieMerkmale, Foto
 
@@ -8,13 +12,17 @@ app = Flask(__name__)
 app.config.from_mapping(
     SECRET_KEY="secret_key_just_for_dev_environment",
     BOOTSTRAP_BOOTSWATCH_THEME="pulse",
-    SQLALCHEMY_DATABASE_URI = "sqlite:///instance/wheeleats.sqlite"
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
     UPLOAD_FOLDER="static/uploads",
     MAX_CONTENT_LENGTH=6 * 1024 * 1024,
 )
 
-# DB an Flask-App binden
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+INSTANCE_DIR = os.path.join(BASE_DIR, "instance")
+os.makedirs(INSTANCE_DIR, exist_ok=True)
+DB_PATH = os.path.join(INSTANCE_DIR, "wheeleats.sqlite")
+app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
+
 db.init_app(app)
 
 # CLI Commands registrieren: flask init-db / seed-db
