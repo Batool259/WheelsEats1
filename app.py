@@ -194,25 +194,25 @@ def restaurant_new():
 def restaurant_map():
     restaurants = (
         Restaurant.query
-        .filter(
-            Restaurant.breitengrad.isnot(None),
-            Restaurant.laengengrad.isnot(None)
-        )
+        .filter(Restaurant.breitengrad.isnot(None), Restaurant.laengengrad.isnot(None))
         .order_by(Restaurant.name.asc())
         .all()
     )
 
-    restaurants_json = [
+    # Wichtig: SQLAlchemy-Objekte sind NICHT direkt JSON-serialisierbar,
+    # darum bauen wir eine Liste aus dicts.
+    restaurants_data = [
         {
             "id": r.id,
             "name": r.name,
-            "lat": r.breitengrad,
-            "lng": r.laengengrad,
+            "lat": float(r.breitengrad),
+            "lng": float(r.laengengrad),
+            "adresse": f"{r.strasse or ''} {r.hausnummer or ''}, {r.postleitzahl or ''} {r.stadt or ''}".strip(),
         }
         for r in restaurants
     ]
 
-    return render_template("map.html", restaurants=restaurants_json)
+    return render_template("map.html", restaurants=restaurants_data)
 
 
 
