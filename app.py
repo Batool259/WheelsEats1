@@ -192,7 +192,28 @@ def restaurant_new():
 # Karte
 @app.route("/map")
 def restaurant_map():
-    return render_template("map.html")
+    restaurants = (
+        Restaurant.query
+        .filter(
+            Restaurant.breitengrad.isnot(None),
+            Restaurant.laengengrad.isnot(None)
+        )
+        .order_by(Restaurant.name.asc())
+        .all()
+    )
+
+    restaurants_json = [
+        {
+            "id": r.id,
+            "name": r.name,
+            "lat": r.breitengrad,
+            "lng": r.laengengrad,
+        }
+        for r in restaurants
+    ]
+
+    return render_template("map.html", restaurants=restaurants_json)
+
 
 
 # Fehlerseiten

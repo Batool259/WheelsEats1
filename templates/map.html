@@ -1,12 +1,57 @@
 {% extends "base.html" %}
-
 {% block TITLE %}Karte{% endblock %}
 
 {% block CONTENT %}
-<h2>Karte – Barrierefreie Orte (Platzhalter)</h2>
+<div class="mb-3">
+  <h1 class="h3 fw-bold mb-1">Restaurant-Karte</h1>
+  <p class="text-muted">
+    Alle Restaurants mit Standort werden als Pins angezeigt.
+  </p>
+</div>
 
-<p>Hier wird später eine interaktive Karte angezeigt.</p>
+<div id="map" style="height: 70vh;" class="rounded shadow"></div>
 
-<p class="text-muted">Aktuell wird die Karte noch nicht dynamisch erzeugt.</p>
+<!-- Leaflet CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+/>
 
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+  // Karte initialisieren (Start: Berlin)
+  const map = L.map("map").setView([52.5200, 13.4050], 12);
+
+  // OpenStreetMap-Kacheln
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 19,
+    attribution: "&copy; OpenStreetMap contributors"
+  }).addTo(map);
+
+  // Restaurants aus Flask (Python → JS)
+  const restaurants = {{ restaurants | tojson }};
+
+  const markers = [];
+
+  restaurants.forEach(r => {
+    if (r.breitengrad && r.laengengrad) {
+      const marker = L.marker([r.breitengrad, r.laengengrad]).addTo(map);
+
+      marker.bindPopup(`
+        <strong>${r.name}</strong><br>
+        <a href="/restaurants/${r.id}">Zur Detailseite</a>
+      `);
+
+      markers.push(marker);
+    }
+  });
+
+  // Automatisch zoomen, damit alle Pins sichtbar sind
+  if (markers.length > 0) {
+    const group = L.featureGroup(markers);
+    map.fitBounds(group.getBounds().pad(0.2));
+  }
+</script>
 {% endblock %}
