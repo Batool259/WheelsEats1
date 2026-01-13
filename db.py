@@ -1,6 +1,7 @@
 import click
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash
 
 db = SQLAlchemy()
 
@@ -115,14 +116,17 @@ class Bewertung(db.Model):
 def register_commands(app):
     @app.cli.command("init-db")
     def init_db_command():
-        db.drop_all()
-        db.create_all()
+        with app.app_context():
+            db.drop_all()
+            db.create_all()
         click.echo("✅ Datenbank wurde neu initialisiert (wheeleats.sqlite).")
 
     @app.cli.command("seed-db")
     def seed_db_command():
-        insert_sample()
+        with app.app_context():
+            insert_sample()
         click.echo("✅ Demo-Daten wurden eingefügt.")
+
 
 def insert_sample():
     # Alles leeren
