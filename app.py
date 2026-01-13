@@ -199,20 +199,20 @@ def restaurant_map():
         .all()
     )
 
-    # Wichtig: SQLAlchemy-Objekte sind NICHT direkt JSON-serialisierbar,
-    # darum bauen wir eine Liste aus dicts.
-    restaurants_data = [
-        {
+    # in "normale" dicts umwandeln (JSON-serialisierbar)
+    restaurants_data = []
+    for r in restaurants:
+        restaurants_data.append({
             "id": r.id,
             "name": r.name,
-            "lat": float(r.breitengrad),
-            "lng": float(r.laengengrad),
-            "adresse": f"{r.strasse or ''} {r.hausnummer or ''}, {r.postleitzahl or ''} {r.stadt or ''}".strip(),
-        }
-        for r in restaurants
-    ]
+            "lat": r.breitengrad,
+            "lng": r.laengengrad,
+            "adresse": " ".join([x for x in [r.strasse, r.hausnummer, r.postleitzahl, r.stadt] if x]),
+            "detail_url": url_for("detail", id=r.id),
+        })
 
     return render_template("map.html", restaurants=restaurants_data)
+
 
 
 

@@ -6,51 +6,133 @@
 <h2>Restaurant-Karte</h2>
 <p class="text-muted">Alle Restaurants mit Standort werden als Pins angezeigt.</p>
 
-<!-- Leaflet CSS -->
+<!-- Leaflet CSS/JS -->
 <link
   rel="stylesheet"
   href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
 />
-
-<div id="map" style="height: 520px; border-radius: 16px;"></div>
-
-<!-- Leaflet JS -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
+<style>
+  .map-layout {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+  }
+  .sidebar {
+    width: 320px;
+    max-width: 40%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+  .sidebar-header {
+    padding: 12px 12px 8px 12px;
+    border-bottom: 1px solid #eee;
+  }
+  .sidebar-list {
+    max-height: 70vh;
+    overflow: auto;
+  }
+  #map {
+    flex: 1;
+    height: 70vh;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+  }
+  .list-item.active {
+    background: #eef5ff;
+    font-weight: 600;
+  }
+  .list-item small {
+    display: block;
+    opacity: 0.75;
+    font-weight: 400;
+  }
+</style>
+
+<div class="map-layout">
+  <!-- Links: Liste -->
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <strong>Restaurants</strong>
+      <div class="text-muted" style="font-size: 0.9em;">
+        Klicke einen Eintrag, um zum Pin zu springen.
+      </div>
+    </div>
+    <div id="restaurantList" class="sidebar-list list-group"></div>
+  </div>
+
+  <!-- Rechts: Karte -->
+  <div id="map"></div>
+</div>
+
 <script>
-  // Restaurants aus Flask/Jinja (schon JSON-fähig dank dict-Liste)
   const restaurants = {{ restaurants | tojson }};
 
-  // Karte initialisieren (Fallback: Berlin)
   const map = L.map("map").setView([52.5200, 13.4050], 12);
 
-  // OpenStreetMap Tiles
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
-    attribution: '&copy; OpenStreetMap contributors'
+    attribution: "&copy; OpenStreetMap contributors"
   }).addTo(map);
 
-  const markers = [];
+  const markersById = {};
+  const listEl = document.getElementById("restaurantList");
+  const markerGroup = [];
+
+  function setActive(id) {
+    document.querySelectorAll(".list-item").forEach(el => el.classList.remove("active"));
+    const activeEl = document.querySelector(`.list-item[data-id="${id}"]`);
+    if (activeEl) activeEl.classList.add("active");
+  }
 
   restaurants.forEach(r => {
     if (r.lat == null || r.lng == null) return;
 
+    // Marker
     const marker = L.marker([r.lat, r.lng]).addTo(map);
 
     const popupHtml = `
-      <strong>${r.name}</strong><br>
-      <small>${r.adresse || ""}</small><br>
-      <a href="/restaurants/${r.id}">Details öffnen</a>
+      <div>
+        <strong>${r.name}</strong><br/>
+        <small>${r.adresse || ""}</small><br/>
+        <a href="${r.detail_url || ("/restaurants/" + r.id)}">Details öffnen</a>
+      </div>
+    `;
+    marker.bindPopup(popupHtml);
+
+    marker.on("click", () => setActive(r.id));
+
+    markersById[r.id] = marker;
+    markerGroup.push(marker);
+
+    // Listeneintrag
+    const item = document.createElement("a");
+    item.href = "#";
+    item.className = "list-group-item list-group-item-action list-item";
+    item.dataset.id = r.id;
+    item.innerHTML = `
+      ${r.name}
+      <small>${r.adresse || ""}</small>
     `;
 
-    marker.bindPopup(popupHtml);
-    markers.push(marker);
+    item.addEventListener("click", (e) => {
+      e.preventDefault();
+      setActive(r.id);
+      map.setView([r.lat, r.lng], 15);
+      markersById[r.id].openPopup();
+    });
+
+    listEl.appendChild(item);
   });
 
-  // Karte automatisch auf alle Marker zoomen
-  if (markers.length > 0) {
-    const group = L.featureGroup(markers);
+  if (markerGroup.length > 0) {
+    const group = L.featureGroup(markerGroup);
     map.fitBounds(group.getBounds().pad(0.2));
+  } else {
+    listEl.innerHTML = `<div class="p-3 text-muted">Keine Restaurants mit Koordinaten gefunden.</div>`;
   }
 </script>
 {% endblock %}
