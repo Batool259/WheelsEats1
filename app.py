@@ -41,6 +41,13 @@ def home():
 # Regsiter
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    # ✅ CHANGED: next kann aus POST oder GET kommen
+    next_url = request.form.get("next") or request.args.get("next")
+
+    # Sicherheitscheck: nur interne Pfade erlauben
+    if next_url and not next_url.startswith("/"):
+        next_url = None
+
     if request.method == "POST":
         benutzername = request.form.get("benutzername", "").strip()
         email = request.form.get("email", "").strip().lower()
@@ -49,19 +56,19 @@ def register():
 
         if not benutzername or not email:
             flash("Bitte Benutzername und E-Mail angeben.", "warning")
-            return render_template("register.html")
+            return render_template("register.html", next=next_url)
 
         if len(password) < 8:
             flash("Passwort muss mindestens 8 Zeichen haben.", "warning")
-            return render_template("register.html")
+            return render_template("register.html", next=next_url)
 
         if password != password2:
             flash("Passwörter stimmen nicht überein.", "warning")
-            return render_template("register.html")
+            return render_template("register.html", next=next_url)
 
         if Nutzer.query.filter_by(email=email).first():
             flash("Diese E-Mail ist bereits registriert.", "warning")
-            return render_template("register.html")
+            return render_template("register.html", next=next_url)
 
         user = Nutzer(
             benutzername=benutzername,
@@ -72,10 +79,16 @@ def register():
         db.session.add(user)
         db.session.commit()
 
-        flash("Registrierung erfolgreich! Bitte einloggen.", "success")
-        return redirect(url_for("login"))
+        # ✅ Direkt einloggen, damit du danach sofort "Restaurant hinzufügen" nutzen kannst
+        session["logged_in"] = True
+        session["user_id"] = user.id
+        session["username"] = user.benutzername
 
-    return render_template("register.html")
+        flash("Registrierung erfolgreich! Du bist jetzt eingeloggt ✅", "success")
+        return redirect(next_url or url_for("index"))
+
+    return render_template("register.html", next=next_url)
+
 
 # Login
 @app.route("/login", methods=["GET", "POST"])
@@ -95,7 +108,13 @@ def login():
         session["username"] = user.benutzername
 
         flash(f"Willkommen, {user.benutzername}!", "success")
-        return redirect(url_for("index"))
+
+        # ✅ CHANGED: next nutzen (POST oder GET)
+        next_url = request.form.get("next") or request.args.get("next")
+        if next_url and not next_url.startswith("/"):
+            next_url = None
+
+        return redirect(next_url or url_for("index"))
 
     return render_template("login.html")
 
@@ -178,7 +197,8 @@ def _to_bool(name: str) -> bool:
 def restaurant_new():
     if not session.get("logged_in"):
         flash("Bitte einloggen, um ein Restaurant einzureichen.", "warning")
-        return redirect(url_for("login"))
+        # ✅ CHANGED: next mitschicken
+        return redirect(url_for("login", next=request.path))
 
     if request.method == "POST":
         name = (request.form.get("name") or "").strip()
@@ -262,8 +282,6 @@ def restaurant_map():
         })
 
     return render_template("map.html", restaurants=restaurants_data)
-
-
 
 
 # Fehlerseiten
