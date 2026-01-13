@@ -4,15 +4,14 @@ from datetime import datetime
 from flask import Flask, render_template, redirect, url_for, request, flash, session
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
-from werkzeug.security import generate_password_hash, check_password_hash
 
-from db import db, Restaurant, Bewertung, BarrierefreieMerkmale, Foto, Nutzer, register_commands
+from db import db, Restaurant, Bewertung, register_commands, BarrierefreieMerkmale, Foto
 
 app = Flask(__name__)
 
 app.config.from_mapping(
     SECRET_KEY="secret_key_just_for_dev_environment",
-    BOOTSTRAP_BOOTSWATCH_THEME="None",
+    BOOTSTRAP_BOOTSWATCH_THEME="pulse",
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
     UPLOAD_FOLDER="static/uploads",
     MAX_CONTENT_LENGTH=6 * 1024 * 1024,
@@ -38,73 +37,36 @@ bootstrap = Bootstrap(app)
 def home():
     return redirect(url_for("index"))
 
-# Regsiter
-@app.route("/register", methods=["GET", "POST"])
-def register():
-    if request.method == "POST":
-        benutzername = request.form.get("benutzername", "").strip()
-        email = request.form.get("email", "").strip().lower()
-        password = request.form.get("password", "")
-        password2 = request.form.get("password2", "")
 
-        if not benutzername or not email:
-            flash("Bitte Benutzername und E-Mail angeben.", "warning")
-            return render_template("register.html")
-
-        if len(password) < 8:
-            flash("Passwort muss mindestens 8 Zeichen haben.", "warning")
-            return render_template("register.html")
-
-        if password != password2:
-            flash("Passwörter stimmen nicht überein.", "warning")
-            return render_template("register.html")
-
-        if Nutzer.query.filter_by(email=email).first():
-            flash("Diese E-Mail ist bereits registriert.", "warning")
-            return render_template("register.html")
-
-        user = Nutzer(
-            benutzername=benutzername,
-            email=email,
-            passwort_hash=generate_password_hash(password),
-            rolle="user"
-        )
-        db.session.add(user)
-        db.session.commit()
-
-        flash("Registrierung erfolgreich! Bitte einloggen.", "success")
-        return redirect(url_for("login"))
-
-    return render_template("register.html")
-
-# Login
+# Login (Demo, ohne DB)
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
-        email = request.form.get("email", "").strip().lower()
-        password = request.form.get("password", "")
-
-        user = Nutzer.query.filter_by(email=email).first()
-
-        if not user or not check_password_hash(user.passwort_hash, password):
-            flash("E-Mail oder Passwort falsch.", "danger")
-            return render_template("login.html")
-
         session["logged_in"] = True
-        session["user_id"] = user.id
-        session["username"] = user.benutzername
-
-        flash(f"Willkommen, {user.benutzername}!", "success")
+        flash("Login erfolgreich (Demo).", "success")
         return redirect(url_for("index"))
-
     return render_template("login.html")
+
+
+# Registrierung (Demo, ohne Speicherung)
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        flash(
+            "Registrierung erfolgreich (Demo – Daten werden noch nicht gespeichert). Bitte jetzt einloggen.",
+            "success",
+        )
+        return redirect(url_for("login"))
+    return render_template("register.html")
+
 
 # Logout
 @app.route("/logout")
 def logout():
-    session.clear()
-    flash("Du wurdest ausgeloggt.", "info")
+    session.pop("logged_in", None)
+    flash("Du wurdest ausgeloggt (Demo).", "info")
     return redirect(url_for("login"))
+
 
 # Startseite (Restaurants-Liste) + Suche
 @app.route("/index")
@@ -149,25 +111,13 @@ def restaurant_review_create(id):
         flash("Bitte einloggen, um eine Bewertung abzugeben.", "warning")
         return redirect(url_for("login"))
 
-    sterne = int(request.form.get("sterne", "0"))
-    text = (request.form.get("text") or "").strip() or None
+    # Demo: wir speichern noch nichts
+    sterne = request.form.get("sterne")
+    text = request.form.get("text")
 
-    if sterne < 1 or sterne > 5:
-        flash("Bitte Sterne von 1 bis 5 wählen.", "danger")
-        return redirect(url_for("detail", id=id))
-
-    review = Bewertung(
-        restaurant_id=id,
-        nutzer_id=session["user_id"],
-        sterne=sterne,
-        text=text,
-    )
-
-    db.session.add(review)
-    db.session.commit()
-
-    flash("Danke! Deine Bewertung wurde gespeichert ✅", "success")
+    flash("Danke! Deine Bewertung wurde gespeichert (Demo – noch ohne Datenbank).", "success")
     return redirect(url_for("detail", id=id))
+
 
 # Restaurant hinzufügen (nur wenn "eingeloggt")
 def _to_bool(name: str) -> bool:
