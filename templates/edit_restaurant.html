@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block CONTENT %}
+<div class="container mt-4" style="max-width: 700px;">
+  <h3 class="mb-3">Restaurant bearbeiten</h3>
+
+  <form method="post">
+    <div class="mb-3">
+      <label class="form-label">Breitengrad</label>
+      <input class="form-control" name="breitengrad" value="{{ restaurant.breitengrad or '' }}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Längengrad</label>
+      <input class="form-control" name="laengengrad" value="{{ restaurant.laengengrad or '' }}">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Öffnungszeiten</label>
+      <textarea class="form-control" name="oeffnungszeiten" rows="4">{{ restaurant.oeffnungszeiten or '' }}</textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Status</label>
+      <select class="form-select" name="status">
+        <option value="pending" {% if restaurant.status != "approved" %}selected{% endif %}>In Bearbeitung</option>
+        <option value="approved" {% if restaurant.status == "approved" %}selected{% endif %}>Geprüft</option>
+      </select>
+    </div>
+
+    <button class="btn btn-secondary" type="submit">Speichern</button>
+    <a class="btn btn-link" href="{{ url_for('detail', id=restaurant.id) }}">Abbrechen</a>
+  </form>
+</div>
+{% endblock %}

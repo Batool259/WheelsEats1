@@ -20,6 +20,17 @@
   </div>
 </div>
 
+
+{% if session.get("role") == "admin" %}
+  <div class="mb-3">
+    <a class="btn btn-sm btn-outline-secondary"
+       href="{{ url_for('restaurant_edit', id=restaurant.id) }}">
+      Restaurant bearbeiten
+    </a>
+  </div>
+{% endif %}
+
+
 {# TITELBILD #}
 {% set titelbild = restaurant.fotos | selectattr("titelbild") | first %}
 

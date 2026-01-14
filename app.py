@@ -1,6 +1,7 @@
 import os
 from datetime import datetime
 
+from flask import abort
 from flask import Flask, render_template, redirect, url_for, request, flash, session
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
@@ -15,14 +16,6 @@ def allowed_file(filename: str) -> bool:
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 app = Flask(__name__)
-
-
-ADMIN_EMAILS = {
-    e.strip().lower()
-    for e in os.environ.get("ADMIN_EMAILS", "").split(",")
-    if e.strip()
-}
-
 
 def is_admin() -> bool:
     return session.get("role") == "admin"
@@ -121,11 +114,6 @@ def login():
             flash("E-Mail oder Passwort falsch.", "danger")
             return render_template("login.html")
 
-        # Admin-Autosetup: wenn E-Mail in ADMIN_EMAILS, dann dauerhaft admin setzen
-        if user.email and user.email.lower() in ADMIN_EMAILS and user.rolle != "admin":
-            user.rolle = "admin"
-            db.session.commit()
-
         session["logged_in"] = True
         session["user_id"] = user.id
         session["username"] = user.benutzername
@@ -208,6 +196,47 @@ def detail(id):
     return render_template("detail.html", restaurant=restaurant, bewertungen=bewertungen, avg=avg)
 
 
+
+@app.route("/restaurants/<int:id>/edit", methods=["GET", "POST"])
+def restaurant_edit(id):
+    # 🔒 Nur eingeloggte Admins
+    if not session.get("logged_in"):
+        abort(403)
+    if not is_admin():
+        abort(403)
+
+    restaurant = Restaurant.query.get_or_404(id)
+
+    if request.method == "POST":
+        # Koordinaten
+        bg = (request.form.get("breitengrad") or "").strip()
+        lg = (request.form.get("laengengrad") or "").strip()
+
+        try:
+            restaurant.breitengrad = float(bg) if bg else None
+            restaurant.laengengrad = float(lg) if lg else None
+        except ValueError:
+            flash("Bitte gültige Koordinaten eingeben.", "danger")
+            return render_template("edit_restaurant.html", restaurant=restaurant)
+
+        # Öffnungszeiten
+        restaurant.oeffnungszeiten = (request.form.get("oeffnungszeiten") or "").strip() or None
+
+        # Status setzen
+        status = (request.form.get("status") or "").strip()
+        if status in ("pending", "approved"):
+            restaurant.status = status
+            if status == "approved" and not restaurant.geprueft_am:
+                restaurant.geprueft_am = datetime.utcnow()
+
+        db.session.commit()
+        flash("Änderungen gespeichert.", "success")
+        return redirect(url_for("detail", id=restaurant.id))
+
+    return render_template("edit_restaurant.html", restaurant=restaurant)
+
+
+
 @app.route("/restaurants/<int:id>/reviews", methods=["POST"])
 def restaurant_review_create(id):
     if not session.get("logged_in"):
@@ -233,6 +262,7 @@ def restaurant_review_create(id):
 
     flash("Danke! Deine Bewertung wurde gespeichert ✅", "success")
     return redirect(url_for("detail", id=id))
+
 
 # Restaurant hinzufügen (nur wenn "eingeloggt")
 def _to_bool(name: str) -> bool:
