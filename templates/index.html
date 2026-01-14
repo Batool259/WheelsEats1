@@ -5,17 +5,50 @@
 {% block CONTENT %}
 
 <section class="my-3">
-  <form class="row g-2 my-3" method="get" action="{{ url_for('index') }}">
+  <form class="row g-2 my-3" method="GET" action="{{ url_for('index') }}">
     <div class="col-md-10">
       <input
         class="form-control"
-        type="text"
         name="q"
-        value="{{ q or '' }}"
-        placeholder="Restaurant oder Adresse">
+        type="text"
+        placeholder="Restaurant oder Adresse"
+        value="{{ q or '' }}">
     </div>
+
     <div class="col-md-2 d-grid">
       <button class="btn btn-primary" type="submit">Suchen</button>
+    </div>
+
+    <!-- Filter -->
+    <div class="col-12 mt-2">
+      <div class="d-flex flex-wrap gap-2">
+
+        <input class="btn-check" type="checkbox" id="f_stufenlos" name="stufenloser_eingang" value="1"
+               {% if filters and filters.stufenloser_eingang %}checked{% endif %}>
+        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_stufenlos">Stufenlos</label>
+
+        <input class="btn-check" type="checkbox" id="f_wc" name="barrierefreies_wc" value="1"
+               {% if filters and filters.barrierefreies_wc %}checked{% endif %}>
+        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_wc">Barrierefreies WC</label>
+
+        <input class="btn-check" type="checkbox" id="f_rampe" name="rampe" value="1"
+               {% if filters and filters.rampe %}checked{% endif %}>
+        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_rampe">Rampe</label>
+
+        <input class="btn-check" type="checkbox" id="f_tueren" name="breite_tueren" value="1"
+               {% if filters and filters.breite_tueren %}checked{% endif %}>
+        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_tueren">Breite Türen</label>
+
+        <input class="btn-check" type="checkbox" id="f_tische" name="unterfahrbare_tische" value="1"
+               {% if filters and filters.unterfahrbare_tische %}checked{% endif %}>
+        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_tische">Unterfahrbare Tische</label>
+
+        <input class="btn-check" type="checkbox" id="f_park" name="behindertenparkplatz" value="1"
+               {% if filters and filters.behindertenparkplatz %}checked{% endif %}>
+        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_park">Behindertenparkplatz</label>
+
+        <a class="btn btn-link btn-sm text-decoration-none" href="{{ url_for('index') }}">Zurücksetzen</a>
+      </div>
     </div>
   </form>
 </section>

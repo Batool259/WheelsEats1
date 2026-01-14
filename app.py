@@ -125,13 +125,23 @@ def logout():
     flash("Du wurdest ausgeloggt.", "info")
     return redirect(url_for("login"))
 
-# Startseite (Restaurants-Liste) + Suche
 @app.route("/index")
 def index():
     q = request.args.get("q", "").strip()
 
+    # Filter aus Querystring (Checkboxen)
+    filters = {
+        "stufenloser_eingang": request.args.get("stufenloser_eingang") == "1",
+        "rampe": request.args.get("rampe") == "1",
+        "barrierefreies_wc": request.args.get("barrierefreies_wc") == "1",
+        "breite_tueren": request.args.get("breite_tueren") == "1",
+        "unterfahrbare_tische": request.args.get("unterfahrbare_tische") == "1",
+        "behindertenparkplatz": request.args.get("behindertenparkplatz") == "1",
+    }
+
     query = Restaurant.query
 
+    # Suche (Name/Adresse)
     if q:
         like = f"%{q}%"
         query = query.filter(
@@ -141,8 +151,18 @@ def index():
             | (Restaurant.stadt.ilike(like))
         )
 
+    # Wenn irgendein Filter aktiv ist → join auf Merkmale
+    if any(filters.values()):
+        query = query.join(Restaurant.merkmale)
+
+        # Nur Restaurants, die das jeweilige Merkmal wirklich haben
+        for key, enabled in filters.items():
+            if enabled:
+                query = query.filter(getattr(BarrierefreieMerkmale, key).is_(True))
+
     restaurants = query.order_by(Restaurant.name.asc()).all()
-    return render_template("index.html", restaurants=restaurants, q=q)
+
+    return render_template("index.html", restaurants=restaurants, q=q, filters=filters)
 
 
 # Detailseite
