@@ -239,6 +239,7 @@ def restaurant_new():
             stadt=(request.form.get("stadt") or "").strip() or None,
             beschreibung=(request.form.get("beschreibung") or "").strip() or None,
             status="pending",
+            erstellt_von_nutzer_id=session["user_id"],
         )
 
         # optional: Koordinaten (robust)
