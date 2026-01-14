@@ -1,6 +1,14 @@
+# Virtuelle Umgebung
 .venv/
+venv/
+
+# Python-Cache
 __pycache__/
 *.pyc
+
+# Betriebssystem-Dateien
 .DS_Store
+
+# Flask-Instance-Ordner & SQLite-Datenbanken
 instance/
-*.sqliteinstance/wheeleats.sqlite 
+*.sqlite
