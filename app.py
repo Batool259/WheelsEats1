@@ -16,6 +16,17 @@ def allowed_file(filename: str) -> bool:
 
 app = Flask(__name__)
 
+
+ADMIN_EMAILS = {
+    e.strip().lower()
+    for e in os.environ.get("ADMIN_EMAILS", "").split(",")
+    if e.strip()
+}
+
+
+def is_admin() -> bool:
+    return session.get("role") == "admin"
+
 app.config.from_mapping(
     SECRET_KEY=os.environ.get("SECRET_KEY", "dev-secret-key"),
     BOOTSTRAP_BOOTSWATCH_THEME=None,
@@ -89,6 +100,7 @@ def register():
         session["logged_in"] = True
         session["user_id"] = user.id
         session["username"] = user.benutzername
+        session["role"] = user.rolle
 
         flash("Registrierung erfolgreich! Du bist jetzt eingeloggt ✅", "success")
         return redirect(next_url or url_for("index"))
@@ -109,9 +121,17 @@ def login():
             flash("E-Mail oder Passwort falsch.", "danger")
             return render_template("login.html")
 
+        # Admin-Autosetup: wenn E-Mail in ADMIN_EMAILS, dann dauerhaft admin setzen
+        if user.email and user.email.lower() in ADMIN_EMAILS and user.rolle != "admin":
+            user.rolle = "admin"
+            db.session.commit()
+
         session["logged_in"] = True
         session["user_id"] = user.id
         session["username"] = user.benutzername
+        session["role"] = user.rolle
+
+
 
         flash(f"Willkommen, {user.benutzername}!", "success")
 
@@ -318,3 +338,4 @@ def restaurant_map():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
+
