@@ -141,6 +141,56 @@
     </div>
   </div>
 
+
+  {# Bewertung-schreiben Block #}
+  {% if session.get("logged_in") %}
+    <div class="mb-3">
+      <button class="btn btn-sm btn-primary"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#reviewForm">
+        Bewertung schreiben
+      </button>
+
+      <div id="reviewForm" class="collapse mt-3">
+        <div class="card shadow-sm rounded-4">
+          <div class="card-body">
+            <form method="post"
+                  action="{{ url_for('restaurant_review_create', id=restaurant.id) }}">
+
+              <div class="mb-2">
+                <label class="form-label">Deine Bewertung</label>
+                <div class="star-rating">
+                  {% for s in range(5, 0, -1) %}
+                    <input type="radio" id="star{{ s }}" name="sterne" value="{{ s }}" required>
+                    <label for="star{{ s }}">★</label>
+                  {% endfor %}
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Kommentar</label>
+                <textarea class="form-control" name="text" rows="3"
+                          placeholder="Deine Erfahrung …"></textarea>
+              </div>
+
+              <button class="btn btn-primary btn-sm" type="submit">
+                Absenden
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% else %}
+    <a class="btn btn-sm btn-outline-primary mb-3"
+       href="{{ url_for('login', next=request.path) }}">
+      Anmelden, um zu bewerten
+    </a>
+  {% endif %}
+
+
+
   {% if bewertungen %}
     <div class="row g-3">
       {% for b in bewertungen %}
