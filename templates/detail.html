@@ -8,8 +8,10 @@
   <h1 class="h3 fw-bold mb-1">{{ restaurant.name }}</h1>
   <div class="text-muted">
     {{ restaurant.adresse_zeile }}
-    {% if restaurant.geprueft_am %}
+    {% if restaurant.geprueft_am or restaurant.status == "approved" %}
       • <span class="badge text-bg-success">Geprüft</span>
+    {% else %}
+      • <span class="badge text-bg-warning">In Bearbeitung</span>
     {% endif %}
     <div class="small mt-1">
       Erstellt von:

@@ -82,7 +82,15 @@
         <!-- Infos Mitte -->
         <div class="flex-grow-1">
           <h5 class="card-title mb-1">{{ r.name }}</h5>
-          <div class="text-muted mb-2">{{ r.adresse_zeile }}</div>
+          <div class="text-muted mb-2">
+            {{ r.adresse_zeile }}
+            {% if r.geprueft_am or r.status == "approved" %}
+            • <span class="badge text-bg-secondary">Geprüft</span>
+            {% else %}
+            • <span class="badge text-bg-secondary">In Bearbeitung</span>
+            {% endif %}
+          </div>
+
 
           <!-- Merkmale -->
           <div class="d-flex flex-wrap gap-2">
