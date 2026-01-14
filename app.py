@@ -8,11 +8,17 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 from db import db, Restaurant, Bewertung, BarrierefreieMerkmale, Foto, Nutzer, register_commands
 
+# Upload-Sicherheit
+ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
+
+def allowed_file(filename: str) -> bool:
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+
 app = Flask(__name__)
 
 app.config.from_mapping(
-    SECRET_KEY="secret_key_just_for_dev_environment",
-    BOOTSTRAP_BOOTSWATCH_THEME="None",
+    SECRET_KEY=os.environ.get("SECRET_KEY", "dev-secret-key"),
+    BOOTSTRAP_BOOTSWATCH_THEME=None,
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
     UPLOAD_FOLDER="static/uploads",
     MAX_CONTENT_LENGTH=6 * 1024 * 1024,
@@ -217,7 +223,6 @@ def _to_bool(name: str) -> bool:
 def restaurant_new():
     if not session.get("logged_in"):
         flash("Bitte einloggen, um ein Restaurant einzureichen.", "warning")
-        # ✅ CHANGED: next mitschicken
         return redirect(url_for("login", next=request.path))
 
     if request.method == "POST":
@@ -227,8 +232,6 @@ def restaurant_new():
             return render_template("new.html")
 
         r = Restaurant(
-            # solange du nur Demo-Login hast, lass das weg:
-            # erstellt_von_nutzer_id=session.get("user_id"),
             name=name,
             strasse=(request.form.get("strasse") or "").strip() or None,
             hausnummer=(request.form.get("hausnummer") or "").strip() or None,
@@ -238,11 +241,15 @@ def restaurant_new():
             status="pending",
         )
 
-        # optional: Koordinaten
+        # optional: Koordinaten (robust)
         bg = (request.form.get("breitengrad") or "").strip()
         lg = (request.form.get("laengengrad") or "").strip()
-        r.breitengrad = float(bg) if bg else None
-        r.laengengrad = float(lg) if lg else None
+        try:
+            r.breitengrad = float(bg) if bg else None
+            r.laengengrad = float(lg) if lg else None
+        except ValueError:
+            flash("Bitte gültige Koordinaten eingeben (z.B. 52.5200 und 13.4050).", "danger")
+            return render_template("new.html")
 
         r.merkmale = BarrierefreieMerkmale(
             stufenloser_eingang=_to_bool("stufenloser_eingang"),
@@ -258,6 +265,10 @@ def restaurant_new():
 
         file = request.files.get("titelbild")
         if file and file.filename:
+            if not allowed_file(file.filename):
+                flash("Nur Bilddateien (png, jpg, jpeg, webp) sind erlaubt.", "danger")
+                return redirect(request.url)
+
             filename = secure_filename(file.filename)
 
             upload_dir = app.config["UPLOAD_FOLDER"]
@@ -270,7 +281,8 @@ def restaurant_new():
 
             file.save(save_path)
 
-            r.fotos = [Foto(dateipfad=save_path.replace("\\", "/"), titelbild=True)]
+            rel_path = f"static/uploads/{filename}"
+            r.fotos = [Foto(dateipfad=rel_path, titelbild=True)]
 
         db.session.commit()
 
@@ -302,18 +314,6 @@ def restaurant_map():
         })
 
     return render_template("map.html", restaurants=restaurants_data)
-
-
-# Fehlerseiten
-@app.errorhandler(404)
-def http_not_found(e):
-    return render_template("404.html"), 404
-
-
-@app.errorhandler(500)
-def http_internal_server_error(e):
-    return render_template("500.html"), 500
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
