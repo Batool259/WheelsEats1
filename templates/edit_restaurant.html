@@ -4,7 +4,7 @@
 {% block CONTENT %}
 <div class="container mt-4" style="max-width: 900px;">
 
-  {# Kopfbereich #} 
+  {# Kopfbereich #}
   <div class="mb-3">
     <h1 class="h3 fw-bold mb-1">{{ restaurant.name }}</h1>
 
@@ -41,7 +41,7 @@
     {% endif %}
   </div>
 
-  {# Merkmale wie Detailseite: erstmal nur anzeigen (Edit kommt im nächsten Schritt) #}
+  {# Merkmale wie Detailseite: Anzeige #}
   <div class="mb-3">
     <div class="fw-semibold mb-2">Barrierefreiheitsmerkmale</div>
     <div class="d-flex flex-wrap gap-2">
@@ -58,8 +58,70 @@
     </div>
   </div>
 
+  {# ALLES was gespeichert werden soll, muss im FORM liegen #}
   <form method="post">
     <div class="row g-3">
+
+      {# Merkmale bearbeiten (IM FORM) #}
+      <div class="col-12">
+        <div class="card shadow-sm rounded-4 mt-1">
+          <div class="card-body">
+            <h5 class="card-title mb-3">Merkmale bearbeiten</h5>
+
+            <div class="row g-2">
+              <div class="col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="stufenloser_eingang" id="stufenloser_eingang"
+                         {% if restaurant.merkmale and restaurant.merkmale.stufenloser_eingang %}checked{% endif %}>
+                  <label class="form-check-label" for="stufenloser_eingang">Stufenloser Eingang</label>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="rampe" id="rampe"
+                         {% if restaurant.merkmale and restaurant.merkmale.rampe %}checked{% endif %}>
+                  <label class="form-check-label" for="rampe">Rampe vorhanden</label>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="barrierefreies_wc" id="barrierefreies_wc"
+                         {% if restaurant.merkmale and restaurant.merkmale.barrierefreies_wc %}checked{% endif %}>
+                  <label class="form-check-label" for="barrierefreies_wc">Barrierefreies WC</label>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="breite_tueren" id="breite_tueren"
+                         {% if restaurant.merkmale and restaurant.merkmale.breite_tueren %}checked{% endif %}>
+                  <label class="form-check-label" for="breite_tueren">Breite Türen (&gt; 90cm)</label>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="unterfahrbare_tische" id="unterfahrbare_tische"
+                         {% if restaurant.merkmale and restaurant.merkmale.unterfahrbare_tische %}checked{% endif %}>
+                  <label class="form-check-label" for="unterfahrbare_tische">Unterfahrbare Tische</label>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" name="behindertenparkplatz" id="behindertenparkplatz"
+                         {% if restaurant.merkmale and restaurant.merkmale.behindertenparkplatz %}checked{% endif %}>
+                  <label class="form-check-label" for="behindertenparkplatz">Behindertenparkplatz</label>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
       {# Linke Card wie Detailseite: Beschreibung + Öffnungszeiten #}
       <div class="col-md-7">
         <div class="card shadow-sm rounded-4">
@@ -73,7 +135,7 @@
 
             <h5 class="card-title mb-2">Öffnungszeiten</h5>
             <textarea class="form-control" name="oeffnungszeiten" rows="4"
-              placeholder="z.B. Mo–Fr: 10:00–18:00">{{ restaurant.oeffnungszeiten or "" }}</textarea>
+                      placeholder="z.B. Mo–Fr: 10:00–18:00">{{ restaurant.oeffnungszeiten or "" }}</textarea>
           </div>
         </div>
       </div>
@@ -119,6 +181,7 @@
           </div>
         </div>
       </div>
+
     </div>
   </form>
 

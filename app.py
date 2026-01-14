@@ -228,6 +228,21 @@ def restaurant_edit(id):
             restaurant.status = status
             if status == "approved" and not restaurant.geprueft_am:
                 restaurant.geprueft_am = datetime.utcnow()
+        
+        # Merkmale speichern / aktualisieren
+        if restaurant.merkmale:
+            m = restaurant.merkmale
+        else:
+            m = BarrierefreieMerkmale()
+            restaurant.merkmale = m
+
+        m.stufenloser_eingang = request.form.get("stufenloser_eingang") == "on"
+        m.rampe = request.form.get("rampe") == "on"
+        m.barrierefreies_wc = request.form.get("barrierefreies_wc") == "on"
+        m.breite_tueren = request.form.get("breite_tueren") == "on"
+        m.unterfahrbare_tische = request.form.get("unterfahrbare_tische") == "on"
+        m.behindertenparkplatz = request.form.get("behindertenparkplatz") == "on"
+
 
         db.session.commit()
         flash("Änderungen gespeichert.", "success")
