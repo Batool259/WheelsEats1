@@ -5,30 +5,47 @@
 {% block CONTENT %}
 
 <div class="mb-3">
-  <h1 class="h3 fw-bold mb-1">{{ restaurant.name }}</h1>
-  <div class="text-muted">
-    {{ restaurant.adresse_zeile }}
-    {% if restaurant.geprueft_am or restaurant.status == "approved" %}
-      • <span class="badge text-bg-success">Geprüft</span>
-    {% else %}
-      • <span class="badge text-bg-warning">In Bearbeitung</span>
-    {% endif %}
-    <div class="small mt-1">
-      Erstellt von:
-      {{ restaurant.erstellt_von.benutzername if restaurant.erstellt_von else "Unbekannt" }}
+  <div class="d-flex justify-content-between align-items-start gap-2">
+    <div>
+      <h1 class="h3 fw-bold mb-1">{{ restaurant.name }}</h1>
+
+      <div class="text-muted">
+        {{ restaurant.adresse_zeile }}
+        {% if restaurant.geprueft_am or restaurant.status == "approved" %}
+          • <span class="badge text-bg-success">Geprüft</span>
+        {% else %}
+          • <span class="badge text-bg-warning">In Bearbeitung</span>
+        {% endif %}
+
+        <div class="small mt-1">
+          Erstellt von:
+          {{ restaurant.erstellt_von.benutzername if restaurant.erstellt_von else "Unbekannt" }}
+        </div>
+      </div>
     </div>
+
+    {% if session.get("role") == "admin" %}
+      <div class="d-flex flex-column align-items-start gap-2">
+
+        <a class="btn btn-sm btn-outline-secondary"
+          href="{{ url_for('restaurant_edit', id=restaurant.id) }}">
+          Restaurant bearbeiten
+        </a>
+
+        <form method="post"
+              action="{{ url_for('restaurant_delete', id=restaurant.id) }}"
+              onsubmit="return confirm('Restaurant wirklich löschen?');"
+              class="m-0">
+          <button class="btn btn-sm btn-outline-secondary">
+            Restaurant löschen
+          </button>
+        </form>
+
+      </div>
+    {% endif %}
+
   </div>
 </div>
-
-
-{% if session.get("role") == "admin" %}
-  <div class="mb-3">
-    <a class="btn btn-sm btn-outline-secondary"
-       href="{{ url_for('restaurant_edit', id=restaurant.id) }}">
-      Restaurant bearbeiten
-    </a>
-  </div>
-{% endif %}
 
 
 {# TITELBILD #}
@@ -190,7 +207,7 @@
   {% endif %}
 
 
-  {# Admin: Bewertung löschen (nur Admins) #}
+  {# Bewertung löschen (nur Admins) #}
   {% if bewertungen %}
   <div class="row g-3">
     {% for b in bewertungen %}

@@ -379,6 +379,26 @@ def restaurant_new():
 
     return render_template("new.html")
 
+
+
+# Restaurant löschen (nur Admin)
+@app.route("/restaurants/<int:id>/delete", methods=["POST"])
+def restaurant_delete(id):
+    require_admin()
+
+    r = Restaurant.query.get_or_404(id)
+
+    # Optional: Fotos-Dateien löschen (nur wenn ihr das wirklich wollt)
+    # (wir können das auch später machen)
+
+    db.session.delete(r)
+    db.session.commit()
+
+    flash("Restaurant wurde gelöscht.", "success")
+    return redirect(url_for("index"))
+
+
+
 # Karte
 @app.route("/map")
 def restaurant_map():
