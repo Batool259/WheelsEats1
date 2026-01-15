@@ -1,13 +1,13 @@
 import os
 from datetime import datetime
 
-from flask import abort
-from flask import Flask, render_template, redirect, url_for, request, flash, session
+from flask import Flask, render_template, redirect, url_for, request, flash, session, abort
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from db import db, Restaurant, Bewertung, BarrierefreieMerkmale, Foto, Nutzer, register_commands
+
 
 # Upload-Sicherheit
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
@@ -19,6 +19,12 @@ app = Flask(__name__)
 
 def is_admin() -> bool:
     return session.get("role") == "admin"
+
+def require_admin():
+    if not session.get("logged_in"):
+        abort(403)
+    if not is_admin():
+        abort(403)
 
 app.config.from_mapping(
     SECRET_KEY=os.environ.get("SECRET_KEY", "dev-secret-key"),
@@ -275,8 +281,24 @@ def restaurant_review_create(id):
     db.session.add(review)
     db.session.commit()
 
-    flash("Danke! Deine Bewertung wurde gespeichert ✅", "success")
+    flash("Danke! Deine Bewertung wurde gespeichert", "success")
     return redirect(url_for("detail", id=id))
+
+
+# Bewertung Löschen
+@app.route("/reviews/<int:id>/delete", methods=["POST"])
+def review_delete(id):
+    require_admin()
+
+    b = Bewertung.query.get_or_404(id)
+    restaurant_id = b.restaurant_id
+
+    db.session.delete(b)
+    db.session.commit()
+
+    flash("Bewertung wurde gelöscht.", "success")
+    return redirect(url_for("detail", id=restaurant_id))
+
 
 
 # Restaurant hinzufügen (nur wenn "eingeloggt")

@@ -190,29 +190,51 @@
   {% endif %}
 
 
-
+  {# Admin: Bewertung löschen (nur Admins) #}
   {% if bewertungen %}
-    <div class="row g-3">
-      {% for b in bewertungen %}
-        <div class="col-md-6">
-          <div class="card">
-            <div class="card-body">
-              <div class="d-flex justify-content-between">
-                <div class="fw-semibold">
-                  {{ b.nutzer.benutzername if b.nutzer else "Anonym" }}
-                </div>
-                <div class="fw-semibold">{{ "★" * b.sterne }}{{ "☆" * (5 - b.sterne) }}</div>
+  <div class="row g-3">
+    {% for b in bewertungen %}
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body d-flex flex-column h-100">
+
+            <div class="d-flex justify-content-between">
+              <div class="fw-semibold">
+                {{ b.nutzer.benutzername if b.nutzer else "Anonym" }}
               </div>
-              <div class="text-muted small mb-2">{{ b.erstellt_am.strftime("%d.%m.%Y") }}</div>
-              <div>{{ b.text or "" }}</div>
+              <div class="fw-semibold">
+                {{ "★" * b.sterne }}{{ "☆" * (5 - b.sterne) }}
+              </div>
             </div>
+
+            <div class="text-muted small mb-2">
+              {{ b.erstellt_am.strftime("%d.%m.%Y") }}
+            </div>
+
+            <div class="mb-3">
+              {{ b.text or "" }}
+            </div>
+
+            {% if session.get("role") == "admin" %}
+              <form method="post"
+                    action="{{ url_for('review_delete', id=b.id) }}"
+                    onsubmit="return confirm('Bewertung wirklich löschen?');"
+                    class="mt-auto text-end">
+                <button class="btn btn-sm btn-outline-danger">
+                  Löschen
+                </button>
+              </form>
+            {% endif %}
+
           </div>
         </div>
-      {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
+  </div>
   {% else %}
     <div class="text-muted">Es gibt noch keine Bewertungen.</div>
   {% endif %}
+
 </div>
 
 {% endblock %}
