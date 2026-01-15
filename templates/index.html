@@ -20,36 +20,79 @@
     </div>
 
     <!-- Filter -->
-    <div class="col-12 mt-2">
-      <div class="d-flex flex-wrap gap-2">
+<!-- Toggle-Button: Filter anzeigen/verstecken -->
+<div class="col-12">
+  <div class="d-flex align-items-center justify-content-between">
+    <button class="btn btn-outline-primary btn-sm rounded-pill"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#filterPanel"
+            aria-expanded="false"
+            aria-controls="filterPanel">
+      Filter ▾
+    </button>
 
-        <input class="btn-check" type="checkbox" id="f_stufenlos" name="stufenloser_eingang" value="1"
-               {% if filters and filters.stufenloser_eingang %}checked{% endif %}>
-        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_stufenlos">Stufenlos</label>
+    <a class="small text-decoration-none" href="{{ url_for('index') }}">Zurücksetzen</a>
+  </div>
+</div>
 
-        <input class="btn-check" type="checkbox" id="f_wc" name="barrierefreies_wc" value="1"
-               {% if filters and filters.barrierefreies_wc %}checked{% endif %}>
-        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_wc">Barrierefreies WC</label>
+<!-- Verstecktes Filter-Panel -->
+<div class="collapse mt-2" id="filterPanel">
+  <div class="card we-filter-card border-0 shadow-sm rounded-4">
+    <div class="card-body p-3 p-md-4">
 
-        <input class="btn-check" type="checkbox" id="f_rampe" name="rampe" value="1"
-               {% if filters and filters.rampe %}checked{% endif %}>
-        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_rampe">Rampe</label>
-
-        <input class="btn-check" type="checkbox" id="f_tueren" name="breite_tueren" value="1"
-               {% if filters and filters.breite_tueren %}checked{% endif %}>
-        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_tueren">Breite Türen</label>
-
-        <input class="btn-check" type="checkbox" id="f_tische" name="unterfahrbare_tische" value="1"
-               {% if filters and filters.unterfahrbare_tische %}checked{% endif %}>
-        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_tische">Unterfahrbare Tische</label>
-
-        <input class="btn-check" type="checkbox" id="f_park" name="behindertenparkplatz" value="1"
-               {% if filters and filters.behindertenparkplatz %}checked{% endif %}>
-        <label class="btn btn-outline-primary btn-sm rounded-pill" for="f_park">Behindertenparkplatz</label>
-
-        <a class="btn btn-link btn-sm text-decoration-none" href="{{ url_for('index') }}">Zurücksetzen</a>
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="fw-semibold">Filter</div>
       </div>
+
+      <div class="we-filter-grid">
+        <label class="we-chip">
+          <input type="checkbox" name="stufenloser_eingang" value="1"
+                 {% if request.args.get('stufenloser_eingang') %}checked{% endif %}>
+          <span>♿ Stufenlos</span>
+        </label>
+
+        <label class="we-chip">
+          <input type="checkbox" name="barrierefreies_wc" value="1"
+                 {% if request.args.get('barrierefreies_wc') %}checked{% endif %}>
+          <span>🚻 WC</span>
+        </label>
+
+        <label class="we-chip">
+          <input type="checkbox" name="rampe" value="1"
+                 {% if request.args.get('rampe') %}checked{% endif %}>
+          <span>↗️ Rampe</span>
+        </label>
+
+        <label class="we-chip">
+          <input type="checkbox" name="breite_tueren" value="1"
+                 {% if request.args.get('breite_tueren') %}checked{% endif %}>
+          <span>🚪 Breite Türen</span>
+        </label>
+
+        <label class="we-chip">
+          <input type="checkbox" name="unterfahrbare_tische" value="1"
+                 {% if request.args.get('unterfahrbare_tische') %}checked{% endif %}>
+          <span>🪑 Unterfahrbar</span>
+        </label>
+
+        <label class="we-chip">
+          <input type="checkbox" name="behindertenparkplatz" value="1"
+                 {% if request.args.get('behindertenparkplatz') %}checked{% endif %}>
+          <span>🅿 Parkplatz</span>
+        </label>
+      </div>
+
+      <div class="d-flex justify-content-end mt-3">
+        <button class="btn btn-primary btn-sm rounded-pill px-4" type="submit">
+          Filter anwenden
+        </button>
+      </div>
+
     </div>
+  </div>
+</div>
+
   </form>
 </section>
 

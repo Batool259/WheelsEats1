@@ -136,3 +136,58 @@
     opacity: 0.8;
   }
 
+  /* filter funktion */ 
+.we-filter-card { background: #fff; }
+
+.we-filter-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+@media (max-width: 992px) { .we-filter-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 576px) { .we-filter-grid{ grid-template-columns: 1fr; } }
+
+.we-chip{
+  position: relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 12px;
+  border:1px solid rgba(15,98,254,.25);
+  border-radius:999px;
+  background:#fff;
+  cursor:pointer;
+  user-select:none;
+  font-weight:600;
+  color:#0b2a55;
+  transition: all .15s ease;
+}
+
+/* ✅ Checkbox weg */
+.we-chip input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.we-chip span{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  line-height:1;
+  font-size:0.95rem;
+}
+
+.we-chip:hover{
+  border-color: rgba(15,98,254,.55);
+  background: rgba(15,98,254,.05);
+}
+
+/* ✅ aktiv */
+.we-chip:has(input:checked){
+  background:#0f62fe;
+  border-color:#0f62fe;
+  color:#fff;
+  box-shadow: 0 10px 22px rgba(15,98,254,.18);
+}
