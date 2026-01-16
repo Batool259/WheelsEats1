@@ -23,23 +23,30 @@
     </div>
   </div>
 
-  {# optional: Titelbild wie Detailseite #}
-  {% set titelbild = restaurant.fotos | selectattr("titelbild") | first %}
-  <div class="mb-4">
+    {# TITELBILD (nur anzeigen, wenn vorhanden) #}
+    {% set titelbild = restaurant.fotos | selectattr("titelbild") | first %}
+
     {% if titelbild %}
-      <img
+    <div class="mb-3">
+        <img
         src="{{ url_for('static', filename=titelbild.dateipfad.replace('static/', '')) }}"
         alt="Titelbild von {{ restaurant.name }}"
         class="img-fluid rounded-4 shadow-sm w-100"
-        style="max-height: 360px; object-fit: cover;"
-      >
-    {% else %}
-      <div class="bg-light rounded-4 d-flex align-items-center justify-content-center"
-           style="height: 240px;">
-        <span class="text-muted">Kein Titelbild vorhanden</span>
-      </div>
+        style="max-height: 360px; object-fit: cover;">
+    </div>
     {% endif %}
-  </div>
+
+    {# Titel + Upload (ohne extra Kasten/Placeholder) #}
+    <div class="mb-4">
+        <h5 class="fw-semibold mb-2">Titelbild hinzufügen</h5>
+
+        <input class="form-control"
+                type="file"
+                name="titelbild"
+                accept="image/png,image/jpeg,image/webp">
+    </div>
+
+
 
   {# Merkmale wie Detailseite: Anzeige #}
   <div class="mb-3">
@@ -59,7 +66,8 @@
   </div>
 
   {# ALLES was gespeichert werden soll, muss im FORM liegen #}
-  <form method="post">
+  <form method="post" enctype="multipart/form-data">
+
     <div class="row g-3">
 
       {# Merkmale bearbeiten (IM FORM) #}
@@ -139,6 +147,8 @@
           </div>
         </div>
       </div>
+
+
 
       {# Rechte Card wie Detailseite: Standort + Koordinatenfelder #}
       <div class="col-md-5">

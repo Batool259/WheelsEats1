@@ -250,6 +250,38 @@ def restaurant_edit(id):
         m.behindertenparkplatz = request.form.get("behindertenparkplatz") == "on"
 
 
+        # Titelbild hochladen (optional)
+        file = request.files.get("titelbild")
+        if file and file.filename:
+            if not allowed_file(file.filename):
+                flash("Nur Bilddateien (png, jpg, jpeg, webp) sind erlaubt.", "danger")
+                return render_template("edit_restaurant.html", restaurant=restaurant)
+
+            filename = secure_filename(file.filename)
+
+            upload_dir = app.config["UPLOAD_FOLDER"]
+            os.makedirs(upload_dir, exist_ok=True)
+
+            save_path = os.path.join(upload_dir, filename)
+            if os.path.exists(save_path):
+                filename = f"{int(datetime.utcnow().timestamp())}_{filename}"
+                save_path = os.path.join(upload_dir, filename)
+
+            file.save(save_path)
+
+            rel_path = f"static/uploads/{filename}"
+
+            # altes Titelbild deaktivieren
+            if restaurant.fotos:
+                for f in restaurant.fotos:
+                    if f.titelbild:
+                        f.titelbild = False
+
+            # neues Titelbild anhängen
+            if not restaurant.fotos:
+                restaurant.fotos = []
+            restaurant.fotos.append(Foto(dateipfad=rel_path, titelbild=True))
+
         db.session.commit()
         flash("Änderungen gespeichert.", "success")
         return redirect(url_for("detail", id=restaurant.id))
