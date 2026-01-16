@@ -250,17 +250,48 @@ def restaurant_edit(id):
         m.behindertenparkplatz = request.form.get("behindertenparkplatz") == "on"
 
 
-        # Titelbild hochladen (optional)
+        # Titelbild löschen?
+        delete_flag = request.form.get("delete_titelbild") == "1"
+
+        # Upload (optional)
         file = request.files.get("titelbild")
-        if file and file.filename:
+
+        upload_dir = app.config["UPLOAD_FOLDER"]
+        os.makedirs(upload_dir, exist_ok=True)
+
+        def get_current_cover():
+            if not restaurant.fotos:
+                return None
+            for f in restaurant.fotos:
+                if f.titelbild:
+                    return f
+            return None
+
+        current_cover = get_current_cover()
+
+        # 1) Löschen hat Priorität
+        if delete_flag and current_cover:
+            if file and file.filename:
+                flash("Hinweis: Du hast gleichzeitig 'Titelbild löschen' und eine neue Datei gewählt. Es wurde nur gelöscht.", "warning")
+
+            # Datei auf Platte löschen
+            # current_cover.dateipfad ist z.B. "static/uploads/xyz.jpg"
+            abs_path = os.path.join(app.root_path, current_cover.dateipfad)
+            if os.path.exists(abs_path):
+                os.remove(abs_path)
+
+            # DB-Eintrag löschen
+            db.session.delete(current_cover)
+            current_cover = None
+
+
+        # 2) Ersetzen, wenn neue Datei hochgeladen wurde
+        elif file and file.filename:
             if not allowed_file(file.filename):
                 flash("Nur Bilddateien (png, jpg, jpeg, webp) sind erlaubt.", "danger")
                 return render_template("edit_restaurant.html", restaurant=restaurant)
 
             filename = secure_filename(file.filename)
-
-            upload_dir = app.config["UPLOAD_FOLDER"]
-            os.makedirs(upload_dir, exist_ok=True)
 
             save_path = os.path.join(upload_dir, filename)
             if os.path.exists(save_path):
@@ -269,18 +300,17 @@ def restaurant_edit(id):
 
             file.save(save_path)
 
+            # altes Titelbild entfernen (Datei + DB)
+            if current_cover:
+                old_abs_path = os.path.join(app.root_path, current_cover.dateipfad)
+                if os.path.exists(old_abs_path):
+                    os.remove(old_abs_path)
+                db.session.delete(current_cover)
+
+            # neues Titelbild speichern
             rel_path = f"static/uploads/{filename}"
-
-            # altes Titelbild deaktivieren
-            if restaurant.fotos:
-                for f in restaurant.fotos:
-                    if f.titelbild:
-                        f.titelbild = False
-
-            # neues Titelbild anhängen
-            if not restaurant.fotos:
-                restaurant.fotos = []
             restaurant.fotos.append(Foto(dateipfad=rel_path, titelbild=True))
+
 
         db.session.commit()
         flash("Änderungen gespeichert.", "success")

@@ -24,21 +24,6 @@
   </div>
 
 
-    {# TITELBILD (nur anzeigen, wenn vorhanden) #}
-    {% set titelbild = restaurant.fotos | selectattr("titelbild") | first %}
-
-    {% if titelbild %}
-    <div class="mb-3">
-        <img
-        src="{{ url_for('static', filename=titelbild.dateipfad.replace('static/', '')) }}"
-        alt="Titelbild von {{ restaurant.name }}"
-        class="img-fluid rounded-4 shadow-sm w-100"
-        style="max-height: 360px; object-fit: cover;">
-    </div>
-    {% endif %}
-
-
-
   {# Merkmale wie Detailseite: Anzeige #}
   <div class="mb-3">
     <div class="fw-semibold mb-2">Barrierefreiheitsmerkmale</div>
@@ -63,6 +48,22 @@
     {# Titel + Upload (ohne extra Kasten/Placeholder) #}
     <div class="mb-4">
         <h5 class="fw-semibold mb-2">Titelbild hinzufügen</h5>
+        {% set current_cover = (restaurant.fotos | selectattr('titelbild') | first) %}
+        {% if current_cover %}
+            <div class="mb-3">
+                <div class="fw-semibold mb-2">Aktuelles Titelbild</div>
+                <img
+                    src="{{ url_for('static', filename=current_cover.dateipfad.replace('static/', '')) }}"
+                    alt="Titelbild"
+                    style="max-width: 100%; height: auto; border-radius: 8px;"
+                 >
+            </div>
+
+            <div class="form-check mb-3">
+                <input class="form-check-input" type="checkbox" id="delete_titelbild" name="delete_titelbild" value="1">
+                <label class="form-check-label" for="delete_titelbild">Titelbild löschen</label>
+            </div>
+        {% endif %}
 
         <input class="form-control"
                 type="file"
