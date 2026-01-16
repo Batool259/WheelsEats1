@@ -105,22 +105,19 @@
     <div class="card mb-3">
       <div class="card-body d-flex gap-3 align-items-start">
 
-        <!-- Bild links -->
-        <div style="width: 180px; flex: 0 0 180px;">
-          {% if titelbild %}
-            <img
-              src="{{ url_for('static', filename=titelbild.dateipfad.replace('static/', '')) }}"
-              class="img-fluid rounded-3"
-              style="height: 110px; width: 180px;"
-              alt="Bild von {{ r.name }}">
-          {% else %}
-            <img
-              src="https://picsum.photos/360/220"
-              class="img-fluid rounded-3"
-              style="height: 110px; width: 180px;"
-              alt="Platzhalterbild">
-          {% endif %}
-        </div>
+<!-- Bild links -->
+<div style="width: 180px; flex: 0 0 180px;">
+  {% if titelbild %}
+    <img
+      src="{{ url_for('static', filename=titelbild.dateipfad.replace('static/', '')) }}"
+      class="img-fluid rounded-3"
+      style="height: 110px; width: 180px;"
+      alt="Bild von {{ r.name }}">
+  {% else %}
+    <div class="bg-light rounded-3" style="height: 110px; width: 180px;"></div>
+  {% endif %}
+</div>
+
 
         <!-- Infos Mitte -->
         <div class="flex-grow-1">
