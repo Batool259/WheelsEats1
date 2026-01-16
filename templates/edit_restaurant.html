@@ -23,6 +23,7 @@
     </div>
   </div>
 
+
     {# TITELBILD (nur anzeigen, wenn vorhanden) #}
     {% set titelbild = restaurant.fotos | selectattr("titelbild") | first %}
 
@@ -35,16 +36,6 @@
         style="max-height: 360px; object-fit: cover;">
     </div>
     {% endif %}
-
-    {# Titel + Upload (ohne extra Kasten/Placeholder) #}
-    <div class="mb-4">
-        <h5 class="fw-semibold mb-2">Titelbild hinzufügen</h5>
-
-        <input class="form-control"
-                type="file"
-                name="titelbild"
-                accept="image/png,image/jpeg,image/webp">
-    </div>
 
 
 
@@ -68,6 +59,16 @@
   {# ALLES was gespeichert werden soll, muss im FORM liegen #}
   <form method="post" enctype="multipart/form-data">
 
+    {# Titel + Upload (ohne extra Kasten/Placeholder) #}
+    <div class="mb-4">
+        <h5 class="fw-semibold mb-2">Titelbild hinzufügen</h5>
+
+        <input class="form-control"
+                type="file"
+                name="titelbild"
+                accept="image/png,image/jpeg,image/webp">
+    </div>
+    
     <div class="row g-3">
 
       {# Merkmale bearbeiten (IM FORM) #}
