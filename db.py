@@ -141,14 +141,14 @@ def insert_sample():
 
     # Nutzer anlegen
     demo_hash = generate_password_hash("demo")
-    u1 = Nutzer(benutzername="Admin", email="Wheeleats@example.com", passwort_hash="demo", rolle="admin")
-    u2 = Nutzer(benutzername="Tim K.", email="tim@example.com", passwort_hash="demo", rolle="user")
-    u3 = Nutzer(benutzername="Gisela Hoffmann", email="gisela@example.com", passwort_hash="demo", rolle="user")
-    u4 = Nutzer(benutzername="Karl-Heinz Schneider", email="karlheinz@example.com", passwort_hash="demo", rolle="user")
-    u5 = Nutzer(benutzername="Renate Berger", email="renate@example.com", passwort_hash="demo", rolle="user")
-    u6 = Nutzer(benutzername="Wolfgang Peters", email="wolfgang@example.com", passwort_hash="demo", rolle="user")
-    u7 = Nutzer(benutzername="Ingrid Lehmann", email="ingrid@example.com", passwort_hash="demo", rolle="user")
-    u8 = Nutzer(benutzername="Gustav Führer", email="gustav@example.com", passwort_hash="demo", rolle="user")
+    u1 = Nutzer(benutzername="Admin", email="Wheeleats@example.com", passwort_hash=demo_hash, rolle="admin")
+    u2 = Nutzer(benutzername="Tim K.", email="tim@example.com", passwort_hash=demo_hash, rolle="user")
+    u3 = Nutzer(benutzername="Gisela Hoffmann", email="gisela@example.com", passwort_hash=demo_hash, rolle="user")
+    u4 = Nutzer(benutzername="Karl-Heinz Schneider", email="karlheinz@example.com", passwort_hash=demo_hash, rolle="user")
+    u5 = Nutzer(benutzername="Renate Berger", email="renate@example.com", passwort_hash=demo_hash, rolle="user")
+    u6 = Nutzer(benutzername="Wolfgang Peters", email="wolfgang@example.com", passwort_hash=demo_hash, rolle="user")
+    u7 = Nutzer(benutzername="Ingrid Lehmann", email="ingrid@example.com", passwort_hash=demo_hash, rolle="user")
+    u8 = Nutzer(benutzername="Gustav Führer", email="gustav@example.com", passwort_hash=demo_hash, rolle="user")
 
     db.session.add_all([u1, u2, u3, u4, u5, u6, u7, u8])
     db.session.commit()  # wichtig, damit alle IDs existieren

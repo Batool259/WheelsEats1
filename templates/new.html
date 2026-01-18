@@ -9,11 +9,14 @@
     <h1 class="display-6 fw-bold mb-1">Restaurant hinzufügen</h1>
     <p class="text-muted mb-0">Helfen Sie anderen, barrierefreie Orte in Berlin zu finden.</p>
   </div>
-
+<!-- Formular:
+  - method="POST" → neue Daten an Server senden
+  - enctype="multipart/form-data" → notwendig für Bild-Upload -->
   <form method="POST" enctype="multipart/form-data" class="card shadow-sm border-0 rounded-4">
     <div class="card-body p-4 p-md-5">
 
-      <!-- Grunddaten -->
+      <!-- Grunddaten: - Pflichtfeld: name, Adresse wird in einzelne Felder aufgeteilt,
+          Wird später im Backend zu einer Adresse zusammengesetzt--> 
       <div class="d-flex align-items-center gap-2 mb-3">
         <span class="badge rounded-pill text-bg-light border">🏛️</span>
         <h2 class="h5 fw-semibold mb-0">Grunddaten</h2>
@@ -43,7 +46,8 @@
           <input name="stadt" type="text" class="form-control" placeholder="Berlin">
         </div>
 
-      <!-- Barrierefreiheit -->
+      <!-- Barrierefreiheit - Checkboxen für Barrierefrei-Merkmale, Werden im Backend als Boolean-Werte verarbeitet,
+           Checkbox sendet nur Daten, wenn sie aktiv ist -->
       <div class="d-flex align-items-center gap-2 mt-5 mb-3">
         <span class="badge rounded-pill text-bg-light border">♿</span>
         <h2 class="h5 fw-semibold mb-0">Barrierefreiheit</h2>
@@ -112,7 +116,8 @@
         </div>
       </div>
 
-      <!-- Details & Foto -->
+      <!-- Details & Foto - Optionale Beschreibung (Freitext), Optionaler Bild-Upload (Titelbild),
+      Datei wird im Backend geprüft und gespeichert-->
       <div class="d-flex align-items-center gap-2 mt-5 mb-3">
         <span class="badge rounded-pill text-bg-light border">🖼️</span>
         <h2 class="h5 fw-semibold mb-0">Details & Foto</h2>

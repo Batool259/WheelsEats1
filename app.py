@@ -9,7 +9,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from db import db, Restaurant, Bewertung, BarrierefreieMerkmale, Foto, Nutzer, register_commands
 
 
-# Upload-Sicherheit
+# Erlaubte Bildtypen (Sicherheit: verhindert Upload von beliebigen Dateien)
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
 
 def allowed_file(filename: str) -> bool:
@@ -363,7 +363,8 @@ def review_delete(id):
 
 
 
-# Restaurant hinzufügen (nur wenn "eingeloggt")
+# Restaurant hinzufügen (nur wenn "eingeloggt") Formular anzeigen (GET) oder speichern (POST, inkl. optionalem Bild)
+# Hilfsfunktion: Checkbox aus dem Formular → True/False
 def _to_bool(name: str) -> bool:
     return request.form.get(name) == "on"
 
