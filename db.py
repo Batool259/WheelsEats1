@@ -140,6 +140,7 @@ def insert_sample():
 
 
     # Nutzer anlegen
+    demo_hash = generate_password_hash("demo")
     u1 = Nutzer(benutzername="Admin", email="Wheeleats@example.com", passwort_hash="demo", rolle="admin")
     u2 = Nutzer(benutzername="Tim K.", email="tim@example.com", passwort_hash="demo", rolle="user")
     u3 = Nutzer(benutzername="Gisela Hoffmann", email="gisela@example.com", passwort_hash="demo", rolle="user")
@@ -151,8 +152,6 @@ def insert_sample():
 
     db.session.add_all([u1, u2, u3, u4, u5, u6, u7, u8])
     db.session.commit()  # wichtig, damit alle IDs existieren
-
-
 
     # Restaurant 1
     r1 = Restaurant(
