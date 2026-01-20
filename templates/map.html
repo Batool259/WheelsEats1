@@ -41,12 +41,12 @@
     border-radius: 10px;
     border: 1px solid #ddd;
   }
-  .list-item.active {
+  .list-item.active {           /* Ausgewähltes Restaurant in der Liste  */ 
     background: #eef5ff;
     font-weight: 600;
   }
-  .list-item small {
-    display: block;
+  .list-item small {            /* Unterzeile, Adresse */ 
+    display: block;           
     opacity: 0.75;
     font-weight: 400;
   }
@@ -69,10 +69,13 @@
 </div>
 
 <script>
+  // Daten aus Python holen 
   const restaurants = {{ restaurants | tojson }};
 
+  // Karte erstellen und Startposition stetzen 
   const map = L.map("map").setView([52.5200, 13.4050], 12);
 
+  // Karte (OpenStreetMap) laden 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution: "&copy; OpenStreetMap contributors"
@@ -82,6 +85,7 @@
   const listEl = document.getElementById("restaurantList");
   const markerGroup = [];
 
+  // Restaurant in der Liste makieren  
   function setActive(id) {
     document.querySelectorAll(".list-item").forEach(el => el.classList.remove("active"));
     const activeEl = document.querySelector(`.list-item[data-id="${id}"]`);
@@ -91,7 +95,7 @@
   restaurants.forEach(r => {
     if (r.lat == null || r.lng == null) return;
 
-    // Marker
+    // Marker 
     const marker = L.marker([r.lat, r.lng]).addTo(map);
 
     const popupHtml = `
@@ -103,12 +107,14 @@
     `;
     marker.bindPopup(popupHtml);
 
+    // Klick auf Makierung und Restaurant wird in der Liste angezeigt
     marker.on("click", () => setActive(r.id));
 
+    // Speichern 
     markersById[r.id] = marker;
     markerGroup.push(marker);
 
-    // Listeneintrag
+    // Listeneintrag erstellen
     const item = document.createElement("a");
     item.href = "#";
     item.className = "list-group-item list-group-item-action list-item";
@@ -118,16 +124,19 @@
       <small>${r.adresse || ""}</small>
     `;
 
+    // Listenklick zoomt auf das Restaurant + öffnet das passende Popup  
     item.addEventListener("click", (e) => {
       e.preventDefault();
       setActive(r.id);
       map.setView([r.lat, r.lng], 15);
       markersById[r.id].openPopup();
     });
-
+    //Eintrag zur Liste hinzufügen 
     listEl.appendChild(item);
   });
 
+  /* Alle Marker sichtbar in einem Feld und Hinweis anzeigen, wenn keine
+  Koordinaten vorhanden sind */ 
   if (markerGroup.length > 0) {
     const group = L.featureGroup(markerGroup);
     map.fitBounds(group.getBounds().pad(0.2));

@@ -1,3 +1,10 @@
+/* 
+  Zentrale Farbdefinitionen für die gesamte Website.
+  Alle Farben werden hier als CSS-Variablen festgelegt,
+  damit das Design einheitlich bleibt und Farben später
+  leicht an einer Stelle geändert werden können.
+*/
+
 :root {
   --color-main: rgb(97, 97, 97);
   --color-shadow: rgb(71, 71, 71);

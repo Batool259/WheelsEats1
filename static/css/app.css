@@ -1,5 +1,5 @@
-:root{
-  /* Modernes Blau (kannst du anpassen) */
+:root{    
+  /* Zentrale Design Variablen (Farben, Abstände, Radius) */ 
   --we-primary: #2563eb;      /* blue-600 */
   --we-primary-700: #1d4ed8;  /* blue-700 */
   --we-bg: #f7f8fb;
@@ -10,28 +10,38 @@
   --radius: 16px;
 }
 
-/* Bootstrap Primary überschreiben */
+/* Hauptbutton ist Blau */
 .btn-primary{
-  background-color: var(--we-primary) !important;
+  background-color: var(--we-primary) !important; /* unser Blau, nicht von Bootstrap */ 
   border-color: var(--we-primary) !important;
 }
+
+/* Hover-Zustand (wenn Maus auf Button ist)  für Primary-Button */
 .btn-primary:hover{
   background-color: var(--we-primary-700) !important;
   border-color: var(--we-primary-700) !important;
 }
+
+/* Outline-Primary Button */
 .btn-outline-primary{
   color: var(--we-primary) !important;
   border-color: rgba(37,99,235,.35) !important;
 }
+
+/* Hover-Zustand für Outline-Button */
 .btn-outline-primary:hover{
   background-color: rgba(37,99,235,.10) !important;
   border-color: rgba(37,99,235,.50) !important;
   color: var(--we-primary) !important;
 }
 
-/* Links */
+/* Standard-Linkfarbe */
 a{
   color: var(--we-primary);
 }
+
+/* Seitenhintergrund */
 .we-body{ background: #f7f8fb; }
+
+/* Maximale Inhaltsbreite */
 .we-main{ max-width: 1100px; }
