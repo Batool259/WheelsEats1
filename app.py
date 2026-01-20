@@ -253,7 +253,7 @@ def restaurant_edit(id):
         # Titelbild löschen?
         delete_flag = request.form.get("delete_titelbild") == "1"
 
-        # Upload (optional)
+        # Upload 
         file = request.files.get("titelbild")
 
         upload_dir = app.config["UPLOAD_FOLDER"]
@@ -437,7 +437,7 @@ def restaurant_new():
 
         db.session.commit()
 
-        flash("Restaurant wurde gespeichert ✅", "success")
+        flash("Restaurant wurde gespeichert", "success")
         return redirect(url_for("detail", id=r.id))
 
     return render_template("new.html")
@@ -451,9 +451,7 @@ def restaurant_delete(id):
 
     r = Restaurant.query.get_or_404(id)
 
-    # Optional: Fotos-Dateien löschen (nur wenn ihr das wirklich wollt)
-    # (wir können das auch später machen)
-
+    # Optional: Fotos-Dateien löschen 
     db.session.delete(r)
     db.session.commit()
 
@@ -465,6 +463,7 @@ def restaurant_delete(id):
 # Karte
 @app.route("/map")
 def restaurant_map():
+    # Restaurant aus der Datenbank holen 
     restaurants = (
         Restaurant.query
         .filter(Restaurant.breitengrad.isnot(None), Restaurant.laengengrad.isnot(None))
@@ -488,4 +487,3 @@ def restaurant_map():
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
-
