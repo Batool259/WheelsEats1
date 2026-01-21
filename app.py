@@ -253,7 +253,7 @@ def restaurant_edit(id):
         # Titelbild löschen?
         delete_flag = request.form.get("delete_titelbild") == "1"
 
-        # Upload 
+        # Upload
         file = request.files.get("titelbild")
 
         upload_dir = app.config["UPLOAD_FOLDER"]

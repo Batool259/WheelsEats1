@@ -121,7 +121,7 @@
 
           {% if restaurant.breitengrad and restaurant.laengengrad %}
             <div class="text-muted mb-2">
-              Lat: {{ restaurant.breitengrad }} • Lng: {{ restaurant.laengengrad }}
+              {{ restaurant.adresse_zeile or "Adresse nicht angegeben." }}
             </div>
 
             <a class="btn btn-outline-primary w-100"
