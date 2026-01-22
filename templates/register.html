@@ -7,27 +7,34 @@
 
 <form method="POST" action="{{ url_for('register', next=request.args.get('next')) }}" class="mt-3" novalidate>
 
+  {# Eingabefeld für den Benutzernamen #}
   <div class="mb-3">
     <label class="form-label">Benutzername</label>
     <input name="benutzername" class="form-control" placeholder="z. B. Max Mustermann" required>
   </div>
 
+  {# Eingabefeld für die E-Mail-Adresse #}
   <div class="mb-3">
     <label class="form-label">E-Mail</label>
     <input name="email" type="email" class="form-control" placeholder="name@example.com" required>
   </div>
 
+  {# Eingabefeld für das Passwort #}
   <div class="mb-3">
     <label class="form-label">Passwort</label>
     <input name="password" type="password" class="form-control" placeholder="Mindestens 8 Zeichen" required>
   </div>
 
+  {# Eingabefeld zur Passwort-Bestätigung #}
   <div class="mb-3">
     <label class="form-label">Passwort bestätigen</label>
     <input name="password2" type="password" class="form-control" placeholder="Passwort wiederholen" required>
   </div>
 
+  {# Absende-Button für die Registrierung #}
   <button class="btn btn-primary" type="submit">Jetzt registrieren</button>
+  
+  {# Link zur Login-Seite für bereits registrierte Nutzer #}
   <a class="btn btn-link" href="{{ url_for('login', next=request.args.get('next')) }}">Bereits registriert? Zum Login</a>
 </form>
 {% endblock %}

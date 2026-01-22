@@ -3,21 +3,28 @@
 
 {% block CONTENT %}
 <h2>Login</h2>
+
+{# Hinweistext #}
 <p class="text-muted">Melde dich an, um Restaurants hinzuzufügen oder zu bewerten.</p>
 
 <form method="POST" action="{{ url_for('login', next=request.args.get('next')) }}" class="mt-3" novalidate>
 
+  {# Eingabefeld für die E-Mail-Adresse #}
   <div class="mb-3">
     <label class="form-label">E-Mail</label>
     <input name="email" type="email" class="form-control" placeholder="name@example.com" required>
   </div>
 
+  {# Eingabefeld für das Passwort #}
   <div class="mb-3">
     <label class="form-label">Passwort</label>
     <input name="password" type="password" class="form-control" placeholder="Passwort" required>
   </div>
 
+  {# Button zum Absenden des Login-Formulars #}
   <button class="btn btn-primary" type="submit">Einloggen</button>
+  
+  {# Link zur Registrierungsseite für neue Nutzer #}
   <a class="btn btn-link" href="{{ url_for('register', next=request.args.get('next')) }}">Noch kein Konto? Registrieren</a>
 
 </form>
