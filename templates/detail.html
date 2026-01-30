@@ -113,36 +113,30 @@
       </div>
     </div>
 
-    <!-- Standort -->
-    <div class="col-12 col-lg-5">
-      <div class="card h-100">
-        <div class="card-body">
-          <h2 class="h5 fw-semibold">Standort</h2>
-
-          {% if restaurant.breitengrad and restaurant.laengengrad %}
-            <div class="text-muted mb-2">
-              {{ restaurant.adresse_zeile or "Adresse nicht angegeben." }}
-            </div>
-
-            <a class="btn btn-outline-primary w-100"
-               target="_blank"
-               href="https://www.google.com/maps?q={{ restaurant.breitengrad }},{{ restaurant.laengengrad }}">
-              Route planen
-            </a>
-          {% else %}
-            <div class="text-muted">Keine Koordinaten vorhanden.</div>
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
-<!-- Website -->
-<div class="col-12 col-lg-5 mt-3">
+<!-- Standort + Website -->
+<div class="col-12 col-lg-5">
   <div class="card h-100">
     <div class="card-body">
+      <h2 class="h5 fw-semibold">Standort</h2>
+
+      {% if restaurant.breitengrad and restaurant.laengengrad %}
+        <div class="text-muted mb-2">
+          {{ restaurant.adresse_zeile or "Adresse nicht angegeben." }}
+        </div>
+
+        <a class="btn btn-outline-primary w-100"
+           target="_blank"
+           href="https://www.google.com/maps?q={{ restaurant.breitengrad }},{{ restaurant.laengengrad }}">
+          Route planen
+        </a>
+      {% else %}
+        <div class="text-muted">Keine Koordinaten vorhanden.</div>
+      {% endif %}
+
+      <hr>
+
       <h2 class="h5 fw-semibold">Website</h2>
 
       {% if restaurant.website %}
