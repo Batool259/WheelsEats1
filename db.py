@@ -39,6 +39,7 @@ class Restaurant(db.Model):
     status = db.Column(db.String(50), nullable=False, default="pending")
     oeffnungszeiten = db.Column(db.Text, nullable=True)
     quelle = db.Column(db.String(255), nullable=True)
+    website = db.Column(db.String(255)) 
 
     erstellt_am = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     aktualisiert_am = db.Column(db.DateTime, nullable=False, default=datetime.utcnow, onupdate=datetime.utcnow)

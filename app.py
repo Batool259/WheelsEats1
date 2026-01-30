@@ -381,8 +381,14 @@ def restaurant_new():
             flash("Bitte gib einen Namen für das Restaurant an.", "danger")
             return render_template("new.html")
 
+        # Website auslesen + optional normalisieren
+        website = (request.form.get("website") or "").strip() or None
+        if website and not website.startswith(("http://", "https://")):
+            website = "https://" + website
+
         r = Restaurant(
             name=name,
+            website=website,
             strasse=(request.form.get("strasse") or "").strip() or None,
             hausnummer=(request.form.get("hausnummer") or "").strip() or None,
             postleitzahl=(request.form.get("postleitzahl") or "").strip() or None,
@@ -435,10 +441,11 @@ def restaurant_new():
             rel_path = f"static/uploads/{filename}"
             r.fotos = [Foto(dateipfad=rel_path, titelbild=True)]
 
-        db.session.commit()
-
-        flash("Restaurant wurde gespeichert", "success")
-        return redirect(url_for("detail", id=r.id))
+    
+            db.session.commit()
+            
+            flash("Restaurant wurde gespeichert", "success")
+            return redirect(url_for("detail", id=r.id))
 
     return render_template("new.html")
 
