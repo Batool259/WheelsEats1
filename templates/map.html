@@ -4,144 +4,82 @@
 
 {% block CONTENT %}
 <h2>Restaurant-Karte</h2>
-<p class="text-muted">Alle Restaurants mit Standort werden als Pins angezeigt.</p>
-
-<!-- Leaflet CSS/JS -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<p class="text-muted">
+  Übersicht der Restaurants auf einer statischen Karte.
+</p>
 
 <style>
   .map-layout {
     display: flex;
     gap: 16px;
-    align-items: stretch;
+    align-items: flex-start;
   }
+
   .sidebar {
     width: 320px;
     max-width: 40%;
     border: 1px solid #ddd;
     border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+  }
+
+  .sidebar-header {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    font-weight: 600;
+  }
+
+  .sidebar-list {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+  .sidebar-list a small {
+    display: block;
+    opacity: 0.75;
+  }
+
+  .map-container {
+    flex: 1;
+    border: 1px solid #ddd;
+    border-radius: 10px;
     overflow: hidden;
     background: #fff;
   }
-  .sidebar-header {
-    padding: 12px 12px 8px 12px;
-    border-bottom: 1px solid #eee;
-  }
-  .sidebar-list {
-    max-height: 70vh;
-    overflow: auto;
-  }
-  #map {
-    flex: 1;
-    height: 70vh;
-    border-radius: 10px;
-    border: 1px solid #ddd;
-  }
-  .list-item.active {           /* Ausgewähltes Restaurant in der Liste  */ 
-    background: #eef5ff;
-    font-weight: 600;
-  }
-  .list-item small {            /* Unterzeile, Adresse */ 
-    display: block;           
-    opacity: 0.75;
-    font-weight: 400;
+
+  .map-container img {
+    width: 100%;
+    height: auto;
+    display: block;
   }
 </style>
 
 <div class="map-layout">
-  <!-- Links: Liste -->
+
+  <!-- Linke Seite: Restaurantliste -->
   <div class="sidebar">
-    <div class="sidebar-header">
-      <strong>Restaurants</strong>
-      <div class="text-muted" style="font-size: 0.9em;">
-        Klicke einen Eintrag, um zum Pin zu springen.
-      </div>
+    <div class="sidebar-header">Restaurants</div>
+    <div class="sidebar-list list-group">
+      {% for r in restaurants %}
+        <a
+          class="list-group-item list-group-item-action"
+          href="{{ r.detail_url }}"
+        >
+          {{ r.name }}
+          <small>{{ r.adresse }}</small>
+        </a>
+      {% endfor %}
     </div>
-    <div id="restaurantList" class="sidebar-list list-group"></div>
   </div>
 
-  <!-- Rechts: Karte -->
-  <div id="map"></div>
+  <!-- Rechte Seite: FESTES BILD -->
+  <div class="map-container">
+    <img
+      <img
+        src="{{ url_for('static', filename='images/map.png') }}"
+        alt="Statische Karte">
+  </div>
+
 </div>
-
-<script>
-  // Daten aus Python holen 
-  const restaurants = {{ restaurants | tojson }};
-
-  // Karte erstellen und Startposition stetzen 
-  const map = L.map("map").setView([52.5200, 13.4050], 12);
-
-  // Karte (OpenStreetMap) laden 
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: "&copy; OpenStreetMap contributors"
-  }).addTo(map);
-
-  const markersById = {};
-  const listEl = document.getElementById("restaurantList");
-  const markerGroup = [];
-
-  // Restaurant in der Liste makieren  
-  function setActive(id) {
-    document.querySelectorAll(".list-item").forEach(el => el.classList.remove("active"));
-    const activeEl = document.querySelector(`.list-item[data-id="${id}"]`);
-    if (activeEl) activeEl.classList.add("active");
-  }
-
-  restaurants.forEach(r => {
-    if (r.lat == null || r.lng == null) return;
-
-    // Marker 
-    const marker = L.marker([r.lat, r.lng]).addTo(map);
-
-    const popupHtml = `
-      <div>
-        <strong>${r.name}</strong><br/>
-        <small>${r.adresse || ""}</small><br/>
-        <a href="${r.detail_url || ("/restaurants/" + r.id)}">Details öffnen</a>
-      </div>
-    `;
-    marker.bindPopup(popupHtml);
-
-    // Klick auf Makierung und Restaurant wird in der Liste angezeigt
-    marker.on("click", () => setActive(r.id));
-
-    // Speichern 
-    markersById[r.id] = marker;
-    markerGroup.push(marker);
-
-    // Listeneintrag erstellen
-    const item = document.createElement("a");
-    item.href = "#";
-    item.className = "list-group-item list-group-item-action list-item";
-    item.dataset.id = r.id;
-    item.innerHTML = `
-      ${r.name}
-      <small>${r.adresse || ""}</small>
-    `;
-
-    // Listenklick zoomt auf das Restaurant + öffnet das passende Popup  
-    item.addEventListener("click", (e) => {
-      e.preventDefault();
-      setActive(r.id);
-      map.setView([r.lat, r.lng], 15);
-      markersById[r.id].openPopup();
-    });
-    //Eintrag zur Liste hinzufügen 
-    listEl.appendChild(item);
-  });
-
-  /* Alle Marker sichtbar in einem Feld und Hinweis anzeigen, wenn keine
-  Koordinaten vorhanden sind */ 
-  if (markerGroup.length > 0) {
-    const group = L.featureGroup(markerGroup);
-    map.fitBounds(group.getBounds().pad(0.2));
-  } else {
-    listEl.innerHTML = `<div class="p-3 text-muted">Keine Restaurants mit Koordinaten gefunden.</div>`;
-  }
-</script>
 {% endblock %}

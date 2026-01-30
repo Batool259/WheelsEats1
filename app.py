@@ -460,10 +460,12 @@ def restaurant_delete(id):
 
 
 
-# Karte
+from urllib.parse import urlencode
+
+# Karte (statisch, ohne JavaScript)
 @app.route("/map")
 def restaurant_map():
-    # Restaurant aus der Datenbank holen 
+    # Restaurants mit Koordinaten aus der DB holen
     restaurants = (
         Restaurant.query
         .filter(Restaurant.breitengrad.isnot(None), Restaurant.laengengrad.isnot(None))
@@ -471,19 +473,54 @@ def restaurant_map():
         .all()
     )
 
-    # in "normale" dicts umwandeln (JSON-serialisierbar)
+    # In dicts umwandeln (für Jinja)
     restaurants_data = []
     for r in restaurants:
+        adresse = " ".join(
+            [x for x in [r.strasse, r.hausnummer, r.postleitzahl, r.stadt] if x]
+        )
+
         restaurants_data.append({
             "id": r.id,
             "name": r.name,
-            "lat": r.breitengrad,
-            "lng": r.laengengrad,
-            "adresse": " ".join([x for x in [r.strasse, r.hausnummer, r.postleitzahl, r.stadt] if x]),
+            "lat": float(r.breitengrad),
+            "lng": float(r.laengengrad),
+            "adresse": adresse,
             "detail_url": url_for("detail", id=r.id),
         })
 
-    return render_template("map.html", restaurants=restaurants_data)
+    # Karten-Zentrum automatisch berechnen (Durchschnitt)
+    if restaurants_data:
+        center_lat = sum(x["lat"] for x in restaurants_data) / len(restaurants_data)
+        center_lng = sum(x["lng"] for x in restaurants_data) / len(restaurants_data)
+        zoom = 12
+    else:
+        # Fallback: Berlin
+        center_lat, center_lng = 52.5200, 13.4050
+        zoom = 12
+
+    # Statische Karten-URL sauber (ohne Zeilenumbrüche) zusammenbauen
+    base_url = "https://staticmap.openstreetmap.de/staticmap.php"
+
+    params = [
+        ("center", f"{center_lat},{center_lng}"),
+        ("zoom", str(zoom)),
+        ("size", "900x600"),
+    ]
+
+    # Marker anhängen (rot)
+    for x in restaurants_data:
+        params.append(("markers", f'{x["lat"]},{x["lng"]},red'))
+
+    map_image_url = f"{base_url}?{urlencode(params)}"
+
+    return render_template(
+        "map.html",
+        restaurants=restaurants_data,
+        map_image_url=map_image_url,
+    )
+
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5001)
