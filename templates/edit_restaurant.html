@@ -134,7 +134,7 @@
         </div>
       </div>
 
-      {# Linke Card wie Detailseite: Beschreibung + Öffnungszeiten #}
+      {# Linke Card wie Detailseite: Beschreibung + Öffnungszeiten + Website #}
       <div class="col-md-7">
         <div class="card shadow-sm rounded-4">
           <div class="card-body">
@@ -152,9 +152,19 @@
                       name="oeffnungszeiten"
                       rows="4"
                       placeholder="z.B. Mo–Fr: 10:00–18:00">{{ restaurant.oeffnungszeiten or "" }}</textarea>
+
+            <hr>
+
+            <h5 class="card-title mb-2">Website</h5>
+            <input type="url"
+                  class="form-control"
+                  name="website"
+                  placeholder="https://www.restaurant.de"
+                  value="{{ restaurant.website or '' }}">
           </div>
         </div>
       </div>
+
 
 
       {# Rechte Card wie Detailseite: Standort + Koordinatenfelder #}

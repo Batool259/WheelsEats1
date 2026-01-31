@@ -225,8 +225,17 @@ def restaurant_edit(id):
             flash("Bitte gültige Koordinaten eingeben.", "danger")
             return render_template("edit_restaurant.html", restaurant=restaurant)
 
-        # Öffnungszeiten
+        # Beschreibung + Öffnungszeiten
+        restaurant.beschreibung = (request.form.get("beschreibung") or "").strip() or None
         restaurant.oeffnungszeiten = (request.form.get("oeffnungszeiten") or "").strip() or None
+
+        # Website
+        website = (request.form.get("website") or "").strip() or None
+        if website and not website.startswith(("http://", "https://")):
+            website = "https://" + website
+
+        print("DEBUG website:", website)  # zum Testen, später entfernen
+        restaurant.website = website
 
         # Status setzen
         status = (request.form.get("status") or "").strip()
@@ -234,7 +243,7 @@ def restaurant_edit(id):
             restaurant.status = status
             if status == "approved" and not restaurant.geprueft_am:
                 restaurant.geprueft_am = datetime.utcnow()
-        
+
         # Merkmale speichern / aktualisieren
         if restaurant.merkmale:
             m = restaurant.merkmale
@@ -248,7 +257,6 @@ def restaurant_edit(id):
         m.breite_tueren = request.form.get("breite_tueren") == "on"
         m.unterfahrbare_tische = request.form.get("unterfahrbare_tische") == "on"
         m.behindertenparkplatz = request.form.get("behindertenparkplatz") == "on"
-
 
         # Titelbild löschen?
         delete_flag = request.form.get("delete_titelbild") == "1"
@@ -274,16 +282,12 @@ def restaurant_edit(id):
             if file and file.filename:
                 flash("Hinweis: Du hast gleichzeitig 'Titelbild löschen' und eine neue Datei gewählt. Es wurde nur gelöscht.", "warning")
 
-            # Datei auf Platte löschen
-            # current_cover.dateipfad ist z.B. "static/uploads/xyz.jpg"
             abs_path = os.path.join(app.root_path, current_cover.dateipfad)
             if os.path.exists(abs_path):
                 os.remove(abs_path)
 
-            # DB-Eintrag löschen
             db.session.delete(current_cover)
             current_cover = None
-
 
         # 2) Ersetzen, wenn neue Datei hochgeladen wurde
         elif file and file.filename:
@@ -300,17 +304,14 @@ def restaurant_edit(id):
 
             file.save(save_path)
 
-            # altes Titelbild entfernen (Datei + DB)
             if current_cover:
                 old_abs_path = os.path.join(app.root_path, current_cover.dateipfad)
                 if os.path.exists(old_abs_path):
                     os.remove(old_abs_path)
                 db.session.delete(current_cover)
 
-            # neues Titelbild speichern
             rel_path = f"static/uploads/{filename}"
             restaurant.fotos.append(Foto(dateipfad=rel_path, titelbild=True))
-
 
         db.session.commit()
         flash("Änderungen gespeichert.", "success")
@@ -385,6 +386,8 @@ def restaurant_new():
         website = (request.form.get("website") or "").strip() or None
         if website and not website.startswith(("http://", "https://")):
             website = "https://" + website
+
+        r.website = website
 
         r = Restaurant(
             name=name,

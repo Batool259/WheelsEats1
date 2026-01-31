@@ -92,7 +92,8 @@
     {% endif %}
   </div>
 
-  <!-- HIER ist der wichtige Teil: row + 2 cols -->
+
+  
   <div class="row g-3">
     <!-- Beschreibung + Öffnungszeiten -->
     <div class="col-12 col-lg-7">
@@ -126,7 +127,7 @@
           {{ restaurant.adresse_zeile or "Adresse nicht angegeben." }}
         </div>
 
-        <a class="btn btn-outline-primary w-100"
+        <a class="btn btn-outline-secondary w-100"
            target="_blank"
            href="https://www.google.com/maps?q={{ restaurant.breitengrad }},{{ restaurant.laengengrad }}">
           Route planen
@@ -174,7 +175,7 @@
   {# Bewertung-schreiben Block #}
   {% if session.get("logged_in") %}
     <div class="mb-3">
-      <button class="btn btn-sm btn-primary"
+      <button class="btn btn-sm btn-secondary"
               type="button"
               data-bs-toggle="collapse"
               data-bs-target="#reviewForm">
@@ -203,7 +204,7 @@
                           placeholder="Deine Erfahrung …"></textarea>
               </div>
 
-              <button class="btn btn-primary btn-sm" type="submit">
+              <button class="btn btn-secondary btn-sm" type="submit">
                 Absenden
               </button>
             </form>
@@ -212,7 +213,7 @@
       </div>
     </div>
   {% else %}
-    <a class="btn btn-sm btn-outline-primary mb-3"
+    <a class="btn btn-sm btn-outline-secondary mb-3"
        href="{{ url_for('login', next=request.path) }}">
       Anmelden, um zu bewerten
     </a>
