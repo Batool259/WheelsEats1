@@ -11,6 +11,13 @@ nav_order: 1
 
 # Erreichte und nicht erreichte Ziele
 
+<details open markdown="block">
+{: .text-delta }
+<summary>Table of contents</summary>
++ ToC
+{: toc }
+</details>
+
 ## Ursprüngliche Projektziele
 
 Zu Beginn des Projekts war unser zentrales Ziel, eine Webanwendung zu entwickeln, die Menschen dabei unterstützt, barrierefreie Restaurants in Berlin-Mitte zu finden.  
