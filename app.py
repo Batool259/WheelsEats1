@@ -214,6 +214,20 @@ def restaurant_edit(id):
     restaurant = Restaurant.query.get_or_404(id)
 
     if request.method == "POST":
+
+        # 📝 Name + Adresse (nur Admin)
+        name = (request.form.get("name") or "").strip()
+        if not name:
+            flash("Bitte einen gültigen Restaurantnamen eingeben.", "danger")
+            return render_template("edit_restaurant.html", restaurant=restaurant)
+
+        restaurant.name = name
+        restaurant.strasse = (request.form.get("strasse") or "").strip() or None
+        restaurant.hausnummer = (request.form.get("hausnummer") or "").strip() or None
+        restaurant.postleitzahl = (request.form.get("postleitzahl") or "").strip() or None
+        restaurant.stadt = (request.form.get("stadt") or "").strip() or None
+
+
         # Koordinaten
         bg = (request.form.get("breitengrad") or "").strip()
         lg = (request.form.get("laengengrad") or "").strip()
@@ -234,7 +248,7 @@ def restaurant_edit(id):
         if website and not website.startswith(("http://", "https://")):
             website = "https://" + website
 
-        print("DEBUG website:", website)  # zum Testen, später entfernen
+
         restaurant.website = website
 
         # Status setzen
@@ -387,8 +401,7 @@ def restaurant_new():
         if website and not website.startswith(("http://", "https://")):
             website = "https://" + website
 
-        r.website = website
-
+    
         r = Restaurant(
             name=name,
             website=website,
@@ -400,6 +413,8 @@ def restaurant_new():
             status="pending",
             erstellt_von_nutzer_id=session["user_id"],
         )
+
+        r.website = website
 
         # optional: Koordinaten (robust)
         bg = (request.form.get("breitengrad") or "").strip()
@@ -430,7 +445,6 @@ def restaurant_new():
                 return redirect(request.url)
 
             filename = secure_filename(file.filename)
-
             upload_dir = app.config["UPLOAD_FOLDER"]
             os.makedirs(upload_dir, exist_ok=True)
 
@@ -445,10 +459,10 @@ def restaurant_new():
             r.fotos = [Foto(dateipfad=rel_path, titelbild=True)]
 
     
-            db.session.commit()
+        db.session.commit()
             
-            flash("Restaurant wurde gespeichert", "success")
-            return redirect(url_for("detail", id=r.id))
+        flash("Restaurant wurde gespeichert", "success")
+        return redirect(url_for("detail", id=r.id))
 
     return render_template("new.html")
 

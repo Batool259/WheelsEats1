@@ -32,7 +32,7 @@
         {% if restaurant.merkmale.stufenloser_eingang %}<span class="badge badge-access badge-stepfree">Stufenlos</span>{% endif %}
         {% if restaurant.merkmale.barrierefreies_wc %}<span class="badge badge-access badge-wc">WC</span>{% endif %}
         {% if restaurant.merkmale.rampe %}<span class="badge badge-access badge-ramp">Rampe</span>{% endif %}
-        {% if restaurant.merkmale.breite_tueren %}<span class="badge badge-access badge-doors">&gt; 90 cm Tür</span>{% endif %}
+        {% if restaurant.merkmale.breite_tueren %}<span class="badge badge-access badge-door">&gt; 90 cm Tür</span>{% endif %}
         {% if restaurant.merkmale.unterfahrbare_tische %}<span class="badge badge-access badge-tables">Unterfahrbar</span>{% endif %}
         {% if restaurant.merkmale.behindertenparkplatz %}<span class="badge badge-access badge-parking">Parkplatz</span>{% endif %}
       {% else %}
@@ -172,6 +172,46 @@
         <div class="card shadow-sm rounded-4">
           <div class="card-body">
             <h5 class="card-title mb-3">Standort</h5>
+
+
+                        <div class="mb-3">
+              <label class="form-label">Restaurantname</label>
+              <input class="form-control"
+                     name="name"
+                     required
+                     value="{{ restaurant.name or '' }}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Straße</label>
+              <input class="form-control"
+                     name="strasse"
+                     value="{{ restaurant.strasse or '' }}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Hausnummer</label>
+              <input class="form-control"
+                     name="hausnummer"
+                     value="{{ restaurant.hausnummer or '' }}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Postleitzahl</label>
+              <input class="form-control"
+                     name="postleitzahl"
+                     value="{{ restaurant.postleitzahl or '' }}">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Stadt</label>
+              <input class="form-control"
+                     name="stadt"
+                     value="{{ restaurant.stadt or '' }}">
+            </div>
+
+            <hr>
+
 
             <div class="mb-2 small text-muted">
               {% if restaurant.breitengrad and restaurant.laengengrad %}
