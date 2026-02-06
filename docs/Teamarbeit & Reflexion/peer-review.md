@@ -10,23 +10,23 @@ nav_order: 3
 {: .no_toc }
 # Peer review
 
-<details open markdown="block">
-{: .text-delta }
-<summary>Table of contents</summary>
-+ ToC
-{: toc }
-</details>
 
-## [team member] - review 1
+## Esma Gebesce - über Batool Sawalha
 
-### My observation (Wahrnehmung)
+### Wahrnehmung
+Ich habe Batool als sehr engagierte und zuverlässige Teampartnerin erlebt. Durch unsere enge Zusammenarbeit konnten wir offen miteinander kommunizieren, Probleme früh ansprechen und gemeinsam Lösungen finden. Besonders positiv ist mir ihre Arbeit an der Kartenansicht aufgefallen, die technisch anspruchsvoll war und eine zentrale Funktion der Anwendung darstellt. Batool arbeitete sehr strukturiert, brachte eigene Lösungsansätze ein und war jederzeit hilfsbereit, wenn Unterstützung benötigt wurde.
 
-[A specific observation, regarding know-how, effectiveness, team work or from another relevant area]
+### Wirkung
+Die offene und vertrauensvolle Zusammenarbeit hatte einen sehr positiven Einfluss auf meinen Arbeitsprozess. Durch den kontinuierlichen Austausch konnten wir Aufgaben effizient aufteilen und uns gegenseitig unterstützen. Besonders hilfreich war, dass wir uns bei technischen Herausforderungen jederzeit abstimmen konnten, wodurch Blockaden schnell gelöst wurden und der Projektfortschritt konstant blieb.
 
-### Effect on me (Wirkung)
+### Wunsch
+Für zukünftige Projekte wünsche ich mir, dass wir diese offene und ehrliche Art der Zusammenarbeit beibehalten. Zusätzlich könnten regelmäßige kurze Abstimmungen zu Beginn einzelner Arbeitsphasen helfen, komplexe Aufgaben – insbesondere bei technisch anspruchsvollen Features – noch gezielter zu planen.
 
-[What positive or negative effect did this observation have on the reviewer?]
 
-### Tip for the future (Wunsch)
+## Batool Sawalha - über Esma Gebesce
 
-[What should be changed or strengthened for the point of view of the reviewer?]
+### Wahrnehmung 
+
+### Wirkung 
+
+### Wunsch
