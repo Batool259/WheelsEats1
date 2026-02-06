@@ -8,195 +8,162 @@ nav_order: 3
 [Batool, Esma]
 
 {: .no_toc }
-## Reference documentation
-
-{: .attention }
-> This page collects internal functions, routes with their functions, and APIs (if any).
-> 
-> See [Uber](https://developer.uber.com/docs/drivers/references/api) or [PayPal](https://developer.paypal.com/api/rest/) for exemplary high-quality API reference documentation.
->
-> You may delete this `attention` box.
+## Routenreferenz
 
 <details open markdown="block">
 {: .text-delta }
-<summary>Table of contents</summary>
+<summary>Inhaltsverzeichnis</summary>
 + ToC
 {: toc }
 </details>
 
-## [Section / module]
-
-### `function_definition()`
-
-**Route:** `/route/`
-
-**Methods:** `POST` `GET` `PATCH` `PUT` `DELETE`
-
-**Purpose:** [Short explanation of what the function does and why]
-
-**Sample output:**
-
-[Show an image, string output, or similar illustration -- or write NONE if function generates no output]
-
----
 ## Authentifizierung
 
 ### `home()`
-
-**Route:** `/`
-
-**Methods:** `GET`
-
-**Purpose:**  
-Einstiegspunkt der Anwendung. Leitet Nutzer automatisch auf die Startseite (`/index`) weiter.
-
-**Sample output:**  
-NONE
-
----
-
-### `login()`
-
-**Route:** `/login`
-
-**Methods:** `GET` `POST`
-
-**Purpose:**  
-Zeigt den Login-Screen an und authentifiziert Nutzer im Demo-Modus. Nach erfolgreichem Login erhalten Nutzer Zugriff auf geschützte Funktionen.
-
-**Sample output:**  
-Login-Formular (E-Mail, Passwort)
+**Route:** `/`  
+**Methods:** `GET`  
+**Zugriff:** öffentlich  
+**Zweck:** Einstiegspunkt der Anwendung. Leitet auf die Übersicht (`/index`) weiter.  
+**Output:** NONE (Redirect)
 
 ---
 
 ### `register()`
+**Route:** `/register`  
+**Methods:** `GET`, `POST`  
+**Zugriff:** öffentlich  
+**Zweck:** Erstellt einen neuen Nutzer, prüft Eingaben (Passwortlänge, Passwortbestätigung, E-Mail eindeutig) und loggt nach erfolgreicher Registrierung direkt ein. Unterstützt optional `next` (nur interne Pfade).  
+**Output:** Registrierungsformular / Redirect zur Übersicht
 
-**Route:** `/register`
+---
 
-**Methods:** `GET` `POST`
-
-**Purpose:**  
-Ermöglicht neuen Nutzern die Registrierung. Die Registrierung ist aktuell als Demo umgesetzt und speichert noch keine Daten dauerhaft.
-
-**Sample output:**  
-Registrierungsformular
+### `login()`
+**Route:** `/login`  
+**Methods:** `GET`, `POST`  
+**Zugriff:** öffentlich  
+**Zweck:** Authentifiziert Nutzer per E-Mail/Passwort (Hash-Prüfung). Setzt Session-Werte (`logged_in`, `user_id`, `username`, `role`). Unterstützt optional `next` (nur interne Pfade).  
+**Output:** Login-Formular / Redirect
 
 ---
 
 ### `logout()`
-
-**Route:** `/logout`
-
-**Methods:** `GET`
-
-**Purpose:**  
-Loggt den aktuell eingeloggten Nutzer aus und beendet die Sitzung.
-
-**Sample output:**  
-Weiterleitung zur Login-Seite mit Hinweisnachricht
+**Route:** `/logout`  
+**Methods:** `GET`  
+**Zugriff:** eingeloggte Nutzer  
+**Zweck:** Löscht die Session und loggt Nutzer aus.  
+**Output:** Redirect zur Login-Seite
 
 ---
 
-## Restaurants
+## Restaurants (öffentlich)
 
 ### `index()`
+**Route:** `/index`  
+**Methods:** `GET`  
+**Zugriff:** öffentlich  
+**Zweck:** Zeigt Restaurantliste mit Suche und optionalen Filtern nach Barrierefreiheitsmerkmalen.  
+**Output:** Restaurant-Übersicht
 
-**Route:** `/index`
+**Suche (Query-Parameter):**
+- `q=<text>` durchsucht `name`, `strasse`, `postleitzahl`, `stadt`
 
-**Methods:** `GET`
+**Filter (Query-Parameter, aktiv wenn Wert `1`):**
+- `stufenloser_eingang=1`
+- `rampe=1`
+- `barrierefreies_wc=1`
+- `breite_tueren=1`
+- `unterfahrbare_tische=1`
+- `behindertenparkplatz=1`
 
-**Purpose:**  
-Startseite der Anwendung. Zeigt eine Übersicht barrierefreier Restaurants mit grundlegenden Informationen.
+Wenn mindestens ein Filter aktiv ist, wird auf `BarrierefreieMerkmale` gejoint und nur Restaurants mit aktivierten Merkmalen angezeigt.
 
-**Sample output:**  
-Restaurant-Übersichtsliste
+---
+
+### `detail(id)`
+**Route:** `/restaurants/<int:id>`  
+**Methods:** `GET`  
+**Zugriff:** öffentlich  
+**Zweck:** Detailseite eines Restaurants. Lädt Bewertungen (neueste zuerst) und berechnet Durchschnittsbewertung (`avg`).  
+**Output:** Detailansicht
 
 ---
 
-### `restaurant_detail(restaurant_id)`
-
-**Route:** `/restaurants/<int:restaurant_id>`
-
-**Methods:** `GET`
-
-**Purpose:**  
-Zeigt die Detailseite eines Restaurants anhand der übergebenen Restaurant-ID.
-
-**Sample output:**  
-Restaurant-Detailansicht
-
----
+## Restaurants (eingeloggt)
 
 ### `restaurant_new()`
-
-**Route:** `/restaurants/new`
-
-**Methods:** `GET` `POST`
-
-**Purpose:**  
-Ermöglicht eingeloggten Nutzern, ein neues Restaurant einzureichen. Nicht eingeloggte Nutzer werden zur Login-Seite weitergeleitet.
-
-**Sample output:**  
-Formular zum Hinzufügen eines Restaurants
+**Route:** `/restaurants/new`  
+**Methods:** `GET`, `POST`  
+**Zugriff:** eingeloggte Nutzer  
+**Zweck:** Einreichen eines neuen Restaurants. Setzt Status auf `pending`, speichert Merkmale (1:1) und optional ein Titelbild. Nicht eingeloggte Nutzer werden auf Login umgeleitet (mit `next`).  
+**Output:** Formular / Redirect zur Detailseite
 
 ---
 
 ## Bewertungen
 
-### `restaurant_review_create(restaurant_id)`
+### `restaurant_review_create(id)`
+**Route:** `/restaurants/<int:id>/reviews`  
+**Methods:** `POST`  
+**Zugriff:** eingeloggte Nutzer  
+**Zweck:** Erstellt eine Bewertung (1–5 Sterne, optional Text) für ein Restaurant. Validiert Sternebereich und speichert in der DB.  
+**Output:** Redirect zur Detailseite + Flash-Nachricht
 
-**Route:** `/restaurants/<int:restaurant_id>/reviews`
+---
 
-**Methods:** `POST`
+## Admin-Funktionen
 
-**Purpose:**  
-Ermöglicht eingeloggten Nutzern, eine Bewertung für ein Restaurant abzugeben. Bewertungen werden aktuell nur im Demo-Modus verarbeitet.
+### `restaurant_edit(id)`
+**Route:** `/restaurants/<int:id>/edit`  
+**Methods:** `GET`, `POST`  
+**Zugriff:** **Admin**  
+**Zweck:** Admin kann Restaurantdaten bearbeiten (Name/Adresse/Koordinaten/Beschreibung/Öffnungszeiten/Website), Merkmale aktualisieren und Status setzen (`pending`/`approved`).  
+Zusätzlich: Titelbild löschen oder ersetzen (inkl. Löschen alter Datei).  
+**Output:** Edit-Formular / Redirect zur Detailseite
 
-**Sample output:**  
-Erfolgsmeldung nach dem Absenden der Bewertung
+---
+
+### `restaurant_delete(id)`
+**Route:** `/restaurants/<int:id>/delete`  
+**Methods:** `POST`  
+**Zugriff:** **Admin**  
+**Zweck:** Löscht ein Restaurant. Abhängige Datensätze werden über ORM-Relations/Cascades entfernt.  
+**Output:** Redirect zur Übersicht
+
+---
+
+### `review_delete(id)`
+**Route:** `/reviews/<int:id>/delete`  
+**Methods:** `POST`  
+**Zugriff:** **Admin**  
+**Zweck:** Löscht eine Bewertung anhand ihrer ID.  
+**Output:** Redirect zur Restaurant-Detailseite
 
 ---
 
 ## Karte
 
 ### `restaurant_map()`
-
-**Route:** `/map`
-
-**Methods:** `GET`
-
-**Purpose:**  
-Zeigt eine Kartenansicht der Restaurants. Die Funktion ist derzeit als Platzhalter umgesetzt.
-
-**Sample output:**  
-Kartenansicht (Platzhalter)
+**Route:** `/map`  
+**Methods:** `GET`  
+**Zugriff:** öffentlich  
+**Zweck:** Zeigt eine **statische** Kartenansicht (ohne JavaScript). Restaurants mit Koordinaten werden aus der DB geladen und als Marker in eine OpenStreetMap-StaticMap-URL eingebaut.  
+**Output:** Kartenansicht als Bild + Liste der Restaurants
 
 ---
 
-## Fehlerbehandlung
+## Upload-Regeln (Titelbild)
 
-### `http_not_found(e)`
-
-**Route:** `*`
-
-**Methods:** `GET`
-
-**Purpose:**  
-Wird ausgelöst, wenn eine angeforderte Route nicht existiert.
-
-**Sample output:**  
-404-Fehlerseite
+- Upload-Verzeichnis: `static/uploads`
+- Max. Dateigröße: 6 MB (`MAX_CONTENT_LENGTH`)
+- Erlaubte Dateiendungen: `png`, `jpg`, `jpeg`, `webp`
+- Dateinamen werden mit `secure_filename` abgesichert
+- Beim Ersetzen/Löschen des Titelbildes wird die alte Datei entfernt (Admin-Edit)
 
 ---
 
-### `http_internal_server_error(e)`
+## Rollen & Zugriffsschutz
 
-**Route:** `*`
-
-**Methods:** `GET`
-
-**Purpose:**  
-Wird ausgelöst, wenn ein interner Serverfehler auftritt.
-
-**Sample output:**  
-500-Fehlerseite
+- Login-Prüfung über `session["logged_in"]`
+- Admin-Prüfung über `session["role"] == "admin"`
+- Admin-only: Restaurant bearbeiten/löschen, Bewertung löschen
+- Eingeloggt: Restaurant einreichen, Bewertung erstellen
