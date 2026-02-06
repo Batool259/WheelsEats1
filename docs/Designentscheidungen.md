@@ -1,92 +1,97 @@
 ---
 title: Designentscheidungen
-nav_order: 3
+nav_order: 4
 ---
 
 {: .label }
 [Batool, Esma]
 
-{: .no_toc }
-## Designentscheidungen
+## Überblick
 
-<details open markdown="block">
-{: .text-delta }
-<summary>Table of contents</summary>
-+ ToC
-{: toc }
-</details>
-
-## 01: [Title]
-
-### Meta
-
-Status
-: **Work in progress** - Decided - Obsolete
-
-Updated
-: DD-MMM-YYYY
-
-### Problem statement
-
-[Describe the problem to be solved or the goal to be achieved. Include relevant context information.]
-
-### Decision
-
-[Describe **which** design decision was taken for **what reason** and by **whom**.]
-
-### Regarded options
-
-[Describe any possible design decision that will solve the problem. Assess these options, e.g., via a simple pro/con list.]
+In diesem Abschnitt werden zentrale Designentscheidungen dokumentiert, die während der Entwicklung von WheelEats getroffen wurden.  
+Ziel war es, eine verständliche, barrierearme und technisch überschaubare Anwendung zu entwickeln, die den Fokus klar auf Nutzbarkeit und Zugänglichkeit legt.
 
 ---
 
-## [Example, delete this section] 01: How to access the database - SQL or SQLAlchemy 
+## Entscheidung 1: Reduziertes, übersichtliches UI
 
-### Meta
+**Problem:**  
+Viele bestehende Plattformen sind visuell überladen und schwer bedienbar, insbesondere für Nutzer:innen mit Mobilitätseinschränkungen.
 
-Status
-: Work in progress - **Decided** - Obsolete
+**Entscheidung:**  
+Wir haben uns für ein reduziertes, klares Benutzerinterface mit wenigen Farben, klaren Strukturen und großen, gut lesbaren Elementen entschieden.
 
-Updated
-: 30-Jun-2024
-
-### Problem statement
-
-Should we perform database CRUD (create, read, update, delete) operations by writing plain SQL or by using SQLAlchemy as object-relational mapper?
-
-Our web application is written in Python with Flask and connects to an SQLite database. To complete the current project, this setup is sufficient.
-
-We intend to scale up the application later on, since we see substantial business value in it.
-
-
-
-Therefore, we will likely:
-Therefore, we will likely:
-Therefore, we will likely:
-
-+ Change the database schema multiple times along the way, and
-+ Switch to a more capable database system at some point.
-
-### Decision
-
-We stick with plain SQL.
-
-Our team still has to come to grips with various technologies new to us, like Python and CSS. Adding another element to our stack will slow us down at the moment.
-
-Also, it is likely we will completely re-write the app after MVP validation. This will create the opportunity to revise tech choices in roughly 4-6 months from now.
-*Decision was taken by:* github.com/joe, github.com/jane, github.com/maxi
-
-### Regarded options
-
-We regarded two alternative options:
-
-+ Plain SQL
-+ SQLAlchemy
-
-| Criterion | Plain SQL | SQLAlchemy |
-| --- | --- | --- |
-| **Know-how** | ✔️ We know how to write SQL | ❌ We must learn ORM concept & SQLAlchemy |
-| **Change DB schema** | ❌ SQL scattered across code | ❔ Good: classes, bad: need Alembic on top |
-| **Switch DB engine** | ❌ Different SQL dialect | ✔️ Abstracts away DB engine |
+**Begründung:**  
+Eine einfache Oberfläche senkt die Einstiegshürde und verbessert die Bedienbarkeit. Die Umsetzung orientiert sich an den in den UI-Designs und Wireframes entwickelten Entwürfen.
 
 ---
+
+## Entscheidung 2: Restaurants als zentrales Datenobjekt
+
+**Problem:**  
+Die Daten müssen so strukturiert sein, dass Bewertungen, Fotos und Barrierefreiheitsinformationen eindeutig zugeordnet werden können.
+
+**Entscheidung:**  
+Restaurant ist das zentrale Objekt des Datenmodells. Alle weiteren Entitäten (Bewertung, Foto, Barrierefreie Merkmale) beziehen sich direkt darauf.
+
+**Begründung:**  
+Diese Struktur ist übersichtlich, leicht erweiterbar und ermöglicht einfache Abfragen (z. B. Detailansicht eines Restaurants).
+
+---
+
+## Entscheidung 3: Barrierefreiheitsmerkmale als eigene 1:1-Entität
+
+**Problem:**  
+Barrierefreiheitsinformationen sollen strukturiert, eindeutig und erweiterbar gespeichert werden.
+
+**Entscheidung:**  
+Barrierefreie Merkmale werden in einer eigenen Tabelle gespeichert und sind 1:1 mit einem Restaurant verknüpft.
+
+**Begründung:**  
+Die Trennung verhindert unübersichtliche Restaurant-Tabellen und erlaubt es, neue Merkmale später unkompliziert hinzuzufügen.
+
+---
+
+## Entscheidung 4: Statische Kartenansicht ohne JavaScript
+
+**Problem:**  
+Interaktive Kartenlösungen erfordern JavaScript und externe APIs, was die Komplexität erhöht.
+
+**Entscheidung:**  
+Wir verwenden eine statische Kartenansicht auf Basis von OpenStreetMap Static Maps.
+
+**Begründung:**  
+Die Lösung ist technisch einfach, barrierearm, schnell ladend und erfüllt dennoch den Zweck der räumlichen Orientierung.
+
+---
+
+## Entscheidung 5: Rollenmodell mit Administratoren
+
+**Problem:**  
+Nicht alle Nutzer:innen sollen die gleichen Rechte haben (z. B. Löschen oder Freigeben von Restaurants).
+
+**Entscheidung:**  
+Es wurde ein einfaches Rollenmodell mit normalen Nutzer:innen und Administratoren eingeführt.
+
+**Begründung:**  
+Admins können Inhalte prüfen, bearbeiten oder löschen, während normale Nutzer:innen Restaurants einreichen und bewerten können. Dies erhöht die Datenqualität.
+
+---
+
+## Entscheidung 6: Status `pending` / `approved` für Restaurants
+
+**Problem:**  
+Neu eingereichte Restaurants sollen nicht automatisch öffentlich sichtbar sein.
+
+**Entscheidung:**  
+Restaurants werden zunächst mit dem Status `pending` gespeichert und erst nach Prüfung auf `approved` gesetzt.
+
+**Begründung:**  
+Dies ermöglicht eine inhaltliche Kontrolle und stellt sicher, dass nur geprüfte Einträge öffentlich angezeigt werden.
+
+---
+
+## Zusammenfassung
+
+Die getroffenen Designentscheidungen unterstützen das übergeordnete Ziel von WheelEats:  
+eine leicht verständliche, barrierearme Plattform bereitzustellen, die relevante Informationen klar strukturiert darstellt und eine aktive Beteiligung der Nutzer:innen ermöglicht.

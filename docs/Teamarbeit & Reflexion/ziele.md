@@ -1,6 +1,6 @@
 ---
-title: Goals
-parent: Team Evaluation
+title: Ziele
+parent: Teamarbeit & Reflexion
 nav_order: 1
 ---
 

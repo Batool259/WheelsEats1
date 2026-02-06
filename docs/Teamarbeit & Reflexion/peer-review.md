@@ -1,6 +1,6 @@
 ---
 title: Peer Review
-parent: Team Evaluation
+parent: Teamarbeit & Reflexion
 nav_order: 3
 ---
 

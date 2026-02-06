@@ -1,6 +1,6 @@
 ---
 title: Beitragsübersicht
-parent: Team Evaluation
+parent: Teamarbeit & Reflexion
 nav_order: 4
 ---
 
