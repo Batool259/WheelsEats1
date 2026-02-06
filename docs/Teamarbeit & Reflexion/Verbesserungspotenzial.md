@@ -1,6 +1,6 @@
 ---
-title: Improvements
-parent: Team Evaluation
+title: Verbesserungspotenzial
+parent: Teamarbeit & Reflexion
 nav_order: 2
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Design Decisions
+title: Designentscheidungen
 nav_order: 3
 ---
 
@@ -7,7 +7,7 @@ nav_order: 3
 [Batool, Esma]
 
 {: .no_toc }
-## Design decisions
+## Designentscheidungen
 
 <details open markdown="block">
 {: .text-delta }

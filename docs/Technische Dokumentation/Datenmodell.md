@@ -1,5 +1,5 @@
 ---
-title: Data Model
+title: Datenmodell
 parent: Technical Docs
 nav_order: 2
 ---

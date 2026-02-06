@@ -1,5 +1,5 @@
 ---
-title: Contributions
+title: Beitragsübersicht
 parent: Team Evaluation
 nav_order: 4
 ---

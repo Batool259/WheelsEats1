@@ -1,5 +1,5 @@
 ---
-title: Value Proposition
+title: Projektidee & Zielsetzung
 nav_order: 1
 ---
 
@@ -7,7 +7,7 @@ nav_order: 1
 [Batool, Esma]
 
 {: .no_toc }
-## Value proposition
+## Projektidee & Zielsetzung
 
 <details open markdown="block">
 {: .text-delta }

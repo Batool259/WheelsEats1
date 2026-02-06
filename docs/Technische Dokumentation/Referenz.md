@@ -1,5 +1,5 @@
 ---
-title: Reference
+title: Referenz / API
 parent: Technical Docs
 nav_order: 3
 ---
