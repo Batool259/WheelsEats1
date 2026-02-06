@@ -8,7 +8,7 @@ nav_order: 3
 [Batool, Esma]
 
 {: .no_toc }
-# Peer review
+# Peer Review
 
 
 ## Esma Gebesce - über Batool Sawalha
