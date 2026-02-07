@@ -27,6 +27,12 @@ Für zukünftige Projekte wünsche ich mir, dass wir diese offene und ehrliche A
 
 ### Wahrnehmung 
 
+Während unseres Projekts habe ich Esma als eine sehr zuverlässige und reflektierte Teampartnerin erlebt, die ihre Aufgaben mit viel Sorgfalt umgesetzt hat. Sie kümmerte sich intensiv um Backend-Struktur und Datenfluss und arbeitete stets mit dem Ziel, eine stabile Grundlage für die Anwendung zu schaffen. Natürlich gab es Phasen, in denen wir einzeln nicht sofort weiterwussten oder technische Schwierigkeiten hatten. Durch gemeinsame Absprachen konnten wir Probleme strukturiert angehen und passende Lösungswege entwickeln. Diese Herangehensweise hat unsere Zusammenarbeit stark geprägt.
+
 ### Wirkung 
 
+Esmas Arbeitsweise hat mir viel Sicherheit im Projekt gegeben. Selbst wenn Herausforderungen auftraten, wusste ich, dass wir sie gemeinsam klären konnten. Der regelmäßige Austausch half uns, Blockaden zu überwinden und Entscheidungen fundiert zu treffen. Dadurch blieb der Arbeitsfluss stabil und die Zusammenarbeit angenehm. Ihr Engagement und ihre Verlässlichkeit hatten einen positiven Einfluss auf meine eigene Motivation und Arbeitsstruktur.
+
 ### Wunsch
+
+Für zukünftige Projekte wünsche ich mir, dass wir diese offene Kommunikation und gemeinsame Problemlösung beibehalten. Gerade in schwierigen Phasen hat sich gezeigt, wie wertvoll unsere Abstimmungen sind. Eine noch frühere gemeinsame Planung bei komplexeren Aufgaben könnte helfen, Herausforderungen schneller zu erkennen und effizienter zu lösen.
