@@ -28,35 +28,50 @@ Updated
 
 ### Ziele
 
-•⁠  ⁠Eine App entwickeln, die echte Bedürfnisse von Menschen mit Mobilitätseinschränkungen adressiert.  
+Ziel ist es, eine Anwendung bereitzustellen, die reale Bedürfnisse von Menschen mit Mobilitätseinschränkungen unterstützt und eine verlässliche Orientierung bei der Suche nach barrierefreundlicher Gastronomie in Berlin-Mitte bietet.
 
-•⁠  ⁠Durch Nutzerinterviews und Feedback-Runden sicherstellen, dass Design und Funktionen wirklich hilfreich sind.  
+Daraus ergeben sich folgende konkrete Ziele:
 
-•⁠  ⁠Eine einfache, barrierearme Bedienoberfläche gestalten, die für alle leicht verständlich ist.  
+• Entwicklung einer Plattform, die barrierearme Navigation und verständliche Informationsdarstellung ermöglicht
 
-•⁠  ⁠Eine aktive Community aufbauen, in der Nutzer*innen selbst Orte hinzufügen und bewerten können.  
+• Sicherstellung, dass Nutzer*innen Restaurants schnell finden und einschätzen können
 
-•⁠  ⁠Vertrauen schaffen, indem alle Daten zu Barrierefreiheit transparent und nachvollziehbar sind.
+• Gestaltung eines intuitiven Login- und Bewertungsprozesses
+
+• Aufbau einer vertrauenswürdigen Community, in der Restaurants ergänzt und bewertet werden können
+
+• Förderung transparenter Informationen zur Barrierefreiheit
+
+• Schaffung einer benutzerfreundlichen Kartenübersicht zur räumlichen Orientierung
+
+• Verbesserung der Nutzererfahrung durch kontinuierliches Feedback
+
+Persönliche Ziele
+
 
 ## Persönliche Ziele
 •⁠  ⁠*Batool:* Kartenintegration mit OpenStreetMap
 
 •⁠  ⁠*Esma:* Backend-API & Datenbank 
 
-•⁠  ⁠*Batool:* UI/UX in Figma + Frontend 
+•⁠  ⁠*Batool:* UI/UX in Figma + Frontend & Dokumentation
 
 •⁠  ⁠*Esma:* Testing, Deployment & Dokumentation
 
 ### Methoden
 
-[Describe how you proceed to achieve your evaluation goal. Be as specific as possible: others should be able to replicate your evaluation by following the description on this section.]
+Die Evaluation erfolgt als moderierter Usability-Test mit mehreren Testpersonen. Die Teilnehmenden bearbeiten typische Nutzungsszenarien, darunter das Finden eines Restaurants in Berlin-Mitte, das Lesen von Detailinformationen, Login/Registrierung sowie das Hinzufügen einer Bewertung. Beobachtungen und Feedback werden dokumentiert und ausgewertet.
 
 ### Ergebnisse
 
-[Present the main results of your evaluation, for example: "On average, users need 3 min to register. The drop-out rate was 70%. Users that didn't complete provided the following reasons: ..."]
+Die bisherigen Tests zeigen eine schnelle Orientierung auf der Plattform, verständliche Restaurantinformationen sowie eine intuitive Nutzung von Login- und Bewertungsfunktionen. Die Kartenansicht unterstützt die räumliche Einordnung der Restaurants. Insgesamt wird die Anwendung als übersichtlich und leicht verständlich wahrgenommen.
 
 ### Implikation
 
-[What did you learn from this evaluation and what will you change to improve? Example: "We aim to decrease the drop-out rate by not asking for a birth date. We will re-run this evaluation to measure the impact."]
+Die Evaluation bestätigt die grundlegende Nutzbarkeit der Plattform. Rückmeldungen zeigen, dass Navigation, Informationsdarstellung und Bewertungsprozess gut verständlich sind.
+
+Mehrere Nutzer*innen äußerten zusätzlich den Wunsch nach einer dynamischen Kartenlösung anstelle der aktuellen statischen Kartenansicht. Eine interaktive Karte könnte die Orientierung verbessern und die Nutzererfahrung weiter erhöhen.
+
+Diese Erkenntnisse fließen in zukünftige Überlegungen zur Weiterentwicklung ein, ohne die bestehende Funktionsstruktur zu verändern.
 
 ---
