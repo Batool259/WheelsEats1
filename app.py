@@ -1,7 +1,18 @@
 import os
 from datetime import datetime
+from urllib.parse import urlencode
 
-from flask import Flask, render_template, redirect, url_for, request, flash, session, abort
+from flask import (
+    Flask,
+    render_template,
+    redirect,
+    url_for,
+    request,
+    flash,
+    session,
+    abort,
+    jsonify, 
+)
 from flask_bootstrap import Bootstrap
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -12,19 +23,24 @@ from db import db, Restaurant, Bewertung, BarrierefreieMerkmale, Foto, Nutzer, r
 # Erlaubte Bildtypen (Sicherheit: verhindert Upload von beliebigen Dateien)
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "webp"}
 
+
 def allowed_file(filename: str) -> bool:
     return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
 app = Flask(__name__)
+
 
 def is_admin() -> bool:
     return session.get("role") == "admin"
+
 
 def require_admin():
     if not session.get("logged_in"):
         abort(403)
     if not is_admin():
         abort(403)
+
 
 app.config.from_mapping(
     SECRET_KEY=os.environ.get("SECRET_KEY", "dev-secret-key"),
@@ -42,7 +58,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{DB_PATH}"
 
 db.init_app(app)
 
-# CLI Commands registrieren: flask init-db / seed-db
+
 register_commands(app)
 
 # Bootstrap (optional)
@@ -54,10 +70,12 @@ bootstrap = Bootstrap(app)
 def home():
     return redirect(url_for("index"))
 
-# Regsiter
+
+# Register
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    # ✅ CHANGED: next kann aus POST oder GET kommen
+    
+    # next kann aus POST oder GET kommen
     next_url = request.form.get("next") or request.args.get("next")
 
     # Sicherheitscheck: nur interne Pfade erlauben
@@ -90,12 +108,12 @@ def register():
             benutzername=benutzername,
             email=email,
             passwort_hash=generate_password_hash(password),
-            rolle="user"
+            rolle="user",
         )
         db.session.add(user)
         db.session.commit()
 
-        # ✅ Direkt einloggen, damit du danach sofort "Restaurant hinzufügen" nutzen kannst
+        # Direkt einloggen, damit du danach sofort "Restaurant hinzufügen" nutzen kannst
         session["logged_in"] = True
         session["user_id"] = user.id
         session["username"] = user.benutzername
@@ -125,11 +143,9 @@ def login():
         session["username"] = user.benutzername
         session["role"] = user.rolle
 
-
-
         flash(f"Willkommen, {user.benutzername}!", "success")
 
-        # ✅ CHANGED: next nutzen (POST oder GET)
+        # next nutzen (POST oder GET)
         next_url = request.form.get("next") or request.args.get("next")
         if next_url and not next_url.startswith("/"):
             next_url = None
@@ -138,12 +154,14 @@ def login():
 
     return render_template("login.html")
 
+
 # Logout
 @app.route("/logout")
 def logout():
     session.clear()
     flash("Du wurdest ausgeloggt.", "info")
     return redirect(url_for("login"))
+
 
 @app.route("/index")
 def index():
@@ -190,22 +208,27 @@ def index():
 def detail(id):
     restaurant = Restaurant.query.get_or_404(id)
 
-    # Bewertungen laden (neueste zuerst)
-    bewertungen = Bewertung.query.filter_by(restaurant_id=id).order_by(Bewertung.erstellt_am.desc()).all()
+    # Bewertungen laden 
+    bewertungen = (
+        Bewertung.query.filter_by(restaurant_id=id)
+        .order_by(Bewertung.erstellt_am.desc())
+        .all()
+    )
 
-    # Durchschnitt (für Anzeige)
+    # Durchschnitt 
     if bewertungen:
         avg = sum(b.sterne for b in bewertungen) / len(bewertungen)
     else:
         avg = None
 
-    return render_template("detail.html", restaurant=restaurant, bewertungen=bewertungen, avg=avg)
-
+    return render_template(
+        "detail.html", restaurant=restaurant, bewertungen=bewertungen, avg=avg
+    )
 
 
 @app.route("/restaurants/<int:id>/edit", methods=["GET", "POST"])
 def restaurant_edit(id):
-    # 🔒 Nur eingeloggte Admins
+    # Nur eingeloggte Admins
     if not session.get("logged_in"):
         abort(403)
     if not is_admin():
@@ -214,8 +237,7 @@ def restaurant_edit(id):
     restaurant = Restaurant.query.get_or_404(id)
 
     if request.method == "POST":
-
-        # 📝 Name + Adresse (nur Admin)
+        # Name + Adresse bearbeiten (nur Admin)
         name = (request.form.get("name") or "").strip()
         if not name:
             flash("Bitte einen gültigen Restaurantnamen eingeben.", "danger")
@@ -226,7 +248,6 @@ def restaurant_edit(id):
         restaurant.hausnummer = (request.form.get("hausnummer") or "").strip() or None
         restaurant.postleitzahl = (request.form.get("postleitzahl") or "").strip() or None
         restaurant.stadt = (request.form.get("stadt") or "").strip() or None
-
 
         # Koordinaten
         bg = (request.form.get("breitengrad") or "").strip()
@@ -247,7 +268,6 @@ def restaurant_edit(id):
         website = (request.form.get("website") or "").strip() or None
         if website and not website.startswith(("http://", "https://")):
             website = "https://" + website
-
 
         restaurant.website = website
 
@@ -294,7 +314,10 @@ def restaurant_edit(id):
         # 1) Löschen hat Priorität
         if delete_flag and current_cover:
             if file and file.filename:
-                flash("Hinweis: Du hast gleichzeitig 'Titelbild löschen' und eine neue Datei gewählt. Es wurde nur gelöscht.", "warning")
+                flash(
+                    "Hinweis: Du hast gleichzeitig 'Titelbild löschen' und eine neue Datei gewählt. Es wurde nur gelöscht.",
+                    "warning",
+                )
 
             abs_path = os.path.join(app.root_path, current_cover.dateipfad)
             if os.path.exists(abs_path):
@@ -332,7 +355,6 @@ def restaurant_edit(id):
         return redirect(url_for("detail", id=restaurant.id))
 
     return render_template("edit_restaurant.html", restaurant=restaurant)
-
 
 
 @app.route("/restaurants/<int:id>/reviews", methods=["POST"])
@@ -377,9 +399,7 @@ def review_delete(id):
     return redirect(url_for("detail", id=restaurant_id))
 
 
-
-# Restaurant hinzufügen (nur wenn "eingeloggt") Formular anzeigen (GET) oder speichern (POST, inkl. optionalem Bild)
-# Hilfsfunktion: Checkbox aus dem Formular → True/False
+# Restaurant hinzufügen (nur wenn "eingeloggt") 
 def _to_bool(name: str) -> bool:
     return request.form.get(name) == "on"
 
@@ -401,7 +421,6 @@ def restaurant_new():
         if website and not website.startswith(("http://", "https://")):
             website = "https://" + website
 
-    
         r = Restaurant(
             name=name,
             website=website,
@@ -416,7 +435,7 @@ def restaurant_new():
 
         r.website = website
 
-        # optional: Koordinaten (robust)
+        # optional: Koordinaten 
         bg = (request.form.get("breitengrad") or "").strip()
         lg = (request.form.get("laengengrad") or "").strip()
         try:
@@ -436,7 +455,7 @@ def restaurant_new():
         )
 
         db.session.add(r)
-        db.session.flush()  # damit r.id existiert
+        db.session.flush()  
 
         file = request.files.get("titelbild")
         if file and file.filename:
@@ -458,14 +477,12 @@ def restaurant_new():
             rel_path = f"static/uploads/{filename}"
             r.fotos = [Foto(dateipfad=rel_path, titelbild=True)]
 
-    
         db.session.commit()
-            
+
         flash("Restaurant wurde gespeichert", "success")
         return redirect(url_for("detail", id=r.id))
 
     return render_template("new.html")
-
 
 
 # Restaurant löschen (nur Admin)
@@ -475,7 +492,7 @@ def restaurant_delete(id):
 
     r = Restaurant.query.get_or_404(id)
 
-    # Optional: Fotos-Dateien löschen 
+    # Optional: Fotos-Dateien löschen
     db.session.delete(r)
     db.session.commit()
 
@@ -483,16 +500,13 @@ def restaurant_delete(id):
     return redirect(url_for("index"))
 
 
-
-from urllib.parse import urlencode
-
-# Karte (statisch, ohne JavaScript)
+# Karte 
 @app.route("/map")
 def restaurant_map():
+
     # Restaurants mit Koordinaten aus der DB holen
     restaurants = (
-        Restaurant.query
-        .filter(Restaurant.breitengrad.isnot(None), Restaurant.laengengrad.isnot(None))
+        Restaurant.query.filter(Restaurant.breitengrad.isnot(None), Restaurant.laengengrad.isnot(None))
         .order_by(Restaurant.name.asc())
         .all()
     )
@@ -500,18 +514,18 @@ def restaurant_map():
     # In dicts umwandeln (für Jinja)
     restaurants_data = []
     for r in restaurants:
-        adresse = " ".join(
-            [x for x in [r.strasse, r.hausnummer, r.postleitzahl, r.stadt] if x]
-        )
+        adresse = " ".join([x for x in [r.strasse, r.hausnummer, r.postleitzahl, r.stadt] if x])
 
-        restaurants_data.append({
-            "id": r.id,
-            "name": r.name,
-            "lat": float(r.breitengrad),
-            "lng": float(r.laengengrad),
-            "adresse": adresse,
-            "detail_url": url_for("detail", id=r.id),
-        })
+        restaurants_data.append(
+            {
+                "id": r.id,
+                "name": r.name,
+                "lat": float(r.breitengrad),
+                "lng": float(r.laengengrad),
+                "adresse": adresse,
+                "detail_url": url_for("detail", id=r.id),
+            }
+        )
 
     # Karten-Zentrum automatisch berechnen (Durchschnitt)
     if restaurants_data:
@@ -538,12 +552,48 @@ def restaurant_map():
 
     map_image_url = f"{base_url}?{urlencode(params)}"
 
-    return render_template(
-        "map.html",
-        restaurants=restaurants_data,
-        map_image_url=map_image_url,
-    )
+    return render_template("map.html", restaurants=restaurants_data, map_image_url=map_image_url)
 
+
+# Headless JSON API (liefert alle Restaurants als JSON)
+@app.get("/api/restaurants")
+def api_restaurants():
+    restaurants = Restaurant.query.order_by(Restaurant.name.asc()).all()
+
+    data = []
+    for r in restaurants:
+        adresse = " ".join([x for x in [r.strasse, r.hausnummer, r.postleitzahl, r.stadt] if x])
+
+        m = r.merkmale  # kann None sein
+
+        data.append(
+            {
+                "id": r.id,
+                "name": r.name,
+                "adresse": adresse or None,
+                "strasse": r.strasse,
+                "hausnummer": r.hausnummer,
+                "postleitzahl": r.postleitzahl,
+                "stadt": r.stadt,
+                "website": r.website,
+                "beschreibung": r.beschreibung,
+                "oeffnungszeiten": r.oeffnungszeiten,
+                "status": r.status,
+                "breitengrad": float(r.breitengrad) if r.breitengrad is not None else None,
+                "laengengrad": float(r.laengengrad) if r.laengengrad is not None else None,
+                "merkmale": {
+                    "stufenloser_eingang": bool(m.stufenloser_eingang) if m else None,
+                    "rampe": bool(m.rampe) if m else None,
+                    "barrierefreies_wc": bool(m.barrierefreies_wc) if m else None,
+                    "breite_tueren": bool(m.breite_tueren) if m else None,
+                    "unterfahrbare_tische": bool(m.unterfahrbare_tische) if m else None,
+                    "behindertenparkplatz": bool(m.behindertenparkplatz) if m else None,
+                },
+                "detail_url": url_for("detail", id=r.id, _external=False),
+            }
+        )
+
+    return jsonify({"count": len(data), "restaurants": data})
 
 
 if __name__ == "__main__":
