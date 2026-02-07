@@ -18,35 +18,29 @@ nav_order: 1
 
 ## Das Problem
 
-Menschen mit Mobilitätseinschränkungen haben oft Schwierigkeiten, barrierefreie Restaurants oder Cafés zu finden. Bestehende Apps liefern selten verlässliche Informationen über Rollstuhlgerechtigkeit oder Zugänglichkeit.
+Menschen mit Mobilitätseinschränkungen stehen im Alltag häufig vor der Herausforderung, geeignete Restaurants oder Cafés zu finden, die tatsächlich barrierefrei zugänglich sind. Informationen zur Zugänglichkeit sind oft unvollständig, unzuverlässig oder schwer auffindbar. Dadurch wird spontane Planung erschwert und Betroffene müssen zusätzliche Zeit investieren, um passende Orte zu recherchieren — insbesondere auf lokaler Ebene.
 
 ## Unsere Lösung
 
-WheelEats ist eine Plattform, die barrierefreie Restaurants anzeigt, bewertet und leicht bedienbar ist. Nutzer können Bewertungen und Fotos hochladen, um anderen zu helfen.
+WheelEats ist eine Web-Plattform zur Darstellung und Bewertung barrierefreundlicher Gastronomie. Die Anwendung sammelt strukturierte Informationen zu Restaurants und ermöglicht registrierten Nutzer*innen, Bewertungen und Bilder beizutragen. Der aktuelle Fokus der Plattform liegt bewusst auf Restaurants im Berliner Bezirk Mitte, um eine übersichtliche, lokal relevante und qualitativ gepflegte Datengrundlage bereitzustellen. Ziel ist es, eine transparente und gemeinschaftlich gepflegte Übersicht zu schaffen, die verlässliche Orientierung bietet und barrierefreie Angebote sichtbar macht.
 
 ## Zielgruppe
 
 
-•⁠  ⁠Rollstuhlfahrer*innen und Menschen mit eingeschränkter Mobilität
+• Menschen mit eingeschränkter Mobilität, insbesondere Rollstuhlfahrer*innen
 
-•⁠  ⁠Familien und Begleitpersonen
+• Begleitpersonen, Familien und Freundeskreise
 
-•⁠  ⁠Gastronom*innen, die ihre Barrierefreiheit transparent zeigen möchten
+• Gastronomiebetriebe im Berliner Raum, die ihre Barrierefreiheit präsentieren möchten
 
 ## App-Ablauf 
 
-Zu Beginn öffnet der Nutzer die WheelEats App und gelangt direkt auf den Homescreen, ohne sich zunächst einloggen zu müssen. Auf dieser Übersichtsseite werden alle barrierefreien Restaurants angezeigt, die speziell darauf ausgelegt sind, für Menschen mit Mobilitätseinschränkungen zugänglich zu sein. Die Liste ermöglicht dem Nutzer einen schnellen Überblick über verfügbare Optionen in seiner Umgebung.
+Beim Öffnen der Anwendung gelangen Nutzer*innen direkt auf die Startseite. Diese zeigt eine Übersicht aller eingetragenen Restaurants innerhalb von Berlin-Mitte. Ein Login ist für das reine Durchsehen der Inhalte nicht erforderlich, wodurch ein schneller Einstieg ermöglicht wird.
 
-Der Nutzer kann ein einzelnes Restaurant auswählen, indem er auf den entsprechenden Eintrag klickt. Anschließend wird er auf eine Detailseite weitergeleitet. Dort findet er umfassende Informationen zum Restaurant, darunter:
+Wählt eine Nutzerin ein Restaurant aus, öffnet sich eine Detailansicht mit weiterführenden Informationen. Dazu gehören Angaben zur Zugänglichkeit, allgemeine Beschreibungen, vorhandene Bilder sowie abgegebene Bewertungen. Diese Detailseite hilft dabei, die Eignung eines Restaurants besser einzuschätzen.
 
-• Angaben zur Barrierefreiheit (z. B. Rampe, barrierefreies WC),
+Registrierte Nutzer*innen können aktiv zur Plattform beitragen. Nach dem Login besteht die Möglichkeit, neue Restaurants aus Berlin-Mitte einzutragen sowie Bewertungen und Fotos hinzuzufügen. Dadurch wird sichergestellt, dass Beiträge eindeutig Nutzerkonten zugeordnet sind und die Inhalte nachvollziehbar bleiben.
 
-• die Öffnungszeiten,
+Zusätzlich steht eine Kartenansicht zur Verfügung. Dort werden die Restaurants geografisch innerhalb von Berlin-Mitte dargestellt, sodass Nutzer*innen schnell erkennen können, welche Optionen sich in ihrer unmittelbaren Umgebung befinden. Diese visuelle Orientierung erleichtert die Planung und unterstützt spontane Entscheidungen.
 
-• sowie weitere relevante Details zum Restaurant.
-
-Neben dem Ansehen bestehender Restaurants hat der Nutzer auch die Möglichkeit, aktiv zur Plattform beizutragen. Über die Navigation kann er zur Seite „Restaurant hinzufügen“ wechseln. Möchte der Nutzer ein neues Restaurant eintragen oder eine Bewertung abgeben, wird er dazu aufgefordert, sich zu registrieren oder einzuloggen. Erst nach dem Login stehen diese Funktionen zur Verfügung. Auf diese Weise wird sichergestellt, dass Beiträge und Bewertungen eindeutig einer Nutzeridentität zugeordnet werden können.
-
-Zusätzlich bietet die App eine Kartenansicht. Über den Menüpunkt „Karte“ kann der Nutzer sehen, wo sich die Restaurants geografisch befinden. Diese Ansicht erleichtert es, barrierefreie Restaurants in der näheren Umgebung schnell zu finden und die Erreichbarkeit besser einzuschätzen.
-
-Am Ende der Nutzerreise hat der Nutzer entweder ein passendes barrierefreies Restaurant gefunden, ein neues Restaurant hinzugefügt, eine Bewertung abgegeben oder sich mithilfe der Kartenansicht orientiert. Die App unterstützt den Nutzer somit durchgehend dabei, barrierefreie Gastronomie einfach zu entdecken und sichtbar zu machen.
+Am Ende der Nutzung haben Anwender*innen entweder ein passendes Restaurant gefunden, eigene Inhalte beigetragen oder sich mithilfe der Kartenübersicht orientiert. Die Plattform unterstützt somit kontinuierlich dabei, barrierefreundliche Gastronomie im Berliner Bezirk Mitte einfacher zugänglich und sichtbarer zu machen.
