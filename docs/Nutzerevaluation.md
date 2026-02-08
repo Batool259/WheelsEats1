@@ -1,75 +1,60 @@
+## Nutzerevaluation
+
+### Meta
+
+**Status:** Abgeschlossen  
+**Updated:** 07.02.2026  
+
 ---
-title: Nutzerevaluation
-nav_order: 4
----
-
-{: .label }
-[Batool, Esma]
-
-{: .no_toc }
-## Nutzerbewertung 
-
-<details open markdown="block">
-{: .text-delta }
-<summary>Table of contents</summary>
-+ ToC
-{: toc }
-</details>
-
-
-## Meta
-
-Status
-: **Work in progress** 
-
-Updated
-: 07.02.2026
 
 ### Ziele
 
-Ziel ist es, eine Anwendung bereitzustellen, die reale Bedürfnisse von Menschen mit Mobilitätseinschränkungen unterstützt und eine verlässliche Orientierung bei der Suche nach barrierefreundlicher Gastronomie in Berlin-Mitte bietet.
+Ziel der Nutzerevaluation war es, zu überprüfen, ob die Anwendung **WheelsEats** die Bedürfnisse von Menschen mit Mobilitätseinschränkungen unterstützt und eine verständliche sowie verlässliche Orientierung bei der Suche nach barrierefreundlicher Gastronomie in Berlin-Mitte bietet.
 
-Daraus ergeben sich folgende konkrete Ziele:
+Daraus ergeben sich folgende konkrete Evaluationsziele:
 
-• Entwicklung einer Plattform, die barrierearme Navigation und verständliche Informationsdarstellung ermöglicht
+- Überprüfung der Verständlichkeit und Übersichtlichkeit der Benutzeroberfläche  
+- Bewertung der Auffindbarkeit und Einschätzbarkeit von Restaurants  
+- Evaluation des Login-, Registrierungs- und Bewertungsprozesses  
+- Einschätzung der Kartenansicht als Unterstützung zur räumlichen Orientierung  
+- Sammlung von Feedback zur allgemeinen Nutzererfahrung und wahrgenommenen Barrierefreiheit  
 
-• Sicherstellung, dass Nutzer*innen Restaurants schnell finden und einschätzen können
+---
 
-• Gestaltung eines intuitiven Login- und Bewertungsprozesses
+### Persönliche Ziele im Projektkontext
 
-• Aufbau einer vertrauenswürdigen Community, in der Restaurants ergänzt und bewertet werden können
+Im Rahmen der Evaluation wurden auch die individuellen Projektziele reflektiert:
 
-• Förderung transparenter Informationen zur Barrierefreiheit
+- **Batool:** Kartenintegration mit OpenStreetMap, Backend-API, Frontend-Umsetzung und Dokumentation  
+- **Esma:** UI/UX-Design, Datenbankmodellierung, Testing, Deployment und Dokumentation  
 
-• Schaffung einer benutzerfreundlichen Kartenübersicht zur räumlichen Orientierung
-
-• Verbesserung der Nutzererfahrung durch kontinuierliches Feedback
-
-Persönliche Ziele
-
-
-## Persönliche Ziele
-•⁠  ⁠*Batool:* Kartenintegration mit OpenStreetMap
-
-•⁠  ⁠*Esma:* UI/UX & Datenbank 
-
-•⁠  ⁠*Batool:* Backend-API + Frontend & Dokumentation
-
-•⁠  ⁠*Esma:* Testing, Deployment & Dokumentation
+---
 
 ### Methoden
 
-Die Evaluation erfolgt als moderierter Usability-Test mit mehreren Testpersonen. Die Teilnehmenden bearbeiten typische Nutzungsszenarien, darunter das Finden eines Restaurants in Berlin-Mitte, das Lesen von Detailinformationen, Login/Registrierung sowie das Hinzufügen einer Bewertung. Beobachtungen und Feedback werden dokumentiert und ausgewertet.
+Die Evaluation wurde als moderierter Usability-Test mit mehreren Testpersonen durchgeführt. Die Teilnehmenden bearbeiteten typische Nutzungsszenarien, darunter:
+
+- Finden eines Restaurants in Berlin-Mitte  
+- Aufrufen von Detailinformationen zu einem Restaurant  
+- Registrierung und Login  
+- Hinzufügen und Lesen von Bewertungen  
+
+Während der Tests wurden Beobachtungen zum Nutzungsverhalten sowie direktes Feedback der Testpersonen dokumentiert. Die Auswertung erfolgte qualitativ anhand der gesammelten Rückmeldungen.
+
+---
 
 ### Ergebnisse
 
-Die bisherigen Tests zeigen eine schnelle Orientierung auf der Plattform, verständliche Restaurantinformationen sowie eine intuitive Nutzung von Login- und Bewertungsfunktionen. Die Kartenansicht unterstützt die räumliche Einordnung der Restaurants. Insgesamt wird die Anwendung als übersichtlich und leicht verständlich wahrgenommen.
+Die Evaluation zeigte, dass sich die Testpersonen schnell auf der Plattform orientieren konnten. Die dargestellten Restaurantinformationen wurden als verständlich und übersichtlich wahrgenommen. Der Login- und Bewertungsprozess wurde überwiegend als intuitiv beschrieben und konnte ohne zusätzliche Erklärungen durchgeführt werden.
 
-### Implikation
+Die Kartenansicht wurde als hilfreich für die räumliche Einordnung der Restaurants empfunden. Insgesamt wurde die Anwendung als klar strukturiert, leicht verständlich und zugänglich bewertet.
 
-Die Evaluation bestätigt die grundlegende Nutzbarkeit der Plattform. Rückmeldungen zeigen, dass Navigation, Informationsdarstellung und Bewertungsprozess gut verständlich sind.
+---
 
-Mehrere Nutzer*innen äußerten zusätzlich den Wunsch nach einer dynamischen Kartenlösung anstelle der aktuellen statischen Kartenansicht. Eine interaktive Karte könnte die Orientierung verbessern und die Nutzererfahrung weiter erhöhen.
+### Implikationen und Weiterentwicklung
 
-Diese Erkenntnisse fließen in zukünftige Überlegungen zur Weiterentwicklung ein, ohne die bestehende Funktionsstruktur zu verändern.
+Die Ergebnisse bestätigen die grundlegende Nutzbarkeit und Verständlichkeit der Anwendung. Navigation, Informationsdarstellung und Bewertungsfunktionen erfüllen die gesetzten Ziele.
 
+Mehrere Testpersonen äußerten den Wunsch nach einer dynamischen, interaktiven Kartenlösung anstelle der aktuellen statischen Kartenansicht. Eine solche Erweiterung könnte die Orientierung weiter verbessern und die Nutzererfahrung in zukünftigen Versionen erhöhen.
+
+Diese Erkenntnisse werden als Grundlage für mögliche Weiterentwicklungen genutzt, ohne die bestehende Funktionsstruktur der aktuellen Version zu verändern.
