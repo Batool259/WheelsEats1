@@ -1,6 +1,5 @@
 import os
 from datetime import datetime
-from urllib.parse import urlencode
 
 from flask import (
     Flask,
@@ -514,7 +513,8 @@ def restaurant_map():
     # In dicts umwandeln (für Jinja)
     restaurants_data = []
     for r in restaurants:
-        adresse = " ".join([x for x in [r.strasse, r.hausnummer, r.postleitzahl, r.stadt] if x])
+        teile = [r.strasse, r.hausnummer, r.postleitzahl, r.stadt]
+        adresse = " ".join(str(x) for x in teile if x)
 
         restaurants_data.append(
             {
@@ -527,32 +527,7 @@ def restaurant_map():
             }
         )
 
-    # Karten-Zentrum automatisch berechnen (Durchschnitt)
-    if restaurants_data:
-        center_lat = sum(x["lat"] for x in restaurants_data) / len(restaurants_data)
-        center_lng = sum(x["lng"] for x in restaurants_data) / len(restaurants_data)
-        zoom = 12
-    else:
-        # Fallback: Berlin
-        center_lat, center_lng = 52.5200, 13.4050
-        zoom = 12
-
-    # Statische Karten-URL sauber (ohne Zeilenumbrüche) zusammenbauen
-    base_url = "https://staticmap.openstreetmap.de/staticmap.php"
-
-    params = [
-        ("center", f"{center_lat},{center_lng}"),
-        ("zoom", str(zoom)),
-        ("size", "900x600"),
-    ]
-
-    # Marker anhängen (rot)
-    for x in restaurants_data:
-        params.append(("markers", f'{x["lat"]},{x["lng"]},red'))
-
-    map_image_url = f"{base_url}?{urlencode(params)}"
-
-    return render_template("map.html", restaurants=restaurants_data, map_image_url=map_image_url)
+    return render_template("map.html", restaurants=restaurants_data,)
 
 
 # Headless JSON API (liefert alle Restaurants als JSON)
