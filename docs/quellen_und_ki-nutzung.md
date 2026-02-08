@@ -172,13 +172,45 @@ GitHub Pages veröffentlichen:
 [https://hwrberlin.github.io/fswd/git.html#5-github-pages](https://hwrberlin.github.io/fswd/git.html#5-github-pages), Letzter Zugriff am: 08.02.2026, 09:12 Uhr
 
 ---
-## Bildquellen
+### Bildquellen – Restaurantbilder
 
+Die in der Anwendung dargestellten Restaurantbilder stammen aus öffentlich zugänglichen Nutzerrezensionen auf Google Maps.
 
+Die Bilder wurden nicht selbst erstellt und dienen ausschließlich zu Demonstrations- und Evaluationszwecken im Rahmen eines nicht-kommerziellen Hochschulprojekts.  
+Eine kommerzielle Nutzung findet nicht statt.
 
+Quelle:
+https://www.google.com/maps
 
+#### Verwendete Beispielrestaurants und zugehörige Quellen
 
+- **Il Punto**  
+  [https://share.google/DkrRoxwZvIzJNQM14](https://share.google/DkrRoxwZvIzJNQM14)
+  Letzter Zugriff am: 08.02.2026, 17:12 Uhr
 
+- **Alvis Restaurant**  
+  [https://share.google/a706UjKWFaSR65cxf ](https://share.google/a706UjKWFaSR65cxf)
+  Letzter Zugriff am: 08.02.2026, 17:13 Uhr
+
+- **Fischer und Lustig**  
+  [https://share.google/oDiUV6xZAVFIg3Ng2](https://share.google/oDiUV6xZAVFIg3Ng2) 
+  Letzter Zugriff am: 08.02.2026, 17:14 Uhr
+
+- **Käfer – Dachgarten Restaurant**  
+  [https://share.google/eHebtPho6DBDFzRTB ](https://share.google/eHebtPho6DBDFzRTB) 
+  Letzter Zugriff am: 08.02.2026, 17:15 Uhr
+
+- **MANI Restaurant**  
+  [https://share.google/TOS6SPzotlhBCfvzI)](https://share.google/TOS6SPzotlhBCfvzI) 
+  Letzter Zugriff am: 08.02.2026, 17:16 Uhr
+
+- **Nante-Eck**  
+  [https://share.google/9srbz7qCiAOUpecCQ](https://share.google/9srbz7qCiAOUpecCQ) 
+  Letzter Zugriff am: 08.02.2026, 17:17 Uhr
+
+- **Schnitzelei Mitte**  
+  [https://share.google/FMmuyyWXzOIYDeOK2](https://share.google/FMmuyyWXzOIYDeOK2) 
+  Letzter Zugriff am: 08.02.2026, 17:18 Uhr
 
 ---
 
