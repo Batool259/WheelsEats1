@@ -24,9 +24,6 @@ Flask – Flash Messages (flash):
 Flask – Template Rendering (render_template):  
 [https://flask.palletsprojects.com/en/stable/tutorial/templates/](https://flask.palletsprojects.com/en/stable/tutorial/templates/), Letzter Zugriff am: 08.02.2026, 08:05 Uhr 
 
-Flask – JSON Responses (jsonify):  
-[https://flask.palletsprojects.com/en/stable/patterns/javascript/#return-json-from-views](https://flask.palletsprojects.com/en/stable/patterns/javascript/#return-json-from-views), Letzter Zugriff am: 08.02.2026, 08:09 Uhr 
-
 Flask – Konfiguration (app.config):  
 [https://flask.palletsprojects.com/en/stable/config/](https://flask.palletsprojects.com/en/stable/config/), Letzter Zugriff am: 08.02.2026, 08:10 Uhr
 

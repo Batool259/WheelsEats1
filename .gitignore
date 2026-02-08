@@ -1,5 +1,4 @@
-# Virtuelle Umgebung
-.venv/
+# Ignore venv folder (Python Virtual Environment)
 venv/
 
 # Python-Cache
