@@ -16,9 +16,8 @@ nav_order: 4
 {: toc }
 </details>
 
-## 01: [Title]
 
-### Meta
+## Meta
 
 Status
 : **Work in progress** 
@@ -52,9 +51,9 @@ Persönliche Ziele
 ## Persönliche Ziele
 •⁠  ⁠*Batool:* Kartenintegration mit OpenStreetMap
 
-•⁠  ⁠*Esma:* Backend-API & Datenbank 
+•⁠  ⁠*Esma:* UI/UX & Datenbank 
 
-•⁠  ⁠*Batool:* UI/UX in Figma + Frontend & Dokumentation
+•⁠  ⁠*Batool:* Backend-API + Frontend & Dokumentation
 
 •⁠  ⁠*Esma:* Testing, Deployment & Dokumentation
 
@@ -74,4 +73,3 @@ Mehrere Nutzer*innen äußerten zusätzlich den Wunsch nach einer dynamischen Ka
 
 Diese Erkenntnisse fließen in zukünftige Überlegungen zur Weiterentwicklung ein, ohne die bestehende Funktionsstruktur zu verändern.
 
----

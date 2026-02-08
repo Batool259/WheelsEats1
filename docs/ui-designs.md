@@ -19,7 +19,7 @@ Die folgenden Screenshots zeigen die **final umgesetzte Benutzeroberfläche**, d
 
 Die Startseite bietet eine Übersicht aller Restaurants und ermöglicht die Suche sowie das Filtern nach Barrierefreiheitsmerkmalen.
 
-![Startseite – Übersicht der Restaurants](assets/images/index.png)
+![Startseite – Übersicht der Restaurants](assets/images/ui_index.png)
 
 ---
 
@@ -27,8 +27,7 @@ Die Startseite bietet eine Übersicht aller Restaurants und ermöglicht die Such
 
 Der Login-Bereich ist bewusst minimal gehalten, um den Einstieg schnell und verständlich zu gestalten.
 
-![Login-Seite](assets/images/login.png)
-
+![Login-Seite](assets/images/ui_login.png)
 ---
 
 ## Restaurant-Detailseite
@@ -40,7 +39,7 @@ Die Detailseite zeigt alle relevanten Informationen zu einem Restaurant:
 - Fotos
 - Bewertungen
 
-![Restaurant-Detailseite](assets/images/detail.png)
+![Restaurant-Detailseite](assets/images/ui_detail.png)
 
 ---
 
@@ -49,7 +48,7 @@ Die Detailseite zeigt alle relevanten Informationen zu einem Restaurant:
 Die Kartenansicht dient der räumlichen Orientierung.  
 Sie zeigt alle Restaurants mit Koordinaten als Marker auf einer **statischen OpenStreetMap-Karte** (ohne JavaScript).
 
-![Kartenansicht](assets/images/map.png)
+![Kartenansicht](assets/images/ui_map.png)
 
 ---
 
@@ -58,7 +57,7 @@ Sie zeigt alle Restaurants mit Koordinaten als Marker auf einer **statischen Ope
 Eingeloggte Nutzer:innen können über dieses Formular neue Restaurants einreichen.  
 Der Fokus liegt auf klar beschrifteten Feldern und gut verständlichen Eingaben.
 
-![Restaurant hinzufügen](assets/images/new.png)
+![Restaurant hinzufügen](assets/images/ui_new.png)
 
 ---
 

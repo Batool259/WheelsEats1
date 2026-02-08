@@ -25,6 +25,7 @@ nav_order: 3
 **Zugriff:** öffentlich  
 **Zweck:** Einstiegspunkt der Anwendung. Leitet auf die Übersicht (`/index`) weiter.  
 **Output:** NONE (Redirect)
+**Sample output:**
 
 ---
 
@@ -34,7 +35,8 @@ nav_order: 3
 **Zugriff:** öffentlich  
 **Zweck:** Erstellt einen neuen Nutzer, prüft Eingaben (Passwortlänge, Passwortbestätigung, E-Mail eindeutig) und loggt nach erfolgreicher Registrierung direkt ein. Unterstützt optional `next` (nur interne Pfade).  
 **Output:** Registrierungsformular / Redirect zur Übersicht
-
+**Sample output:**
+![Register-Seite](../assets/images/register.png)
 ---
 
 ### `login()`
@@ -43,6 +45,8 @@ nav_order: 3
 **Zugriff:** öffentlich  
 **Zweck:** Authentifiziert Nutzer per E-Mail/Passwort (Hash-Prüfung). Setzt Session-Werte (`logged_in`, `user_id`, `username`, `role`). Unterstützt optional `next` (nur interne Pfade).  
 **Output:** Login-Formular / Redirect
+**Sample output:**
+![Login-Seite](../assets/images/login.png)
 
 ---
 
@@ -52,7 +56,8 @@ nav_order: 3
 **Zugriff:** eingeloggte Nutzer  
 **Zweck:** Löscht die Session und loggt Nutzer aus.  
 **Output:** Redirect zur Login-Seite
-
+**Sample output:**
+![Logout-Seite](../assets/images/logout.png)
 ---
 
 ## Restaurants (öffentlich)
@@ -85,6 +90,8 @@ Wenn mindestens ein Filter aktiv ist, wird auf `BarrierefreieMerkmale` gejoint u
 **Zugriff:** öffentlich  
 **Zweck:** Detailseite eines Restaurants. Lädt Bewertungen (neueste zuerst) und berechnet Durchschnittsbewertung (`avg`).  
 **Output:** Detailansicht
+**Sample output:**  
+![Detailansicht](../assets/images/detail.png)
 
 ---
 
@@ -96,7 +103,8 @@ Wenn mindestens ein Filter aktiv ist, wird auf `BarrierefreieMerkmale` gejoint u
 **Zugriff:** eingeloggte Nutzer  
 **Zweck:** Einreichen eines neuen Restaurants. Setzt Status auf `pending`, speichert Merkmale (1:1) und optional ein Titelbild. Nicht eingeloggte Nutzer werden auf Login umgeleitet (mit `next`).  
 **Output:** Formular / Redirect zur Detailseite
-
+**Sample output:**  
+![Restaurant hinzufügen](../assets/images/new.png)
 ---
 
 ## Bewertungen
@@ -119,6 +127,8 @@ Wenn mindestens ein Filter aktiv ist, wird auf `BarrierefreieMerkmale` gejoint u
 **Zweck:** Admin kann Restaurantdaten bearbeiten (Name/Adresse/Koordinaten/Beschreibung/Öffnungszeiten/Website), Merkmale aktualisieren und Status setzen (`pending`/`approved`).  
 Zusätzlich: Titelbild löschen oder ersetzen (inkl. Löschen alter Datei).  
 **Output:** Edit-Formular / Redirect zur Detailseite
+**Sample output:**
+![Kartenansicht](../assets/images/admin.png)
 
 ---
 
@@ -128,6 +138,7 @@ Zusätzlich: Titelbild löschen oder ersetzen (inkl. Löschen alter Datei).
 **Zugriff:** **Admin**  
 **Zweck:** Löscht ein Restaurant. Abhängige Datensätze werden über ORM-Relations/Cascades entfernt.  
 **Output:** Redirect zur Übersicht
+
 
 ---
 
@@ -148,6 +159,8 @@ Zusätzlich: Titelbild löschen oder ersetzen (inkl. Löschen alter Datei).
 **Zugriff:** öffentlich  
 **Zweck:** Zeigt eine **statische** Kartenansicht (ohne JavaScript). Restaurants mit Koordinaten werden aus der DB geladen und als Marker in eine OpenStreetMap-StaticMap-URL eingebaut.  
 **Output:** Kartenansicht als Bild + Liste der Restaurants
+**Sample output:**
+![Kartenansicht](../assets/images/map.png)
 
 ---
 

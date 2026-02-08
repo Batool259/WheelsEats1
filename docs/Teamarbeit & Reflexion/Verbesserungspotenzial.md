@@ -8,7 +8,7 @@ nav_order: 2
 [Batool, Esma]
 
 {: .no_toc }
-# How we would improve next time
+# Verbesserungspotenzial
 
 <details open markdown="block">
 {: .text-delta }
