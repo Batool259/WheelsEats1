@@ -258,6 +258,7 @@ Flask-SQLAlchemy, [https://www.perplexity.ai/search/wie-fuge-ich-eine-datenbanke
 Karte, [https://www.perplexity.ai/search/ist-eine-dynamische-oder-eine-C_B6FbkXQZe3vsX0yuwh1w#0](https://www.perplexity.ai/search/ist-eine-dynamische-oder-eine-C_B6FbkXQZe3vsX0yuwh1w#0), Letzter Aufruf am: 08.02.2026, 19:12
 
 ### UI-Design & Prototyping
+
 Google Stitch – KI-gestütztes UI-Design-Tool  
 [https://stitch.withgoogle.com/](https://stitch.withgoogle.com/), 16.12.25, 16:10
 
