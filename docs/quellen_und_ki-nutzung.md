@@ -237,6 +237,14 @@ Flask User Auth Series:
 Complete Python Website Tutorial (Auth & DB):  
 [https://www.youtube.com/watch?v=dam0GPOAvVI](https://www.youtube.com/watch?v=dam0GPOAvVI), Letzter Zugriff am: 08.02.2026, 16:35 Uhr
 
+WTForms for efficient forms validation and rendering in Flask:
+[https://www.youtube.com/watch?v=j5IQI4aW9ZU&t=209s](https://www.youtube.com/watch?v=j5IQI4aW9ZU&t=209s), Letzter Zugriff am: 08.02.2026, 19:27 Uhr
+
+Web Development mit Flask - Full Stack App mit SQLAlchemy & Bootstrap:
+[https://www.youtube.com/watch?v=nC7vQn0jZXw&t=4s](https://www.youtube.com/watch?v=nC7vQn0jZXw&t=4s), Letzter Zugriff am: 08.02.2026, 19:29 Uhr
+
+Python Flask Tutorial #30 - SQLAlchemy
+[https://www.youtube.com/watch?v=aH647Ex5lgA&t=13s](https://www.youtube.com/watch?v=aH647Ex5lgA&t=13s), Letzter Zugriff am: 08.02.2026, 19:30 Uhr
 
 ---
 ## KI-Nutzung
@@ -244,6 +252,8 @@ Complete Python Website Tutorial (Auth & DB):
 Die PDF Versionen der KI-Lins finden sie im Ordner WheelEats1\docs\assets\images\ki_pdf. 
 
 Admin, [https://www.perplexity.ai/search/wie-kann-man-bei-vsc-eine-admi-sKLcHS7.SPuJfjO410vpqA#0](https://www.perplexity.ai/search/wie-kann-man-bei-vsc-eine-admi-sKLcHS7.SPuJfjO410vpqA#0), letzter Aufruf am: 08.02.2026, 19:10 
+
+Flask-SQLAlchemy, [https://www.perplexity.ai/search/wie-fuge-ich-eine-datenbanken-2FoiUh3FSHmSmq6LPdF5NA#0](https://www.perplexity.ai/search/wie-fuge-ich-eine-datenbanken-2FoiUh3FSHmSmq6LPdF5NA#0), Letzter Aufruf am: 08.02.2026, 18:25
 
 Karte, [https://www.perplexity.ai/search/ist-eine-dynamische-oder-eine-C_B6FbkXQZe3vsX0yuwh1w#0](https://www.perplexity.ai/search/ist-eine-dynamische-oder-eine-C_B6FbkXQZe3vsX0yuwh1w#0), Letzter Aufruf am: 08.02.2026, 19:12
 
