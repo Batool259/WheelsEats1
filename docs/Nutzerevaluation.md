@@ -3,7 +3,7 @@
 ### Meta
 
 **Status:** Abgeschlossen  
-**Updated:** 07.02.2026  
+**Updated:** 08.02.2026  
 
 ---
 
