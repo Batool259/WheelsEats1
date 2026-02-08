@@ -1,5 +1,8 @@
-{: .no_toc }
-## Routenreferenz
+---
+title: Referenz
+parent: Technische Dokumentation
+nav_order: 3
+---
 
 <details open markdown="block">
 {: .text-delta }
