@@ -213,7 +213,23 @@ https://www.google.com/maps
   Letzter Zugriff am: 08.02.2026, 17:18 Uhr
 
 ---
+## Videoquellen
 
+
+Python Flask Tutorial deutsch [Kompletter Einsteigerkurs] - Lerne eigene RESTful APIs zu entwickeln: https://www.youtube.com/watch?v=eTLM5SgEEhA, Letzter Zugriff am: 08.02.2026, 16:26 Uhr
+
+Python Flask Authentication Tutorial - Learn Flask Login: https://www.youtube.com/watch?v=71EU8gnZqZQ, Letzter Zugriff am: 08.02.2026, 16:27 Uhr
+
+Intro to Flask-Admin (Admin Dashboard): https://www.youtube.com/watch?v=G1FBSYJ45Ww, Letzter Zugriff am: 08.02.2026, 16:30 Uhr
+
+How to Use Flask-SQLAlchemy: https://www.youtube.com/watch?v=a1Ykeqj_D_M, Letzter Zugriff am: 08.02.2026, 16:32 Uhr
+
+Flask User Auth Series: https://www.youtube.com/watch?v=t9zA1gvrTvo, Letzter Zugriff am: 08.02.2026, 16:33 Uhr
+
+Complete Python Website Tutorial (Auth & DB): https://www.youtube.com/watch?v=dam0GPOAvVI, Letzter Zugriff am: 08.02.2026, 16:35 Uhr 
+
+
+---
 ## KI-Nutzung
 
 ### UI-Design & Prototyping
