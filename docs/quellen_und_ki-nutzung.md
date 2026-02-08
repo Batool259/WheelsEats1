@@ -174,3 +174,8 @@ GitHub Pages veröffentlichen:
 ---
 
 ## KI-Nutzung
+
+### UI-Design & Prototyping
+Google Stitch – KI-gestütztes UI-Design-Tool  
+[https://stitch.withgoogle.com/](https://stitch.withgoogle.com/) 
+16.12.25, 16:10
