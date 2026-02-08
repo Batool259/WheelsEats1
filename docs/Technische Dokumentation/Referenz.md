@@ -152,7 +152,7 @@ Zusätzlich: Titelbild löschen oder ersetzen (inkl. Löschen alter Datei).
 **Output:** Redirect zur Übersicht
 
 **Sample output:**
-![Restaurant löschen](../assets/images/restaurant_loeschen.png)
+![Restaurant löschen](../assets/images/restaurant_löschen.png)
 
 ---
 
@@ -164,7 +164,7 @@ Zusätzlich: Titelbild löschen oder ersetzen (inkl. Löschen alter Datei).
 **Output:** Redirect zur Restaurant-Detailseite
 
 **Sample output:**
-![Bewertung löschen](../assets/images/bewertung_loeschen.png)
+![Bewertung löschen](../assets/images/bewertung_löschen.png)
 
 ---
 
