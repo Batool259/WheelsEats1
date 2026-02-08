@@ -246,7 +246,7 @@ Python Flask Tutorial #30 - SQLAlchemy
 ---
 ## KI-Nutzung
 
-Die PDF Versionen der KI-Links finden Sie im Ordner WheelEats1\docs\assets\images\ki_pdf. 
+Die PDF Versionen der KI-Links finden Sie im Github Repository WheelsEats1 . 
 
 Admin, [https://www.perplexity.ai/search/wie-kann-man-bei-vsc-eine-admi-sKLcHS7.SPuJfjO410vpqA#0](https://www.perplexity.ai/search/wie-kann-man-bei-vsc-eine-admi-sKLcHS7.SPuJfjO410vpqA#0), letzter Aufruf am: 08.02.2026, 19:10 
 
