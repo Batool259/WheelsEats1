@@ -172,6 +172,7 @@ GitHub Pages veröffentlichen:
 [https://hwrberlin.github.io/fswd/git.html#5-github-pages](https://hwrberlin.github.io/fswd/git.html#5-github-pages), Letzter Zugriff am: 08.02.2026, 09:12 Uhr
 
 ---
+
 ### Bildquellen – Restaurantbilder
 
 Die in der Anwendung dargestellten Restaurantbilder stammen aus öffentlich zugänglichen Nutzerrezensionen auf Google Maps.
@@ -181,6 +182,7 @@ Eine kommerzielle Nutzung findet nicht statt.
 
 Quelle:
 https://www.google.com/maps
+
 
 #### Verwendete Beispielrestaurants und zugehörige Quellen
 
@@ -213,6 +215,7 @@ https://www.google.com/maps
   Letzter Zugriff am: 08.02.2026, 17:18 Uhr
 
 ---
+
 ## Videoquellen
 
 
